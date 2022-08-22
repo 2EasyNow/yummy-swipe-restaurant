@@ -1,0 +1,134 @@
+{
+  "project_info": {
+    "project_number": "1079170693126",
+    "project_id": "food-delivery-d071d",
+    "storage_bucket": "food-delivery-d071d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1079170693126:android:345cf97fe25fe076e86b87",
+        "android_client_info": {
+          "package_name": "tech.easynow.yummy_swipe.customer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1079170693126-750vb3uo1u4v5da4i0s18t6jrl56rgl7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "tech.easynow.yummy_swipe.customer",
+            "certificate_hash": "92ba959c8437a1e42f07b4bf27eee3c5ece71870"
+          }
+        },
+        {
+          "client_id": "1079170693126-gp5d44ti2a3clbbq2qbppbucdpinrn82.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbWKk9loepkI0FMr3b5DKuBd7eijHTgAU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1079170693126-gp5d44ti2a3clbbq2qbppbucdpinrn82.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1079170693126-ltsm762i5i15v5l7i5h1i8lksu6icskm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.foodSwipe"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1079170693126:android:6bf3c629e792ff45e86b87",
+        "android_client_info": {
+          "package_name": "tech.easynow.yummy_swipe.resturant"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1079170693126-gp5d44ti2a3clbbq2qbppbucdpinrn82.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbWKk9loepkI0FMr3b5DKuBd7eijHTgAU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1079170693126-gp5d44ti2a3clbbq2qbppbucdpinrn82.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1079170693126-ltsm762i5i15v5l7i5h1i8lksu6icskm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.foodSwipe"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1079170693126:android:0346e0db61455b98e86b87",
+        "android_client_info": {
+          "package_name": "tech.easynow.yummy_swipe.rider"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1079170693126-nabgf758138e2lsl70asfbu34nerb66m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "tech.easynow.yummy_swipe.rider",
+            "certificate_hash": "92ba959c8437a1e42f07b4bf27eee3c5ece71870"
+          }
+        },
+        {
+          "client_id": "1079170693126-gp5d44ti2a3clbbq2qbppbucdpinrn82.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbWKk9loepkI0FMr3b5DKuBd7eijHTgAU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1079170693126-gp5d44ti2a3clbbq2qbppbucdpinrn82.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1079170693126-ltsm762i5i15v5l7i5h1i8lksu6icskm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.foodSwipe"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
