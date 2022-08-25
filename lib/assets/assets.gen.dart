@@ -132,6 +132,9 @@ class $AssetsSvgGen {
   /// File path: assets/svg/burger.svg
   SvgGenImage get burger => const SvgGenImage('assets/svg/burger.svg');
 
+  /// File path: assets/svg/chef.svg
+  SvgGenImage get chef => const SvgGenImage('assets/svg/chef.svg');
+
   /// File path: assets/svg/delivery_boy.svg
   SvgGenImage get deliveryBoy =>
       const SvgGenImage('assets/svg/delivery_boy.svg');

@@ -74,7 +74,7 @@ class OnBoardingPage extends GetView<OnBoardingController> {
                       padding: const EdgeInsets.only(bottom: 20),
                       child: _PageViewIndicators(
                         activeIndex: logic.currentPage,
-                        totalPages: 2,
+                        totalPages: controller.totalPages,
                         indicatorColor: AppColors(context).primary,
                       ),
                     ),

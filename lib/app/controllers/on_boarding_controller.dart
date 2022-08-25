@@ -14,15 +14,15 @@ class OnBoardingController extends GetxController {
     IntroductionScreenModel(
       AppStrings.introductionPage1Title,
       AppStrings.introductionPage1Content,
-      Assets.svg.burger.path,
+      Assets.svg.chef.path,
       // Assets.svg.darkManageTask.path,
     ),
-    IntroductionScreenModel(
-      AppStrings.introductionPage2Title,
-      AppStrings.introductionPage2Content,
-      Assets.svg.deliveryBoy.path,
-      // Assets.svg.darkTaskList.path,
-    ),
+    // IntroductionScreenModel(
+    //   AppStrings.introductionPage2Title,
+    //   AppStrings.introductionPage2Content,
+    //   Assets.svg.deliveryBoy.path,
+    //   // Assets.svg.darkTaskList.path,
+    // ),
   ];
 
   // get total pages
