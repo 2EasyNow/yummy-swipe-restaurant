@@ -1,87 +1,81 @@
 import 'package:get/get.dart';
-import '../bindings/create_account_binding.dart';
-import '../bindings/getting_started_binding.dart';
-import '../bindings/home_binding.dart';
-import '../bindings/login_binding.dart';
-import '../bindings/on_boarding_binding.dart';
-import '../bindings/profile_binding.dart';
-import '../bindings/setting_binding.dart';
-import '../bindings/splash_binding.dart';
-import '../ui/pages/create_account_page/create_account_page.dart';
-import '../ui/pages/getting_started_page/getting_started_page.dart';
-import '../ui/pages/home_page/home_page.dart';
-import '../ui/pages/login_page/login_page.dart';
-import '../ui/pages/on_boarding_page/on_boarding_page.dart';
-import '../ui/pages/profile_page/profile_page.dart';
-import '../ui/pages/setting_page/setting_page.dart';
-import '../ui/pages/splash_page/splash_page.dart';
-import '../ui/pages/unknown_route_page/unknown_route_page.dart';
-import 'app_routes.dart';
 
-final _defaultTransition = Transition.native;
+import 'package:intelligent_food_delivery/app/modules/categories/bindings/categories_binding.dart';
+import 'package:intelligent_food_delivery/app/modules/categories/views/categories_view.dart';
+import 'package:intelligent_food_delivery/app/modules/categories/sub_modules/category_food_list/bindings/category_food_list_binding.dart';
+import 'package:intelligent_food_delivery/app/modules/categories/sub_modules/category_food_list/views/category_food_list_view.dart';
+import 'package:intelligent_food_delivery/app/modules/food/bindings/food_binding.dart';
+import 'package:intelligent_food_delivery/app/modules/food/views/food_view.dart';
+import 'package:intelligent_food_delivery/app/modules/getting_started/bindings/getting_started_binding.dart';
+import 'package:intelligent_food_delivery/app/modules/getting_started/views/getting_started_view.dart';
+import 'package:intelligent_food_delivery/app/modules/home/bindings/home_binding.dart';
+import 'package:intelligent_food_delivery/app/modules/home/views/home_view.dart';
+import 'package:intelligent_food_delivery/app/modules/login/bindings/login_binding.dart';
+import 'package:intelligent_food_delivery/app/modules/login/views/login_view.dart';
+import 'package:intelligent_food_delivery/app/modules/on_boarding/bindings/on_boarding_binding.dart';
+import 'package:intelligent_food_delivery/app/modules/on_boarding/views/on_boarding_view.dart';
+import 'package:intelligent_food_delivery/app/modules/setting/bindings/setting_binding.dart';
+import 'package:intelligent_food_delivery/app/modules/setting/views/setting_view.dart';
+import 'package:intelligent_food_delivery/app/modules/sign_up/bindings/sign_up_binding.dart';
+import 'package:intelligent_food_delivery/app/modules/sign_up/views/sign_up_view.dart';
+import 'package:intelligent_food_delivery/app/modules/splash/bindings/splash_binding.dart';
+import 'package:intelligent_food_delivery/app/modules/splash/views/splash_view.dart';
+
+part 'app_routes.dart';
 
 class AppPages {
-  static final unknownRoutePage = GetPage(
-    name: AppRoutes.UNKNOWN,
-    page: () => UnknownRoutePage(),
-    transition: _defaultTransition,
-  );
+  AppPages._();
 
-  static final List<GetPage> pages = [
-    unknownRoutePage,
+  static const INITIAL = Routes.HOME;
+
+  static final routes = [
     GetPage(
-      name: AppRoutes.HOME,
-      page: () => const HomePage(),
+      name: _Paths.HOME,
+      page: () => HomeView(),
       binding: HomeBinding(),
-      transition: _defaultTransition,
     ),
     GetPage(
-      name: AppRoutes.SPLASH,
-      page: () => const SplashPage(),
+      name: _Paths.SPLASH,
+      page: () => SplashView(),
       binding: SplashBinding(),
-      transition: _defaultTransition,
     ),
     GetPage(
-      name: AppRoutes.PROFILE,
-      page: () => ProfilePage(),
-      binding: ProfileBinding(),
-      transition: _defaultTransition,
-    ),
-    GetPage(
-      name: AppRoutes.SETTING,
-      page: () => SettingPage(),
-      binding: SettingBinding(),
-      transition: _defaultTransition,
-    ),
-    GetPage(
-      name: AppRoutes.HOME,
-      page: () => const HomePage(),
-      binding: HomeBinding(),
-      transition: _defaultTransition,
-    ),
-    GetPage(
-      name: AppRoutes.GETTING_STARTED,
-      page: () => const GettingStartedPage(),
-      binding: GettingStartedBinding(),
-      transition: _defaultTransition,
-    ),
-    GetPage(
-      name: AppRoutes.ON_BOARDING,
-      page: () => const OnBoardingPage(),
-      binding: OnBoardingBinding(),
-      transition: _defaultTransition,
-    ),
-    GetPage(
-      name: AppRoutes.LOGIN,
-      page: () => const LoginPage(),
+      name: _Paths.LOGIN,
+      page: () => LoginView(),
       binding: LoginBinding(),
-      transition: Transition.rightToLeft,
     ),
     GetPage(
-      name: AppRoutes.CREATE_ACCOUNT,
-      page: () => const CreateAccountPage(),
-      binding: CreateAccountBinding(),
-      transition: Transition.rightToLeft,
+      name: _Paths.SETTING,
+      page: () => SettingView(),
+      binding: SettingBinding(),
+    ),
+    GetPage(
+      name: _Paths.SIGN_UP,
+      page: () => SignUpView(),
+      binding: SignUpBinding(),
+    ),
+    GetPage(
+      name: _Paths.GETTING_STARTED,
+      page: () => GettingStartedView(),
+      binding: GettingStartedBinding(),
+    ),
+    GetPage(
+      name: _Paths.ON_BOARDING,
+      page: () => OnBoardingView(),
+      binding: OnBoardingBinding(),
+    ),
+    GetPage(name: _Paths.CATEGORIES, page: () => CategoriesView(), binding: CategoriesBinding(), children: [
+      GetPage(
+        name: _Paths.CATEGORY_FOOD_LIST,
+        page: () => CategoryFoodListView(),
+        binding: CategoryFoodListBinding(),
+        transition: Transition.rightToLeft,
+      ),
+    ]),
+    GetPage(
+      name: _Paths.FOOD,
+      page: () => FoodView(),
+      binding: FoodBinding(),
     ),
   ];
 }
