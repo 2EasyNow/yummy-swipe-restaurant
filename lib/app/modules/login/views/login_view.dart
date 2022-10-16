@@ -267,7 +267,7 @@ class _LoggedInSheet extends StatelessWidget {
         ),
         const VerticalSpacer(),
         TimerButton(
-          onTap: () => Get.offAllNamed(Routes.HOME),
+          onTap: () => Get.offAllNamed(Routes.ON_BOARDING),
           time: 3,
           backgroundColor: AppColors(context).primary,
           textColor: AppColors(context).onPrimary,

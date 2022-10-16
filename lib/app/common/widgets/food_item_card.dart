@@ -13,6 +13,7 @@ import 'package:intelligent_food_delivery/app/common/theme/app_colors.dart';
 import 'package:intelligent_food_delivery/app/common/utils/firebase.dart';
 import 'package:intelligent_food_delivery/app/common/widgets/confirmation_dialog.dart';
 import 'package:intelligent_food_delivery/app/common/widgets/snackbars.dart';
+import 'package:intelligent_food_delivery/app/domain/app_settings/usecase/app_setttings_use_case.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../data/food_category/models/food_category.dart';
@@ -296,7 +297,7 @@ class _UpdateItemViewState extends State<_UpdateItemView> {
                                   if (query.isNotEmpty) {
                                     var lowercaseQuery = query.toLowerCase();
                                     final results = snap.data!.where((category) {
-                                      return category.data!.name.contains(query.toLowerCase());
+                                      return category.data!.name.toLowerCase().contains(lowercaseQuery);
                                     }).toList(growable: false)
                                       ..sort((a, b) => a.data!.name
                                           .toLowerCase()
@@ -339,15 +340,16 @@ class _UpdateItemViewState extends State<_UpdateItemView> {
                         ChipsInput<String>(
                           initialValue: _tags,
                           findSuggestions: (String query) {
+                            final allTags = Get.find<AppSettingsUseCase>().tags;
                             if (query.isNotEmpty) {
                               var lowercaseQuery = query.toLowerCase();
-                              final results = controller.tags.where((tag) {
+                              final results = allTags.where((tag) {
                                 return tag.contains(query.toLowerCase());
                               }).toList(growable: false)
                                 ..sort((a, b) => a.toLowerCase().indexOf(lowercaseQuery).compareTo(b.toLowerCase().indexOf(lowercaseQuery)));
                               return results;
                             }
-                            return controller.tags;
+                            return allTags;
                           },
                           onChanged: (data) {
                             _tags = data;

@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:intelligent_food_delivery/app/domain/app_user/use_cases/resturant_owner_use_case.dart';
 
 import '../../common/utils/firebase.dart';
 import '../../routes/app_pages.dart';
@@ -12,20 +13,6 @@ class AuthenticationController extends GetxController {
   AuthenticationController();
 
   bool get isUserLoggedIn => FirebaseAuth.instance.currentUser != null;
-
-  // Future<bool> get isUserVerified async {
-  //   if (FirebaseAuth.instance.currentUser == null) {
-  //     logOut();
-  //     return Future.value(false);
-  //   }
-  //   await FirebaseAuth.instance.currentUser!.reload();
-  //   final provider = FirebaseAuth.instance.currentUser!.providerData.first.providerId;
-  //   if (!provider.contains("password")) {
-  //     return true;
-  //   } else {
-  //     return FirebaseAuth.instance.currentUser!.emailVerified;
-  //   }
-  // }
 
   String? get currentUserId => FirebaseAuth.instance.currentUser?.uid;
 
@@ -40,6 +27,7 @@ class AuthenticationController extends GetxController {
       phoneNumber: phone,
       verificationCompleted: (AuthCredential credential) async {
         await FirebaseAuth.instance.signInWithCredential(credential);
+        
         onCompleteVerification();
       },
       verificationFailed: (FirebaseAuthException exception) {
@@ -51,8 +39,7 @@ class AuthenticationController extends GetxController {
       codeSent: (verificationId, forceResendingToken) {
         onCodeSent(verificationId, forceResendingToken);
       },
-      codeAutoRetrievalTimeout: (verificationId) {
-      },
+      codeAutoRetrievalTimeout: (verificationId) {},
     );
     // final credentials = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password);
     // credentials.user!.updateDisplayName(name);

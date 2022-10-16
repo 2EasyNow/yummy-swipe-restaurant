@@ -10,25 +10,6 @@ import '../../../data/food_item/models/food_item.dart';
 import '../../../domain/food_item/use_cases/food_item_use_case.dart';
 
 class FoodController extends GetxController {
-  final tags = <String>[
-    'Shawarma',
-    'Pizza',
-    'Burger',
-    'Sandwich',
-    'Pasta',
-    'Salad',
-    'Dessert',
-    'Drinks',
-    'Fries',
-    'Chicken',
-    'Beef',
-    'Lamb',
-    'Fish',
-    'Vegetarian',
-    'Breakfast',
-    'Lunch',
-    'Dinner',
-  ];
   final List<FoodItemDocumentSnapshot> allFoodItems = [];
 
   @override

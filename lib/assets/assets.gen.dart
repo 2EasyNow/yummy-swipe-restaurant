@@ -110,12 +110,15 @@ class $AssetsImagesGen {
   /// File path: assets/images/burger.png
   AssetGenImage get burger => const AssetGenImage('assets/images/burger.png');
 
+  /// File path: assets/images/deal.png
+  AssetGenImage get deal => const AssetGenImage('assets/images/deal.png');
+
   /// File path: assets/images/google_icon.png
   AssetGenImage get googleIcon =>
       const AssetGenImage('assets/images/google_icon.png');
 
-  /// File path: assets/images/logo.png
-  AssetGenImage get logo => const AssetGenImage('assets/images/logo.png');
+  /// File path: assets/images/logout.png
+  AssetGenImage get logout => const AssetGenImage('assets/images/logout.png');
 
   /// File path: assets/images/no-members-found.png
   AssetGenImage get noMembersFound =>

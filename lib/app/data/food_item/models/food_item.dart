@@ -61,12 +61,11 @@ class FoodItem {
   final List<String> tags;
   final bool active;
 
-  @TimestampConverter()
+  @DateTimeToTimestampConverter()
   final DateTime? createdAt;
-  @TimestampConverter()
+  @DateTimeToTimestampConverter()
   final DateTime updatedAt;
   String get imagePath => 'resturants/$resturantOwnerId/$imageName';
-
 }
 
 @Collection<FoodItem>('FoodItems')

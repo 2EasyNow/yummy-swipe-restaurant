@@ -23,7 +23,7 @@ class OnBoardingView extends GetView<OnBoardingController> {
       condition: FirebaseAuth.instance.currentUser != null,
       builder: (context) {
         return FutureBuilder<bool>(
-          future: Get.find<ResturantOwnerUseCase>().isUserRecordAdded(),
+          future: Get.find<ResturantOwnerUseCase>().isCurrentUserRecordAdded(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
               return Material(
@@ -99,8 +99,6 @@ class OnBoardingView extends GetView<OnBoardingController> {
     );
   }
 }
-
-
 
 class _BackAndNextButtons extends GetView<OnBoardingController> {
   const _BackAndNextButtons({Key? key}) : super(key: key);

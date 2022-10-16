@@ -20,6 +20,7 @@ import '../../../common/theme/app_colors.dart';
 import '../../../common/theme/text_theme.dart';
 import '../../../common/widgets/bottom_sheets.dart';
 import '../../../common/widgets/spacers.dart';
+import '../../../domain/app_settings/usecase/app_setttings_use_case.dart';
 import '../controllers/food_controller.dart';
 
 class FoodView extends GetView<FoodController> {
@@ -230,7 +231,7 @@ class _AddItemView extends GetWidget<FoodController> {
                                   if (query.isNotEmpty) {
                                     var lowercaseQuery = query.toLowerCase();
                                     final results = snap.data!.where((category) {
-                                      return category.data!.name.contains(query.toLowerCase());
+                                      return category.data!.name.toLowerCase().contains(lowercaseQuery);
                                     }).toList(growable: false)
                                       ..sort((a, b) => a.data!.name
                                           .toLowerCase()
@@ -272,15 +273,16 @@ class _AddItemView extends GetWidget<FoodController> {
                         ChipsInput<String>(
                           initialValue: _tags,
                           findSuggestions: (String query) {
+                            final allTags = Get.find<AppSettingsUseCase>().tags;
                             if (query.isNotEmpty) {
                               var lowercaseQuery = query.toLowerCase();
-                              final results = controller.tags.where((tag) {
+                              final results = allTags.where((tag) {
                                 return tag.contains(query.toLowerCase());
                               }).toList(growable: false)
                                 ..sort((a, b) => a.toLowerCase().indexOf(lowercaseQuery).compareTo(b.toLowerCase().indexOf(lowercaseQuery)));
                               return results;
                             }
-                            return controller.tags;
+                            return allTags;
                           },
                           onChanged: (data) {
                             _tags.clear();

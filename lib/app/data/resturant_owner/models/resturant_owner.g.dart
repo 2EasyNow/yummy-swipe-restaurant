@@ -132,9 +132,11 @@ abstract class ResturantOwnerDocumentReference
     String name,
     String phone,
     String address,
-    bool active,
+    String bannerImagePath,
+    List<String> resturantTags,
     DateTime? createdAt,
     DateTime updatedAt,
+    bool active,
   });
 
   Future<void> set(ResturantOwner value);
@@ -183,18 +185,24 @@ class _$ResturantOwnerDocumentReference extends FirestoreDocumentReference<
     Object? name = _sentinel,
     Object? phone = _sentinel,
     Object? address = _sentinel,
-    Object? active = _sentinel,
+    Object? bannerImagePath = _sentinel,
+    Object? resturantTags = _sentinel,
     Object? createdAt = _sentinel,
     Object? updatedAt = _sentinel,
+    Object? active = _sentinel,
   }) async {
     final json = {
       if (resturantName != _sentinel) "resturantName": resturantName as String,
       if (name != _sentinel) "name": name as String,
       if (phone != _sentinel) "phone": phone as String,
       if (address != _sentinel) "address": address as String,
-      if (active != _sentinel) "active": active as bool,
+      if (bannerImagePath != _sentinel)
+        "bannerImagePath": bannerImagePath as String,
+      if (resturantTags != _sentinel)
+        "resturantTags": resturantTags as List<String>,
       if (createdAt != _sentinel) "createdAt": createdAt as DateTime?,
       if (updatedAt != _sentinel) "updatedAt": updatedAt as DateTime,
+      if (active != _sentinel) "active": active as bool,
     };
 
     return reference.update(json);
@@ -365,16 +373,27 @@ abstract class ResturantOwnerQuery
     List<String>? whereIn,
     List<String>? whereNotIn,
   });
-  ResturantOwnerQuery whereActive({
-    bool? isEqualTo,
-    bool? isNotEqualTo,
-    bool? isLessThan,
-    bool? isLessThanOrEqualTo,
-    bool? isGreaterThan,
-    bool? isGreaterThanOrEqualTo,
+  ResturantOwnerQuery whereBannerImagePath({
+    String? isEqualTo,
+    String? isNotEqualTo,
+    String? isLessThan,
+    String? isLessThanOrEqualTo,
+    String? isGreaterThan,
+    String? isGreaterThanOrEqualTo,
     bool? isNull,
-    List<bool>? whereIn,
-    List<bool>? whereNotIn,
+    List<String>? whereIn,
+    List<String>? whereNotIn,
+  });
+  ResturantOwnerQuery whereResturantTags({
+    List<String>? isEqualTo,
+    List<String>? isNotEqualTo,
+    List<String>? isLessThan,
+    List<String>? isLessThanOrEqualTo,
+    List<String>? isGreaterThan,
+    List<String>? isGreaterThanOrEqualTo,
+    bool? isNull,
+    String? arrayContains,
+    List<String>? arrayContainsAny,
   });
   ResturantOwnerQuery whereCreatedAt({
     DateTime? isEqualTo,
@@ -397,6 +416,17 @@ abstract class ResturantOwnerQuery
     bool? isNull,
     List<DateTime>? whereIn,
     List<DateTime>? whereNotIn,
+  });
+  ResturantOwnerQuery whereActive({
+    bool? isEqualTo,
+    bool? isNotEqualTo,
+    bool? isLessThan,
+    bool? isLessThanOrEqualTo,
+    bool? isGreaterThan,
+    bool? isGreaterThanOrEqualTo,
+    bool? isNull,
+    List<bool>? whereIn,
+    List<bool>? whereNotIn,
   });
 
   ResturantOwnerQuery orderByDocumentId({
@@ -459,12 +489,24 @@ abstract class ResturantOwnerQuery
     ResturantOwnerDocumentSnapshot? startAfterDocument,
   });
 
-  ResturantOwnerQuery orderByActive({
+  ResturantOwnerQuery orderByBannerImagePath({
     bool descending = false,
-    bool startAt,
-    bool startAfter,
-    bool endAt,
-    bool endBefore,
+    String startAt,
+    String startAfter,
+    String endAt,
+    String endBefore,
+    ResturantOwnerDocumentSnapshot? startAtDocument,
+    ResturantOwnerDocumentSnapshot? endAtDocument,
+    ResturantOwnerDocumentSnapshot? endBeforeDocument,
+    ResturantOwnerDocumentSnapshot? startAfterDocument,
+  });
+
+  ResturantOwnerQuery orderByResturantTags({
+    bool descending = false,
+    List<String> startAt,
+    List<String> startAfter,
+    List<String> endAt,
+    List<String> endBefore,
     ResturantOwnerDocumentSnapshot? startAtDocument,
     ResturantOwnerDocumentSnapshot? endAtDocument,
     ResturantOwnerDocumentSnapshot? endBeforeDocument,
@@ -489,6 +531,18 @@ abstract class ResturantOwnerQuery
     DateTime startAfter,
     DateTime endAt,
     DateTime endBefore,
+    ResturantOwnerDocumentSnapshot? startAtDocument,
+    ResturantOwnerDocumentSnapshot? endAtDocument,
+    ResturantOwnerDocumentSnapshot? endBeforeDocument,
+    ResturantOwnerDocumentSnapshot? startAfterDocument,
+  });
+
+  ResturantOwnerQuery orderByActive({
+    bool descending = false,
+    bool startAt,
+    bool startAfter,
+    bool endAt,
+    bool endBefore,
     ResturantOwnerDocumentSnapshot? startAtDocument,
     ResturantOwnerDocumentSnapshot? endAtDocument,
     ResturantOwnerDocumentSnapshot? endBeforeDocument,
@@ -774,20 +828,20 @@ class _$ResturantOwnerQuery
     );
   }
 
-  ResturantOwnerQuery whereActive({
-    bool? isEqualTo,
-    bool? isNotEqualTo,
-    bool? isLessThan,
-    bool? isLessThanOrEqualTo,
-    bool? isGreaterThan,
-    bool? isGreaterThanOrEqualTo,
+  ResturantOwnerQuery whereBannerImagePath({
+    String? isEqualTo,
+    String? isNotEqualTo,
+    String? isLessThan,
+    String? isLessThanOrEqualTo,
+    String? isGreaterThan,
+    String? isGreaterThanOrEqualTo,
     bool? isNull,
-    List<bool>? whereIn,
-    List<bool>? whereNotIn,
+    List<String>? whereIn,
+    List<String>? whereNotIn,
   }) {
     return _$ResturantOwnerQuery(
       reference.where(
-        _$ResturantOwnerFieldMap["active"]!,
+        _$ResturantOwnerFieldMap["bannerImagePath"]!,
         isEqualTo: isEqualTo,
         isNotEqualTo: isNotEqualTo,
         isLessThan: isLessThan,
@@ -797,6 +851,34 @@ class _$ResturantOwnerQuery
         isNull: isNull,
         whereIn: whereIn,
         whereNotIn: whereNotIn,
+      ),
+      _collection,
+    );
+  }
+
+  ResturantOwnerQuery whereResturantTags({
+    List<String>? isEqualTo,
+    List<String>? isNotEqualTo,
+    List<String>? isLessThan,
+    List<String>? isLessThanOrEqualTo,
+    List<String>? isGreaterThan,
+    List<String>? isGreaterThanOrEqualTo,
+    bool? isNull,
+    String? arrayContains,
+    List<String>? arrayContainsAny,
+  }) {
+    return _$ResturantOwnerQuery(
+      reference.where(
+        _$ResturantOwnerFieldMap["resturantTags"]!,
+        isEqualTo: isEqualTo,
+        isNotEqualTo: isNotEqualTo,
+        isLessThan: isLessThan,
+        isLessThanOrEqualTo: isLessThanOrEqualTo,
+        isGreaterThan: isGreaterThan,
+        isGreaterThanOrEqualTo: isGreaterThanOrEqualTo,
+        isNull: isNull,
+        arrayContains: arrayContains,
+        arrayContainsAny: arrayContainsAny,
       ),
       _collection,
     );
@@ -844,6 +926,34 @@ class _$ResturantOwnerQuery
     return _$ResturantOwnerQuery(
       reference.where(
         _$ResturantOwnerFieldMap["updatedAt"]!,
+        isEqualTo: isEqualTo,
+        isNotEqualTo: isNotEqualTo,
+        isLessThan: isLessThan,
+        isLessThanOrEqualTo: isLessThanOrEqualTo,
+        isGreaterThan: isGreaterThan,
+        isGreaterThanOrEqualTo: isGreaterThanOrEqualTo,
+        isNull: isNull,
+        whereIn: whereIn,
+        whereNotIn: whereNotIn,
+      ),
+      _collection,
+    );
+  }
+
+  ResturantOwnerQuery whereActive({
+    bool? isEqualTo,
+    bool? isNotEqualTo,
+    bool? isLessThan,
+    bool? isLessThanOrEqualTo,
+    bool? isGreaterThan,
+    bool? isGreaterThanOrEqualTo,
+    bool? isNull,
+    List<bool>? whereIn,
+    List<bool>? whereNotIn,
+  }) {
+    return _$ResturantOwnerQuery(
+      reference.where(
+        _$ResturantOwnerFieldMap["active"]!,
         isEqualTo: isEqualTo,
         isNotEqualTo: isNotEqualTo,
         isLessThan: isLessThan,
@@ -1072,7 +1182,7 @@ class _$ResturantOwnerQuery
     return _$ResturantOwnerQuery(query, _collection);
   }
 
-  ResturantOwnerQuery orderByActive({
+  ResturantOwnerQuery orderByBannerImagePath({
     bool descending = false,
     Object? startAt = _sentinel,
     Object? startAfter = _sentinel,
@@ -1083,7 +1193,50 @@ class _$ResturantOwnerQuery
     ResturantOwnerDocumentSnapshot? endBeforeDocument,
     ResturantOwnerDocumentSnapshot? startAfterDocument,
   }) {
-    var query = reference.orderBy(_$ResturantOwnerFieldMap["active"]!,
+    var query = reference.orderBy(_$ResturantOwnerFieldMap["bannerImagePath"]!,
+        descending: descending);
+
+    if (startAtDocument != null) {
+      query = query.startAtDocument(startAtDocument.snapshot);
+    }
+    if (startAfterDocument != null) {
+      query = query.startAfterDocument(startAfterDocument.snapshot);
+    }
+    if (endAtDocument != null) {
+      query = query.endAtDocument(endAtDocument.snapshot);
+    }
+    if (endBeforeDocument != null) {
+      query = query.endBeforeDocument(endBeforeDocument.snapshot);
+    }
+
+    if (startAt != _sentinel) {
+      query = query.startAt([startAt]);
+    }
+    if (startAfter != _sentinel) {
+      query = query.startAfter([startAfter]);
+    }
+    if (endAt != _sentinel) {
+      query = query.endAt([endAt]);
+    }
+    if (endBefore != _sentinel) {
+      query = query.endBefore([endBefore]);
+    }
+
+    return _$ResturantOwnerQuery(query, _collection);
+  }
+
+  ResturantOwnerQuery orderByResturantTags({
+    bool descending = false,
+    Object? startAt = _sentinel,
+    Object? startAfter = _sentinel,
+    Object? endAt = _sentinel,
+    Object? endBefore = _sentinel,
+    ResturantOwnerDocumentSnapshot? startAtDocument,
+    ResturantOwnerDocumentSnapshot? endAtDocument,
+    ResturantOwnerDocumentSnapshot? endBeforeDocument,
+    ResturantOwnerDocumentSnapshot? startAfterDocument,
+  }) {
+    var query = reference.orderBy(_$ResturantOwnerFieldMap["resturantTags"]!,
         descending: descending);
 
     if (startAtDocument != null) {
@@ -1201,6 +1354,49 @@ class _$ResturantOwnerQuery
     return _$ResturantOwnerQuery(query, _collection);
   }
 
+  ResturantOwnerQuery orderByActive({
+    bool descending = false,
+    Object? startAt = _sentinel,
+    Object? startAfter = _sentinel,
+    Object? endAt = _sentinel,
+    Object? endBefore = _sentinel,
+    ResturantOwnerDocumentSnapshot? startAtDocument,
+    ResturantOwnerDocumentSnapshot? endAtDocument,
+    ResturantOwnerDocumentSnapshot? endBeforeDocument,
+    ResturantOwnerDocumentSnapshot? startAfterDocument,
+  }) {
+    var query = reference.orderBy(_$ResturantOwnerFieldMap["active"]!,
+        descending: descending);
+
+    if (startAtDocument != null) {
+      query = query.startAtDocument(startAtDocument.snapshot);
+    }
+    if (startAfterDocument != null) {
+      query = query.startAfterDocument(startAfterDocument.snapshot);
+    }
+    if (endAtDocument != null) {
+      query = query.endAtDocument(endAtDocument.snapshot);
+    }
+    if (endBeforeDocument != null) {
+      query = query.endBeforeDocument(endBeforeDocument.snapshot);
+    }
+
+    if (startAt != _sentinel) {
+      query = query.startAt([startAt]);
+    }
+    if (startAfter != _sentinel) {
+      query = query.startAfter([startAfter]);
+    }
+    if (endAt != _sentinel) {
+      query = query.endAt([endAt]);
+    }
+    if (endBefore != _sentinel) {
+      query = query.endBefore([endBefore]);
+    }
+
+    return _$ResturantOwnerQuery(query, _collection);
+  }
+
   @override
   bool operator ==(Object other) {
     return other is _$ResturantOwnerQuery &&
@@ -1257,13 +1453,22 @@ ResturantOwner _$ResturantOwnerFromJson(Map<String, dynamic> json) =>
       name: json['name'] as String,
       phone: json['phone'] as String,
       address: json['address'] as String,
-      coordinates: const LatLngConverter()
-          .fromJson(json['coordinates'] as Map<String, dynamic>),
+      coordinates:
+          const LatLngConverter().fromJson(json['coordinates'] as Object),
+      openingTime: const TimeOfDayToTimestampConverter()
+          .fromJson(json['openingTime'] as Timestamp),
+      closingTime: const TimeOfDayToTimestampConverter()
+          .fromJson(json['closingTime'] as Timestamp),
+      resturantTags: (json['resturantTags'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
+      bannerImagePath: json['bannerImagePath'] as String? ?? '',
       active: json['active'] as bool? ?? true,
       createdAt: _$JsonConverterFromJson<Timestamp, DateTime>(
-          json['createdAt'], const TimestampConverter().fromJson),
-      updatedAt:
-          const TimestampConverter().fromJson(json['updatedAt'] as Timestamp),
+          json['createdAt'], const DateTimeToTimestampConverter().fromJson),
+      updatedAt: const DateTimeToTimestampConverter()
+          .fromJson(json['updatedAt'] as Timestamp),
     );
 
 const _$ResturantOwnerFieldMap = <String, String>{
@@ -1271,10 +1476,14 @@ const _$ResturantOwnerFieldMap = <String, String>{
   'name': 'name',
   'phone': 'phone',
   'address': 'address',
+  'bannerImagePath': 'bannerImagePath',
+  'resturantTags': 'resturantTags',
+  'openingTime': 'openingTime',
+  'closingTime': 'closingTime',
   'coordinates': 'coordinates',
-  'active': 'active',
   'createdAt': 'createdAt',
   'updatedAt': 'updatedAt',
+  'active': 'active',
 };
 
 Map<String, dynamic> _$ResturantOwnerToJson(ResturantOwner instance) =>
@@ -1283,11 +1492,18 @@ Map<String, dynamic> _$ResturantOwnerToJson(ResturantOwner instance) =>
       'name': instance.name,
       'phone': instance.phone,
       'address': instance.address,
+      'bannerImagePath': instance.bannerImagePath,
+      'resturantTags': instance.resturantTags,
+      'openingTime':
+          const TimeOfDayToTimestampConverter().toJson(instance.openingTime),
+      'closingTime':
+          const TimeOfDayToTimestampConverter().toJson(instance.closingTime),
       'coordinates': const LatLngConverter().toJson(instance.coordinates),
-      'active': instance.active,
       'createdAt': _$JsonConverterToJson<Timestamp, DateTime>(
-          instance.createdAt, const TimestampConverter().toJson),
-      'updatedAt': const TimestampConverter().toJson(instance.updatedAt),
+          instance.createdAt, const DateTimeToTimestampConverter().toJson),
+      'updatedAt':
+          const DateTimeToTimestampConverter().toJson(instance.updatedAt),
+      'active': instance.active,
     };
 
 Value? _$JsonConverterFromJson<Json, Value>(

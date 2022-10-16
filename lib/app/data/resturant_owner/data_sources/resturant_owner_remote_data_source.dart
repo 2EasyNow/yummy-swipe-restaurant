@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intelligent_food_delivery/app/data/resturant_owner/data_sources/resturant_owner_data_source.dart';
 
 import '../models/resturant_owner.dart';
@@ -5,7 +6,7 @@ import '../models/resturant_owner.dart';
 class ResturantOwnerRemoteDataSource implements ResturantOwnerDataSource {
   @override
   Future<void> createResturantOwner(ResturantOwner user) async {
-    userRef.add(user);
+    userRef.doc(FirebaseAuth.instance.currentUser!.uid).set(user);
   }
 
   @override
@@ -22,14 +23,7 @@ class ResturantOwnerRemoteDataSource implements ResturantOwnerDataSource {
 
   @override
   Future<ResturantOwner> updateOwner(String uid, ResturantOwner user) async {
-    await userRef.doc(uid).update(
-          name: user.name,
-          resturantName: user.resturantName,
-          phone: user.phone,
-          address: user.address,
-          updatedAt: DateTime.now(),
-          active: user.active,
-        );
+    await userRef.doc(uid).set(user);
     return user;
   }
 }

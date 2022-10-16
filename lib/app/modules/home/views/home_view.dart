@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
+import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 import 'package:intelligent_food_delivery/app/common/widgets/spacers.dart';
 import 'package:intelligent_food_delivery/app/core/core.dart';
 import 'package:intelligent_food_delivery/assets/assets.gen.dart';
@@ -11,7 +13,30 @@ import '../../../routes/app_pages.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
-  const HomeView({super.key});
+  HomeView({super.key});
+
+  final _navigations = [
+    _NavigationCardsModel(
+      title: 'Food',
+      image: Assets.images.burger.path,
+      onTap: () => Get.toNamed(Routes.FOOD),
+    ),
+    _NavigationCardsModel(
+      title: 'Category',
+      image: Assets.images.deal.path,
+      onTap: () => Get.toNamed(Routes.FOOD),
+    ),
+    _NavigationCardsModel(
+      title: 'Profile',
+      image: Assets.images.profile.path,
+      onTap: () => Get.toNamed(Routes.RESTURANT_PROFILE),
+    ),
+    _NavigationCardsModel(
+      title: 'Logout',
+      image: Assets.images.logout.path,
+      onTap: Get.find<AuthenticationController>().logOut,
+    )
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -22,24 +47,29 @@ class HomeView extends GetView<HomeController> {
       ),
       body: GridView.count(
         crossAxisCount: 2,
-        children: [
-          Card(
+        children: _navigations.map((item) {
+          return Card(
             child: InkWell(
-              onTap: () => Get.toNamed(Routes.FOOD),
+              onTap: item.onTap,
               child: Column(
                 children: [
                   Expanded(
                     child: Container(
                       alignment: Alignment.center,
-                      child: Assets.images.burger.image(
-                        width: 30.w,
-                        fit: BoxFit.cover,
-                      ),
+                      child: item.image.endsWith('svg')
+                          ? SvgPicture.asset(
+                              item.image,
+                              width: 80,
+                            )
+                          : Image.asset(
+                              item.image,
+                              width: 80,
+                            ),
                     ),
                   ),
                   const Divider(),
                   Text(
-                    'Food',
+                    item.title,
                     style: AppTextStyle(
                       fontSize: 12.sp,
                       fontWeight: FontWeight.bold,
@@ -49,66 +79,21 @@ class HomeView extends GetView<HomeController> {
                 ],
               ),
             ),
-          ),
-          Card(
-            child: InkWell(
-              onTap: () => Get.toNamed(Routes.CATEGORIES),
-              child: Column(
-                children: [
-                  Expanded(
-                    child: Container(
-                      alignment: Alignment.center,
-                      child: Assets.images.burger.image(
-                        width: 30.w,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  const Divider(),
-                  Text(
-                    'Categories',
-                    style: AppTextStyle(
-                      fontSize: 12.sp,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const VerticalSpacer(space: 8),
-                ],
-              ),
-            ),
-          ),
-          Card(
-            child: InkWell(
-              onTap: () {
-                Get.find<AuthenticationController>().logOut();
-              },
-              child: Column(
-                children: [
-                  Expanded(
-                    child: Container(
-                      alignment: Alignment.center,
-                      child: Assets.icons.logout.svg(
-                        width: 20.w,
-                        fit: BoxFit.cover,
-                        color: Colors.red,
-                      ),
-                    ),
-                  ),
-                  const Divider(),
-                  Text(
-                    'Logout',
-                    style: AppTextStyle(
-                      fontSize: 12.sp,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const VerticalSpacer(space: 8),
-                ],
-              ),
-            ),
-          ),
-        ],
+          );
+        }).toList(),
       ).paddingSymmetric(horizontal: 12),
     );
   }
+}
+
+class _NavigationCardsModel {
+  final String title;
+  final String image;
+  final Callback onTap;
+
+  _NavigationCardsModel({
+    required this.title,
+    required this.image,
+    required this.onTap,
+  });
 }

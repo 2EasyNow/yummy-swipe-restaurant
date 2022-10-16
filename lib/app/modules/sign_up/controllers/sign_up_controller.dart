@@ -1,10 +1,10 @@
+import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intelligent_food_delivery/app/common/widgets/snackbars.dart';
 import 'package:intelligent_food_delivery/app/domain/app_user/use_cases/resturant_owner_use_case.dart';
-
 import '../../../core/core.dart';
 
 enum CreateAccountState {
@@ -21,16 +21,35 @@ enum CreateAccountState {
 }
 
 class SignUpController extends GetxController {
-  final formKey = GlobalKey<FormState>();
+  int currentStep = 0;
+  final firstStepFormKey = GlobalKey<FormState>();
+  final secondStepFormKey = GlobalKey<FormState>();
   final resturantNameController = TextEditingController();
   final nameController = TextEditingController();
   final phoneController = TextEditingController();
   final addressController = TextEditingController();
   final coordinatedController = TextEditingController();
+  final openingTimeController = TextEditingController();
+  final closingTimeController = TextEditingController();
+
   LatLng? resturantCoordinates;
+  List<String> resturantTags = [];
+  TimeOfDay? _openingTime, _closingTime;
+
+  set openingTime(val) {
+    _openingTime = val;
+    openingTimeController.text = val.format(Get.context!);
+  }
+
+  set closingTime(val) {
+    _closingTime = val;
+    closingTimeController.text = val.format(Get.context!);
+  }
 
   final phoneNumberScopeNode = FocusScopeNode();
   final coordinatedScopeNode = FocusScopeNode();
+
+  File? bannerImage;
 
   String? get phoneNumber {
     final number = phoneController.text.replaceAll('-', '');
@@ -46,16 +65,22 @@ class SignUpController extends GetxController {
 
   onCreateAccountWithPhoneNumber([Widget? bottomSheet]) async {
     // check wether all the fields are filled or not
-    if (!formKey.currentState!.validate()) return;
+    if (!secondStepFormKey.currentState!.validate()) return;
     if (resturantCoordinates == null) {
       showErrorSnackbar('Resturant Location', "Please select resturant's location coordinates");
+      return;
     }
-
+    if (_openingTime == null || _closingTime == null) {
+      showErrorSnackbar('Resturant Timing', "Please select resturant's opening and closing time");
+      return;
+    }
 
     // check if it is already registerd or not
     final resturantOwnerUseCase = Get.find<ResturantOwnerUseCase>();
     if (await resturantOwnerUseCase.isOwnerRegistered(phoneNumber!)) {
       showErrorSnackbar('Register Resturant', "Resturant with this phone number is already registered");
+      currentStep = 0;
+      update();
       phoneNumberScopeNode.requestFocus();
       return;
     }
@@ -103,9 +128,29 @@ class SignUpController extends GetxController {
       name: nameController.text,
       resturantName: resturantNameController.text,
       phone: phoneNumber!,
+      bannerImage: bannerImage!,
       address: addressController.text,
       coordinates: resturantCoordinates!,
+      resturantTags: resturantTags,
+      openingTime: _openingTime!,
+      closingTime: _closingTime!,
     );
     createAccountState.value = CreateAccountState.userCreated;
+  }
+
+  onStepTapped(int step) {
+    if (currentStep == step) return;
+    if (currentStep == 0) {
+      if (!firstStepFormKey.currentState!.validate()) return;
+      if (bannerImage == null) {
+        showErrorSnackbar('Resturant Banner', "Please select resturant's banner image");
+        return;
+      }
+      currentStep = step;
+      update();
+    } else {
+      currentStep = step;
+      update();
+    }
   }
 }

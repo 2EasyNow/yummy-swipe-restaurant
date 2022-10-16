@@ -46,9 +46,9 @@ class FoodCategory {
   final bool active;
   final int totalFoodItems;
 
-  @TimestampConverter()
+  @DateTimeToTimestampConverter()
   final DateTime? createdAt;
-  @TimestampConverter()
+  @DateTimeToTimestampConverter()
   final DateTime updatedAt;
 }
 

@@ -1158,9 +1158,9 @@ FoodCategory _$FoodCategoryFromJson(Map<String, dynamic> json) => FoodCategory(
       totalFoodItems: json['totalFoodItems'] as int? ?? 0,
       active: json['active'] as bool? ?? true,
       createdAt: _$JsonConverterFromJson<Timestamp, DateTime>(
-          json['createdAt'], const TimestampConverter().fromJson),
-      updatedAt:
-          const TimestampConverter().fromJson(json['updatedAt'] as Timestamp),
+          json['createdAt'], const DateTimeToTimestampConverter().fromJson),
+      updatedAt: const DateTimeToTimestampConverter()
+          .fromJson(json['updatedAt'] as Timestamp),
     );
 
 const _$FoodCategoryFieldMap = <String, String>{
@@ -1179,8 +1179,9 @@ Map<String, dynamic> _$FoodCategoryToJson(FoodCategory instance) =>
       'active': instance.active,
       'totalFoodItems': instance.totalFoodItems,
       'createdAt': _$JsonConverterToJson<Timestamp, DateTime>(
-          instance.createdAt, const TimestampConverter().toJson),
-      'updatedAt': const TimestampConverter().toJson(instance.updatedAt),
+          instance.createdAt, const DateTimeToTimestampConverter().toJson),
+      'updatedAt':
+          const DateTimeToTimestampConverter().toJson(instance.updatedAt),
     };
 
 Value? _$JsonConverterFromJson<Json, Value>(
