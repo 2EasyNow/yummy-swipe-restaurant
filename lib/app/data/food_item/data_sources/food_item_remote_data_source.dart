@@ -8,20 +8,20 @@ import 'food_item_data_source.dart';
 
 class FoodItemRemoteDataSource implements FoodItemDataSource {
   @override
-  Future<void> createFoodItem(FoodItem item) async {
-    await foodItemRef.add(item);
+  Future<String> createFoodItem(FoodItem item) async {
+    return (await foodItemRef.add(item)).reference.id;
   }
 
   @override
-  Future<List<FoodItemDocumentSnapshot>> getItemsByResturant(String resturantId) async {
-    final data = await foodItemRef.whereResturantOwnerId(isEqualTo: resturantId).get();
-    return data.docs;
+  Future<List<FoodItem>> getItemsByRestaurant(String restaurantId) async {
+    final data = await foodItemRef.whereRestaurantId(isEqualTo: restaurantId).get();
+    return data.docs.map((e) => e.data).toList();
   }
 
   @override
-  Future<List<FoodItemDocumentSnapshot>> getItemsOfResturantByCategory(String categoryId) async {
+  Future<List<FoodItem>> getItemsOfRestaurantByCategory(String categoryId) async {
     final data = await foodItemRef.whereCategories(arrayContains: categoryId).get();
-    return data.docs;
+    return data.docs.map((e) => e.data).toList();
   }
 
   @override
@@ -31,9 +31,9 @@ class FoodItemRemoteDataSource implements FoodItemDataSource {
   }
 
   @override
-  Future<FoodItem> update(String uid, FoodItem newItem) async {
-    await foodItemRef.doc(uid).set(newItem);
-    return newItem;
+  Future<FoodItem> update(FoodItem updatedItem) async {
+    await foodItemRef.doc(updatedItem.id).set(updatedItem);
+    return updatedItem;
   }
 
   @override
@@ -43,6 +43,6 @@ class FoodItemRemoteDataSource implements FoodItemDataSource {
 
   @override
   Future<String> uploadItemImage(File image, String itemId) {
-    return FirebaseUtils.uploadFileOnFirebaseStorage(image, 'resturants/${FirebaseAuth.instance.currentUser!.uid}/$itemId');
+    return FirebaseUtils.uploadFileOnFirebaseStorage(image, 'restaurants/${FirebaseAuth.instance.currentUser!.uid}/$itemId');
   }
 }

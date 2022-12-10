@@ -23,7 +23,7 @@ class SplashView extends GetView<SplashController> {
             color: AppColors(context).primary,
           ),
           Text(
-            "YummySwipe Resturant",
+            "YummySwipe Restaurant",
             style: AppTextStyle(
               fontWeight: FontWeight.w700,
               fontSize: 32.sp,

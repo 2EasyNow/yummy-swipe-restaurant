@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 part of 'app_pages.dart';
 // DO NOT EDIT. This is code generated via package:get_cli/get_cli.dart
 
@@ -15,6 +17,8 @@ abstract class Routes {
   static const FOOD = _Paths.FOOD;
   static const CATEGORY_FOOD_LIST = _Paths.CATEGORY_FOOD_LIST;
   static const RESTURANT_PROFILE = _Paths.RESTURANT_PROFILE;
+  static const ORDERS_LIST = _Paths.ORDERS_LIST;
+  static const ORDERS_DETAIL = _Paths.ORDERS_DETAIL;
 }
 
 abstract class _Paths {
@@ -28,5 +32,7 @@ abstract class _Paths {
   static const CATEGORIES = '/categories';
   static const FOOD = '/food';
   static const CATEGORY_FOOD_LIST = '/category-food-list';
-  static const RESTURANT_PROFILE = '/resturant-profile';
+  static const RESTURANT_PROFILE = '/restaurant-profile';
+  static const ORDERS_LIST = '/orders-list';
+  static const ORDERS_DETAIL = '/orders-detail';
 }

@@ -7,7 +7,7 @@ part of 'app_settings.dart';
 // **************************************************************************
 
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, require_trailing_commas, prefer_single_quotes, prefer_double_quotes, use_super_parameters
 
 class _Sentinel {
   const _Sentinel();
@@ -66,7 +66,7 @@ class _$AppSettingsCollectionReference extends _$AppSettingsQuery
 
   _$AppSettingsCollectionReference._(
     CollectionReference<AppSettings> reference,
-  ) : super(reference, reference);
+  ) : super(reference, $referenceWithoutCursor: reference);
 
   String get path => reference.path;
 
@@ -125,12 +125,27 @@ abstract class AppSettingsDocumentReference extends FirestoreDocumentReference<
   @override
   Future<void> delete();
 
+  /// Updates data on the document. Data will be merged with any existing
+  /// document data.
+  ///
+  /// If no document exists yet, the update will fail.
   Future<void> update({
     int searchInKm,
+    FieldValue searchInKmFieldValue,
     DateTime updatedAt,
+    FieldValue updatedAtFieldValue,
   });
 
-  Future<void> set(AppSettings value);
+  /// Updates fields in the current document using the transaction API.
+  ///
+  /// The update will fail if applied to a document that does not exist.
+  void transactionUpdate(
+    Transaction transaction, {
+    int searchInKm,
+    FieldValue searchInKmFieldValue,
+    DateTime updatedAt,
+    FieldValue updatedAtFieldValue,
+  });
 }
 
 class _$AppSettingsDocumentReference
@@ -148,43 +163,66 @@ class _$AppSettingsDocumentReference
 
   @override
   Stream<AppSettingsDocumentSnapshot> snapshots() {
-    return reference.snapshots().map((snapshot) {
-      return AppSettingsDocumentSnapshot._(
-        snapshot,
-        snapshot.data(),
-      );
-    });
+    return reference.snapshots().map(AppSettingsDocumentSnapshot._);
   }
 
   @override
   Future<AppSettingsDocumentSnapshot> get([GetOptions? options]) {
-    return reference.get(options).then((snapshot) {
-      return AppSettingsDocumentSnapshot._(
-        snapshot,
-        snapshot.data(),
-      );
-    });
+    return reference.get(options).then(AppSettingsDocumentSnapshot._);
   }
 
   @override
-  Future<void> delete() {
-    return reference.delete();
+  Future<AppSettingsDocumentSnapshot> transactionGet(Transaction transaction) {
+    return transaction.get(reference).then(AppSettingsDocumentSnapshot._);
   }
 
   Future<void> update({
     Object? searchInKm = _sentinel,
+    FieldValue? searchInKmFieldValue,
     Object? updatedAt = _sentinel,
+    FieldValue? updatedAtFieldValue,
   }) async {
+    assert(
+      searchInKm == _sentinel || searchInKmFieldValue == null,
+      "Cannot specify both searchInKm and searchInKmFieldValue",
+    );
+    assert(
+      updatedAt == _sentinel || updatedAtFieldValue == null,
+      "Cannot specify both updatedAt and updatedAtFieldValue",
+    );
     final json = {
-      if (searchInKm != _sentinel) "searchInKm": searchInKm as int,
-      if (updatedAt != _sentinel) "updatedAt": updatedAt as DateTime,
+      if (searchInKm != _sentinel) 'searchInKm': searchInKm as int,
+      if (searchInKmFieldValue != null) 'searchInKm': searchInKmFieldValue,
+      if (updatedAt != _sentinel) 'updatedAt': updatedAt as DateTime,
+      if (updatedAtFieldValue != null) 'updatedAt': updatedAtFieldValue,
     };
 
     return reference.update(json);
   }
 
-  Future<void> set(AppSettings value) {
-    return reference.set(value);
+  void transactionUpdate(
+    Transaction transaction, {
+    Object? searchInKm = _sentinel,
+    FieldValue? searchInKmFieldValue,
+    Object? updatedAt = _sentinel,
+    FieldValue? updatedAtFieldValue,
+  }) {
+    assert(
+      searchInKm == _sentinel || searchInKmFieldValue == null,
+      "Cannot specify both searchInKm and searchInKmFieldValue",
+    );
+    assert(
+      updatedAt == _sentinel || updatedAtFieldValue == null,
+      "Cannot specify both updatedAt and updatedAtFieldValue",
+    );
+    final json = {
+      if (searchInKm != _sentinel) 'searchInKm': searchInKm as int,
+      if (searchInKmFieldValue != null) 'searchInKm': searchInKmFieldValue,
+      if (updatedAt != _sentinel) 'updatedAt': updatedAt as DateTime,
+      if (updatedAtFieldValue != null) 'updatedAt': updatedAtFieldValue,
+    };
+
+    transaction.update(reference, json);
   }
 
   @override
@@ -197,27 +235,6 @@ class _$AppSettingsDocumentReference
 
   @override
   int get hashCode => Object.hash(runtimeType, parent, id);
-}
-
-class AppSettingsDocumentSnapshot
-    extends FirestoreDocumentSnapshot<AppSettings> {
-  AppSettingsDocumentSnapshot._(
-    this.snapshot,
-    this.data,
-  );
-
-  @override
-  final DocumentSnapshot<AppSettings> snapshot;
-
-  @override
-  AppSettingsDocumentReference get reference {
-    return AppSettingsDocumentReference(
-      snapshot.reference,
-    );
-  }
-
-  @override
-  final AppSettings? data;
 }
 
 abstract class AppSettingsQuery
@@ -368,61 +385,45 @@ class _$AppSettingsQuery
     extends QueryReference<AppSettings, AppSettingsQuerySnapshot>
     implements AppSettingsQuery {
   _$AppSettingsQuery(
-    this.reference,
-    this._collection,
-  );
+    this._collection, {
+    required Query<AppSettings> $referenceWithoutCursor,
+    $QueryCursor $queryCursor = const $QueryCursor(),
+  }) : super(
+          $referenceWithoutCursor: $referenceWithoutCursor,
+          $queryCursor: $queryCursor,
+        );
 
   final CollectionReference<Object?> _collection;
 
   @override
-  final Query<AppSettings> reference;
-
-  AppSettingsQuerySnapshot _decodeSnapshot(
-    QuerySnapshot<AppSettings> snapshot,
-  ) {
-    final docs = snapshot.docs.map((e) {
-      return AppSettingsQueryDocumentSnapshot._(e, e.data());
-    }).toList();
-
-    final docChanges = snapshot.docChanges.map((change) {
-      return FirestoreDocumentChange<AppSettingsDocumentSnapshot>(
-        type: change.type,
-        oldIndex: change.oldIndex,
-        newIndex: change.newIndex,
-        doc: AppSettingsDocumentSnapshot._(change.doc, change.doc.data()),
-      );
-    }).toList();
-
-    return AppSettingsQuerySnapshot._(
-      snapshot,
-      docs,
-      docChanges,
-    );
-  }
-
-  @override
   Stream<AppSettingsQuerySnapshot> snapshots([SnapshotOptions? options]) {
-    return reference.snapshots().map(_decodeSnapshot);
+    return reference
+        .snapshots()
+        .map(AppSettingsQuerySnapshot._fromQuerySnapshot);
   }
 
   @override
   Future<AppSettingsQuerySnapshot> get([GetOptions? options]) {
-    return reference.get(options).then(_decodeSnapshot);
+    return reference
+        .get(options)
+        .then(AppSettingsQuerySnapshot._fromQuerySnapshot);
   }
 
   @override
   AppSettingsQuery limit(int limit) {
     return _$AppSettingsQuery(
-      reference.limit(limit),
       _collection,
+      $referenceWithoutCursor: $referenceWithoutCursor.limit(limit),
+      $queryCursor: $queryCursor,
     );
   }
 
   @override
   AppSettingsQuery limitToLast(int limit) {
     return _$AppSettingsQuery(
-      reference.limitToLast(limit),
       _collection,
+      $referenceWithoutCursor: $referenceWithoutCursor.limitToLast(limit),
+      $queryCursor: $queryCursor,
     );
   }
 
@@ -438,35 +439,64 @@ class _$AppSettingsQuery
     AppSettingsDocumentSnapshot? endBeforeDocument,
     AppSettingsDocumentSnapshot? startAfterDocument,
   }) {
-    var query = reference.orderBy(fieldPath, descending: descending);
+    final query =
+        $referenceWithoutCursor.orderBy(fieldPath, descending: descending);
+    var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
-      query = query.startAtDocument(startAtDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        startAt: const [],
+        startAtDocumentSnapshot: startAtDocument.snapshot,
+      );
     }
     if (startAfterDocument != null) {
-      query = query.startAfterDocument(startAfterDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        startAfter: const [],
+        startAfterDocumentSnapshot: startAfterDocument.snapshot,
+      );
     }
     if (endAtDocument != null) {
-      query = query.endAtDocument(endAtDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        endAt: const [],
+        endAtDocumentSnapshot: endAtDocument.snapshot,
+      );
     }
     if (endBeforeDocument != null) {
-      query = query.endBeforeDocument(endBeforeDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        endBefore: const [],
+        endBeforeDocumentSnapshot: endBeforeDocument.snapshot,
+      );
     }
 
     if (startAt != _sentinel) {
-      query = query.startAt([startAt]);
+      queryCursor = queryCursor.copyWith(
+        startAt: [...queryCursor.startAt, startAt],
+        startAtDocumentSnapshot: null,
+      );
     }
     if (startAfter != _sentinel) {
-      query = query.startAfter([startAfter]);
+      queryCursor = queryCursor.copyWith(
+        startAfter: [...queryCursor.startAfter, startAfter],
+        startAfterDocumentSnapshot: null,
+      );
     }
     if (endAt != _sentinel) {
-      query = query.endAt([endAt]);
+      queryCursor = queryCursor.copyWith(
+        endAt: [...queryCursor.endAt, endAt],
+        endAtDocumentSnapshot: null,
+      );
     }
     if (endBefore != _sentinel) {
-      query = query.endBefore([endBefore]);
+      queryCursor = queryCursor.copyWith(
+        endBefore: [...queryCursor.endBefore, endBefore],
+        endBeforeDocumentSnapshot: null,
+      );
     }
-
-    return _$AppSettingsQuery(query, _collection);
+    return _$AppSettingsQuery(
+      _collection,
+      $referenceWithoutCursor: query,
+      $queryCursor: queryCursor,
+    );
   }
 
   AppSettingsQuery whereFieldPath(
@@ -484,7 +514,8 @@ class _$AppSettingsQuery
     bool? isNull,
   }) {
     return _$AppSettingsQuery(
-      reference.where(
+      _collection,
+      $referenceWithoutCursor: $referenceWithoutCursor.where(
         fieldPath,
         isEqualTo: isEqualTo,
         isNotEqualTo: isNotEqualTo,
@@ -498,7 +529,7 @@ class _$AppSettingsQuery
         whereNotIn: whereNotIn,
         isNull: isNull,
       ),
-      _collection,
+      $queryCursor: $queryCursor,
     );
   }
 
@@ -514,7 +545,8 @@ class _$AppSettingsQuery
     List<String>? whereNotIn,
   }) {
     return _$AppSettingsQuery(
-      reference.where(
+      _collection,
+      $referenceWithoutCursor: $referenceWithoutCursor.where(
         FieldPath.documentId,
         isEqualTo: isEqualTo,
         isNotEqualTo: isNotEqualTo,
@@ -526,7 +558,7 @@ class _$AppSettingsQuery
         whereIn: whereIn,
         whereNotIn: whereNotIn,
       ),
-      _collection,
+      $queryCursor: $queryCursor,
     );
   }
 
@@ -542,8 +574,9 @@ class _$AppSettingsQuery
     List<int>? whereNotIn,
   }) {
     return _$AppSettingsQuery(
-      reference.where(
-        _$AppSettingsFieldMap["searchInKm"]!,
+      _collection,
+      $referenceWithoutCursor: $referenceWithoutCursor.where(
+        _$AppSettingsFieldMap['searchInKm']!,
         isEqualTo: isEqualTo,
         isNotEqualTo: isNotEqualTo,
         isLessThan: isLessThan,
@@ -554,7 +587,7 @@ class _$AppSettingsQuery
         whereIn: whereIn,
         whereNotIn: whereNotIn,
       ),
-      _collection,
+      $queryCursor: $queryCursor,
     );
   }
 
@@ -570,8 +603,9 @@ class _$AppSettingsQuery
     List<DateTime>? whereNotIn,
   }) {
     return _$AppSettingsQuery(
-      reference.where(
-        _$AppSettingsFieldMap["updatedAt"]!,
+      _collection,
+      $referenceWithoutCursor: $referenceWithoutCursor.where(
+        _$AppSettingsFieldMap['updatedAt']!,
         isEqualTo: isEqualTo,
         isNotEqualTo: isNotEqualTo,
         isLessThan: isLessThan,
@@ -582,7 +616,7 @@ class _$AppSettingsQuery
         whereIn: whereIn,
         whereNotIn: whereNotIn,
       ),
-      _collection,
+      $queryCursor: $queryCursor,
     );
   }
 
@@ -597,35 +631,65 @@ class _$AppSettingsQuery
     AppSettingsDocumentSnapshot? endBeforeDocument,
     AppSettingsDocumentSnapshot? startAfterDocument,
   }) {
-    var query = reference.orderBy(FieldPath.documentId, descending: descending);
+    final query = $referenceWithoutCursor.orderBy(FieldPath.documentId,
+        descending: descending);
+    var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
-      query = query.startAtDocument(startAtDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        startAt: const [],
+        startAtDocumentSnapshot: startAtDocument.snapshot,
+      );
     }
     if (startAfterDocument != null) {
-      query = query.startAfterDocument(startAfterDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        startAfter: const [],
+        startAfterDocumentSnapshot: startAfterDocument.snapshot,
+      );
     }
     if (endAtDocument != null) {
-      query = query.endAtDocument(endAtDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        endAt: const [],
+        endAtDocumentSnapshot: endAtDocument.snapshot,
+      );
     }
     if (endBeforeDocument != null) {
-      query = query.endBeforeDocument(endBeforeDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        endBefore: const [],
+        endBeforeDocumentSnapshot: endBeforeDocument.snapshot,
+      );
     }
 
     if (startAt != _sentinel) {
-      query = query.startAt([startAt]);
+      queryCursor = queryCursor.copyWith(
+        startAt: [...queryCursor.startAt, startAt],
+        startAtDocumentSnapshot: null,
+      );
     }
     if (startAfter != _sentinel) {
-      query = query.startAfter([startAfter]);
+      queryCursor = queryCursor.copyWith(
+        startAfter: [...queryCursor.startAfter, startAfter],
+        startAfterDocumentSnapshot: null,
+      );
     }
     if (endAt != _sentinel) {
-      query = query.endAt([endAt]);
+      queryCursor = queryCursor.copyWith(
+        endAt: [...queryCursor.endAt, endAt],
+        endAtDocumentSnapshot: null,
+      );
     }
     if (endBefore != _sentinel) {
-      query = query.endBefore([endBefore]);
+      queryCursor = queryCursor.copyWith(
+        endBefore: [...queryCursor.endBefore, endBefore],
+        endBeforeDocumentSnapshot: null,
+      );
     }
 
-    return _$AppSettingsQuery(query, _collection);
+    return _$AppSettingsQuery(
+      _collection,
+      $referenceWithoutCursor: query,
+      $queryCursor: queryCursor,
+    );
   }
 
   AppSettingsQuery orderBySearchInKm({
@@ -639,36 +703,65 @@ class _$AppSettingsQuery
     AppSettingsDocumentSnapshot? endBeforeDocument,
     AppSettingsDocumentSnapshot? startAfterDocument,
   }) {
-    var query = reference.orderBy(_$AppSettingsFieldMap["searchInKm"]!,
-        descending: descending);
+    final query = $referenceWithoutCursor
+        .orderBy(_$AppSettingsFieldMap['searchInKm']!, descending: descending);
+    var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
-      query = query.startAtDocument(startAtDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        startAt: const [],
+        startAtDocumentSnapshot: startAtDocument.snapshot,
+      );
     }
     if (startAfterDocument != null) {
-      query = query.startAfterDocument(startAfterDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        startAfter: const [],
+        startAfterDocumentSnapshot: startAfterDocument.snapshot,
+      );
     }
     if (endAtDocument != null) {
-      query = query.endAtDocument(endAtDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        endAt: const [],
+        endAtDocumentSnapshot: endAtDocument.snapshot,
+      );
     }
     if (endBeforeDocument != null) {
-      query = query.endBeforeDocument(endBeforeDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        endBefore: const [],
+        endBeforeDocumentSnapshot: endBeforeDocument.snapshot,
+      );
     }
 
     if (startAt != _sentinel) {
-      query = query.startAt([startAt]);
+      queryCursor = queryCursor.copyWith(
+        startAt: [...queryCursor.startAt, startAt],
+        startAtDocumentSnapshot: null,
+      );
     }
     if (startAfter != _sentinel) {
-      query = query.startAfter([startAfter]);
+      queryCursor = queryCursor.copyWith(
+        startAfter: [...queryCursor.startAfter, startAfter],
+        startAfterDocumentSnapshot: null,
+      );
     }
     if (endAt != _sentinel) {
-      query = query.endAt([endAt]);
+      queryCursor = queryCursor.copyWith(
+        endAt: [...queryCursor.endAt, endAt],
+        endAtDocumentSnapshot: null,
+      );
     }
     if (endBefore != _sentinel) {
-      query = query.endBefore([endBefore]);
+      queryCursor = queryCursor.copyWith(
+        endBefore: [...queryCursor.endBefore, endBefore],
+        endBeforeDocumentSnapshot: null,
+      );
     }
 
-    return _$AppSettingsQuery(query, _collection);
+    return _$AppSettingsQuery(
+      _collection,
+      $referenceWithoutCursor: query,
+      $queryCursor: queryCursor,
+    );
   }
 
   AppSettingsQuery orderByUpdatedAt({
@@ -682,36 +775,65 @@ class _$AppSettingsQuery
     AppSettingsDocumentSnapshot? endBeforeDocument,
     AppSettingsDocumentSnapshot? startAfterDocument,
   }) {
-    var query = reference.orderBy(_$AppSettingsFieldMap["updatedAt"]!,
-        descending: descending);
+    final query = $referenceWithoutCursor
+        .orderBy(_$AppSettingsFieldMap['updatedAt']!, descending: descending);
+    var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
-      query = query.startAtDocument(startAtDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        startAt: const [],
+        startAtDocumentSnapshot: startAtDocument.snapshot,
+      );
     }
     if (startAfterDocument != null) {
-      query = query.startAfterDocument(startAfterDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        startAfter: const [],
+        startAfterDocumentSnapshot: startAfterDocument.snapshot,
+      );
     }
     if (endAtDocument != null) {
-      query = query.endAtDocument(endAtDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        endAt: const [],
+        endAtDocumentSnapshot: endAtDocument.snapshot,
+      );
     }
     if (endBeforeDocument != null) {
-      query = query.endBeforeDocument(endBeforeDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        endBefore: const [],
+        endBeforeDocumentSnapshot: endBeforeDocument.snapshot,
+      );
     }
 
     if (startAt != _sentinel) {
-      query = query.startAt([startAt]);
+      queryCursor = queryCursor.copyWith(
+        startAt: [...queryCursor.startAt, startAt],
+        startAtDocumentSnapshot: null,
+      );
     }
     if (startAfter != _sentinel) {
-      query = query.startAfter([startAfter]);
+      queryCursor = queryCursor.copyWith(
+        startAfter: [...queryCursor.startAfter, startAfter],
+        startAfterDocumentSnapshot: null,
+      );
     }
     if (endAt != _sentinel) {
-      query = query.endAt([endAt]);
+      queryCursor = queryCursor.copyWith(
+        endAt: [...queryCursor.endAt, endAt],
+        endAtDocumentSnapshot: null,
+      );
     }
     if (endBefore != _sentinel) {
-      query = query.endBefore([endBefore]);
+      queryCursor = queryCursor.copyWith(
+        endBefore: [...queryCursor.endBefore, endBefore],
+        endBeforeDocumentSnapshot: null,
+      );
     }
 
-    return _$AppSettingsQuery(query, _collection);
+    return _$AppSettingsQuery(
+      _collection,
+      $referenceWithoutCursor: query,
+      $queryCursor: queryCursor,
+    );
   }
 
   @override
@@ -725,6 +847,24 @@ class _$AppSettingsQuery
   int get hashCode => Object.hash(runtimeType, reference);
 }
 
+class AppSettingsDocumentSnapshot
+    extends FirestoreDocumentSnapshot<AppSettings> {
+  AppSettingsDocumentSnapshot._(this.snapshot) : data = snapshot.data();
+
+  @override
+  final DocumentSnapshot<AppSettings> snapshot;
+
+  @override
+  AppSettingsDocumentReference get reference {
+    return AppSettingsDocumentReference(
+      snapshot.reference,
+    );
+  }
+
+  @override
+  final AppSettings? data;
+}
+
 class AppSettingsQuerySnapshot extends FirestoreQuerySnapshot<AppSettings,
     AppSettingsQueryDocumentSnapshot> {
   AppSettingsQuerySnapshot._(
@@ -732,6 +872,38 @@ class AppSettingsQuerySnapshot extends FirestoreQuerySnapshot<AppSettings,
     this.docs,
     this.docChanges,
   );
+
+  factory AppSettingsQuerySnapshot._fromQuerySnapshot(
+    QuerySnapshot<AppSettings> snapshot,
+  ) {
+    final docs = snapshot.docs.map(AppSettingsQueryDocumentSnapshot._).toList();
+
+    final docChanges = snapshot.docChanges.map((change) {
+      return _decodeDocumentChange(
+        change,
+        AppSettingsDocumentSnapshot._,
+      );
+    }).toList();
+
+    return AppSettingsQuerySnapshot._(
+      snapshot,
+      docs,
+      docChanges,
+    );
+  }
+
+  static FirestoreDocumentChange<AppSettingsDocumentSnapshot>
+      _decodeDocumentChange<T>(
+    DocumentChange<T> docChange,
+    AppSettingsDocumentSnapshot Function(DocumentSnapshot<T> doc) decodeDoc,
+  ) {
+    return FirestoreDocumentChange<AppSettingsDocumentSnapshot>(
+      type: docChange.type,
+      oldIndex: docChange.oldIndex,
+      newIndex: docChange.newIndex,
+      doc: decodeDoc(docChange.doc),
+    );
+  }
 
   final QuerySnapshot<AppSettings> snapshot;
 
@@ -745,18 +917,18 @@ class AppSettingsQuerySnapshot extends FirestoreQuerySnapshot<AppSettings,
 class AppSettingsQueryDocumentSnapshot
     extends FirestoreQueryDocumentSnapshot<AppSettings>
     implements AppSettingsDocumentSnapshot {
-  AppSettingsQueryDocumentSnapshot._(this.snapshot, this.data);
+  AppSettingsQueryDocumentSnapshot._(this.snapshot) : data = snapshot.data();
 
   @override
   final QueryDocumentSnapshot<AppSettings> snapshot;
 
   @override
+  final AppSettings data;
+
+  @override
   AppSettingsDocumentReference get reference {
     return AppSettingsDocumentReference(snapshot.reference);
   }
-
-  @override
-  final AppSettings data;
 }
 
 // **************************************************************************

@@ -9,7 +9,8 @@ part 'food_item.g.dart';
 @JsonSerializable(createFieldMap: true)
 class FoodItem {
   FoodItem({
-    required this.resturantOwnerId,
+    this.id = '',
+    required this.restaurantId,
     required this.name,
     required this.description,
     required this.price,
@@ -28,6 +29,7 @@ class FoodItem {
 
   // copyWith
   FoodItem copyWith({
+    String? id,
     String? name,
     String? description,
     String? imageName,
@@ -39,7 +41,8 @@ class FoodItem {
     DateTime? updatedAt,
   }) {
     return FoodItem(
-      resturantOwnerId: resturantOwnerId,
+      id: id ?? this.id,
+      restaurantId: restaurantId,
       name: name ?? this.name,
       description: description ?? this.description,
       imageName: imageName ?? this.imageName,
@@ -52,9 +55,11 @@ class FoodItem {
     );
   }
 
+  @Id()
+  final String id;
   final String name;
   final String description;
-  final String resturantOwnerId;
+  final String restaurantId;
   final int price;
   final String imageName;
   final List<String> categories;
@@ -65,7 +70,7 @@ class FoodItem {
   final DateTime? createdAt;
   @DateTimeToTimestampConverter()
   final DateTime updatedAt;
-  String get imagePath => 'resturants/$resturantOwnerId/$imageName';
+  String get imagePath => 'restaurants/$restaurantId/$imageName';
 }
 
 @Collection<FoodItem>('FoodItems')

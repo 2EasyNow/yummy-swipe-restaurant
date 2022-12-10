@@ -24,12 +24,17 @@ class HomeView extends GetView<HomeController> {
     _NavigationCardsModel(
       title: 'Category',
       image: Assets.images.deal.path,
-      onTap: () => Get.toNamed(Routes.FOOD),
+      onTap: () => Get.toNamed(Routes.CATEGORIES),
     ),
     _NavigationCardsModel(
       title: 'Profile',
       image: Assets.images.profile.path,
       onTap: () => Get.toNamed(Routes.RESTURANT_PROFILE),
+    ),
+    _NavigationCardsModel(
+      title: 'Orders',
+      image: Assets.images.profile.path,
+      onTap: () => Get.toNamed(Routes.ORDERS_LIST),
     ),
     _NavigationCardsModel(
       title: 'Logout',

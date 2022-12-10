@@ -32,12 +32,12 @@ class FoodItemCard extends StatelessWidget {
     this.isModdifyAble = false,
   }) : super(key: key);
 
-  final FoodItemDocumentSnapshot item;
+  final FoodItem item;
   final bool isModdifyAble;
 
   @override
   Widget build(BuildContext context) {
-    final FoodItem foodItem = item.data!;
+    final FoodItem foodItem = item;
     return SizedBox.fromSize(
       size: Size.fromHeight(isModdifyAble ? 130 : 100),
       child: Card(
@@ -149,15 +149,18 @@ class FoodItemCard extends StatelessWidget {
 
 class _UpdateItemView extends StatefulWidget {
   _UpdateItemView({required this.item})
-      : _nameController = TextEditingController(text: item.data!.name),
-        _descController = TextEditingController(text: item.data!.description),
-        _priceController = TextEditingController(text: item.data!.price.toString());
-  final FoodItemDocumentSnapshot item;
+      : _nameController = TextEditingController(text: item.name),
+        _descController = TextEditingController(text: item.description),
+        _priceController = TextEditingController(text: item.price.toString());
+  final FoodItem item;
 
   final TextEditingController _nameController, _priceController, _descController;
 
   @override
-  State<_UpdateItemView> createState() => _UpdateItemViewState(item.data!.categories, item.data!.tags);
+  State<_UpdateItemView> createState() => _UpdateItemViewState(
+        item.categories,
+        item.tags,
+      );
 }
 
 class _UpdateItemViewState extends State<_UpdateItemView> {
@@ -282,27 +285,25 @@ class _UpdateItemViewState extends State<_UpdateItemView> {
                           ),
                         ),
                         const VerticalSpacer(space: 8),
-                        FutureBuilder<List<FoodCategoryDocumentSnapshot>>(
-                            future: Get.find<FoodCategoryUseCase>().getAllResturantCategories(
-                              resturantOwnerId: FirebaseAuth.instance.currentUser!.uid,
+                        FutureBuilder<List<FoodCategory>>(
+                            future: Get.find<FoodCategoryUseCase>().getAllRestaurantCategories(
+                              restaurantOwnerId: FirebaseAuth.instance.currentUser!.uid,
                             ),
                             builder: (context, snap) {
                               if (!snap.hasData) {
                                 return const Center(child: CircularProgressIndicator());
                               }
                               final initialValue = snap.data!.where((element) => _categories.contains(element.id)).toList();
-                              return ChipsInput<FoodCategoryDocumentSnapshot>(
+                              return ChipsInput<FoodCategory>(
                                 initialValue: initialValue,
                                 findSuggestions: (String query) {
                                   if (query.isNotEmpty) {
                                     var lowercaseQuery = query.toLowerCase();
                                     final results = snap.data!.where((category) {
-                                      return category.data!.name.toLowerCase().contains(lowercaseQuery);
+                                      return category.name.toLowerCase().contains(lowercaseQuery);
                                     }).toList(growable: false)
-                                      ..sort((a, b) => a.data!.name
-                                          .toLowerCase()
-                                          .indexOf(lowercaseQuery)
-                                          .compareTo(b.data!.name.toLowerCase().indexOf(lowercaseQuery)));
+                                      ..sort((a, b) =>
+                                          a.name.toLowerCase().indexOf(lowercaseQuery).compareTo(b.name.toLowerCase().indexOf(lowercaseQuery)));
                                     return results;
                                   }
                                   return snap.data!;
@@ -315,7 +316,7 @@ class _UpdateItemViewState extends State<_UpdateItemView> {
                                 chipBuilder: (context, state, category) {
                                   return InputChip(
                                     key: ValueKey(category.id),
-                                    label: Text(category.data!.name),
+                                    label: Text(category.name),
                                     onDeleted: () => state.deleteChip(category),
                                     materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                   );
@@ -323,7 +324,7 @@ class _UpdateItemViewState extends State<_UpdateItemView> {
                                 suggestionBuilder: (context, category) {
                                   return ListTile(
                                     key: ObjectKey(category),
-                                    title: Text(category.data!.name),
+                                    title: Text(category.name),
                                   );
                                 },
                               );
@@ -405,7 +406,6 @@ class _UpdateItemViewState extends State<_UpdateItemView> {
                           onPressed: () async {
                             if (_formKey.currentState!.validate()) {
                               showLoadingBottomSheet(context, title: 'Updating...');
-                              print(_tags);
                               await controller.updateItem(
                                 item: widget.item,
                                 name: widget._nameController.text,
@@ -446,7 +446,7 @@ class _UpdateItemViewState extends State<_UpdateItemView> {
       );
     } else {
       return FutureBuilder<String>(
-        future: FirebaseUtils.fileUrlFromFirebaseStorage(widget.item.data!.imagePath),
+        future: FirebaseUtils.fileUrlFromFirebaseStorage(widget.item.imagePath),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return const FadeShimmer(

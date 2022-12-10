@@ -5,7 +5,7 @@ import 'package:intelligent_food_delivery/app/data/food_category/models/food_cat
 import 'package:intelligent_food_delivery/app/domain/food_category/use_cases/food_category_use_case.dart';
 
 class CategoriesController extends GetxController {
-  final List<FoodCategoryDocumentSnapshot> allCategories = [];
+  final List<FoodCategory> allCategories = [];
 
   @override
   onInit() async {
@@ -15,8 +15,8 @@ class CategoriesController extends GetxController {
 
   refreshCategoriesList() async {
     FoodCategoryUseCase useCase = Get.find();
-    final data = await useCase.getAllResturantCategories(
-      resturantOwnerId: FirebaseAuth.instance.currentUser!.uid,
+    final data = await useCase.getAllRestaurantCategories(
+      restaurantOwnerId: FirebaseAuth.instance.currentUser!.uid,
     );
     allCategories.clear();
     allCategories.addAll(data);
@@ -25,28 +25,32 @@ class CategoriesController extends GetxController {
 
   Future createCategory(String name) async {
     FoodCategoryUseCase useCase = Get.find();
-    await useCase.createCategory(
+    final category = await useCase.createCategory(
       name: name,
-      resturantOwnerId: FirebaseAuth.instance.currentUser!.uid,
+      restaurantId: FirebaseAuth.instance.currentUser!.uid,
     );
     showSuccessSnackbar('Create Category', "Category Created Successfully");
-    refreshCategoriesList();
+    allCategories.add(category);
+    update();
   }
 
-  void deleteCategory(FoodCategoryDocumentSnapshot category) async {
+  void deleteCategory(FoodCategory category) async {
     FoodCategoryUseCase useCase = Get.find();
     await useCase.deleteCategory(categoryId: category.id);
     showSuccessSnackbar('Delete Category', "Category Deleted Successfully");
-    refreshCategoriesList();
+    allCategories.removeWhere((c) => c.id == category.id);
+    update();
   }
 
-  Future updateCategory(FoodCategoryDocumentSnapshot category, String text) async {
+  Future updateCategory(FoodCategory category, String text) async {
     FoodCategoryUseCase useCase = Get.find();
-    await useCase.updateCategory(
+    final updatedCaetgory = await useCase.updateCategory(
       oldCategory: category,
       name: text,
     );
     showSuccessSnackbar('Update Category', "Category Updated Successfully");
-    refreshCategoriesList();
+    final index = allCategories.indexWhere((element) => element.id == category.id);
+    allCategories[index] = updatedCaetgory;
+    update();
   }
 }

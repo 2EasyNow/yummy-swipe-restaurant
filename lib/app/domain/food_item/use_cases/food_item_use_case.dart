@@ -13,7 +13,7 @@ class FoodItemUseCase {
   FoodItemUseCase(this._repository);
 
   Future<FoodItem> create({
-    required String resturantOwnerId,
+    required String restaurantOwnerId,
     required String name,
     required String description,
     required int price,
@@ -27,7 +27,7 @@ class FoodItemUseCase {
       imageName,
     );
     final item = FoodItem(
-      resturantOwnerId: resturantOwnerId,
+      restaurantId: restaurantOwnerId,
       name: name,
       description: description,
       price: price,
@@ -37,17 +37,17 @@ class FoodItemUseCase {
       updatedAt: DateTime.now(),
       createdAt: DateTime.now(),
     );
-      final categoryUseCase = Get.find<FoodCategoryUseCase>();
+    final categoryUseCase = Get.find<FoodCategoryUseCase>();
 
-      for (var element in categories) {
-        categoryUseCase.incrementTotalFoodItems(categoryId: element);
-      }
-    
+    for (var element in categories) {
+      categoryUseCase.incrementTotalFoodItems(categoryId: element);
+    }
+
     return await _repository.createItem(item);
   }
 
   Future<FoodItem> updateItem({
-    required FoodItemDocumentSnapshot oldItem,
+    required FoodItem oldItem,
     String? name,
     String? description,
     String? imageUrl,
@@ -57,18 +57,18 @@ class FoodItemUseCase {
     bool? active,
   }) async {
     if (categories != null) {
-      final needIncrementCategory = categories.where((element) => !oldItem.data!.categories.contains(element)).toList();
-      final needDecrementCategory = oldItem.data!.categories.where((element) => !categories.contains(element)).toList();
+      final needIncrementCategory = categories.where((element) => !oldItem.categories.contains(element)).toList();
+      final needDecrementCategory = oldItem.categories.where((element) => !categories.contains(element)).toList();
       final categoryUseCase = Get.find<FoodCategoryUseCase>();
       for (var element in needIncrementCategory) {
         await categoryUseCase.incrementTotalFoodItems(categoryId: element);
       }
-      
+
       for (var element in needDecrementCategory) {
         await categoryUseCase.decrementTotalFoodItems(categoryId: element);
       }
     }
-    final item = oldItem.data!.copyWith(
+    final item = oldItem.copyWith(
       name: name,
       description: description,
       imageName: imageUrl,
@@ -78,7 +78,7 @@ class FoodItemUseCase {
       active: active,
       updatedAt: DateTime.now(),
     );
-    return await _repository.updateItem(oldItem.id, item);
+    return await _repository.updateItem(item);
   }
 
   Future<FoodItem> updateCategoryStatus({
@@ -88,19 +88,19 @@ class FoodItemUseCase {
     final category = item.data!.copyWith(
       active: active,
     );
-    return _repository.updateItem(item.id, category);
+    return _repository.updateItem(category);
   }
 
-  Future<List<FoodItemDocumentSnapshot>> getAllFoodItems({
-    required String resturantOwnerId,
+  Future<List<FoodItem>> getAllFoodItems({
+    required String restaurantOwnerId,
   }) async {
-    return _repository.getResturantItems(resturantOwnerId);
+    return _repository.getRestaurantItems(restaurantOwnerId);
   }
 
-  Future<List<FoodItemDocumentSnapshot>> getAllFoodItemsByCategory({
+  Future<List<FoodItem>> getAllFoodItemsByCategory({
     required String categoryId,
   }) async {
-    return _repository.getResturantItemsByCategory(categoryId);
+    return _repository.getRestaurantItemsByCategory(categoryId);
   }
 
   Future<List<FoodItemDocumentSnapshot>> searchFoodItems({

@@ -5,12 +5,12 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
-import 'package:intelligent_food_delivery/app/domain/app_user/use_cases/resturant_owner_use_case.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../common/theme/app_colors.dart';
 import '../../../common/theme/text_theme.dart';
 import '../../../common/widgets/spacers.dart';
+import '../../../domain/restaurant/use_cases/resturant_use_case.dart';
 import '../../../routes/app_pages.dart';
 import '../controllers/on_boarding_controller.dart';
 
@@ -23,7 +23,7 @@ class OnBoardingView extends GetView<OnBoardingController> {
       condition: FirebaseAuth.instance.currentUser != null,
       builder: (context) {
         return FutureBuilder<bool>(
-          future: Get.find<ResturantOwnerUseCase>().isCurrentUserRecordAdded(),
+          future: Get.find<RestaurantUseCase>().isCurrentUserRecordAdded(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
               return Material(

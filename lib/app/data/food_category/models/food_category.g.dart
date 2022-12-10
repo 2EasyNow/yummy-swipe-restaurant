@@ -7,7 +7,7 @@ part of 'food_category.dart';
 // **************************************************************************
 
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, require_trailing_commas, prefer_single_quotes, prefer_double_quotes, use_super_parameters
 
 class _Sentinel {
   const _Sentinel();
@@ -30,14 +30,14 @@ abstract class FoodCategoryCollectionReference
     DocumentSnapshot<Map<String, Object?>> snapshot,
     SnapshotOptions? options,
   ) {
-    return FoodCategory.fromJson(snapshot.data()!);
+    return FoodCategory.fromJson({'id': snapshot.id, ...?snapshot.data()});
   }
 
   static Map<String, Object?> toFirestore(
     FoodCategory value,
     SetOptions? options,
   ) {
-    return _$FoodCategoryToJson(value);
+    return {..._$FoodCategoryToJson(value)}..remove('id');
   }
 
   @override
@@ -66,7 +66,7 @@ class _$FoodCategoryCollectionReference extends _$FoodCategoryQuery
 
   _$FoodCategoryCollectionReference._(
     CollectionReference<FoodCategory> reference,
-  ) : super(reference, reference);
+  ) : super(reference, $referenceWithoutCursor: reference);
 
   String get path => reference.path;
 
@@ -125,16 +125,43 @@ abstract class FoodCategoryDocumentReference extends FirestoreDocumentReference<
   @override
   Future<void> delete();
 
+  /// Updates data on the document. Data will be merged with any existing
+  /// document data.
+  ///
+  /// If no document exists yet, the update will fail.
   Future<void> update({
-    String resturantOwnerId,
+    String restaurantId,
+    FieldValue restaurantIdFieldValue,
     String name,
+    FieldValue nameFieldValue,
     bool active,
+    FieldValue activeFieldValue,
     int totalFoodItems,
+    FieldValue totalFoodItemsFieldValue,
     DateTime? createdAt,
+    FieldValue createdAtFieldValue,
     DateTime updatedAt,
+    FieldValue updatedAtFieldValue,
   });
 
-  Future<void> set(FoodCategory value);
+  /// Updates fields in the current document using the transaction API.
+  ///
+  /// The update will fail if applied to a document that does not exist.
+  void transactionUpdate(
+    Transaction transaction, {
+    String restaurantId,
+    FieldValue restaurantIdFieldValue,
+    String name,
+    FieldValue nameFieldValue,
+    bool active,
+    FieldValue activeFieldValue,
+    int totalFoodItems,
+    FieldValue totalFoodItemsFieldValue,
+    DateTime? createdAt,
+    FieldValue createdAtFieldValue,
+    DateTime updatedAt,
+    FieldValue updatedAtFieldValue,
+  });
 }
 
 class _$FoodCategoryDocumentReference extends FirestoreDocumentReference<
@@ -152,52 +179,134 @@ class _$FoodCategoryDocumentReference extends FirestoreDocumentReference<
 
   @override
   Stream<FoodCategoryDocumentSnapshot> snapshots() {
-    return reference.snapshots().map((snapshot) {
-      return FoodCategoryDocumentSnapshot._(
-        snapshot,
-        snapshot.data(),
-      );
-    });
+    return reference.snapshots().map(FoodCategoryDocumentSnapshot._);
   }
 
   @override
   Future<FoodCategoryDocumentSnapshot> get([GetOptions? options]) {
-    return reference.get(options).then((snapshot) {
-      return FoodCategoryDocumentSnapshot._(
-        snapshot,
-        snapshot.data(),
-      );
-    });
+    return reference.get(options).then(FoodCategoryDocumentSnapshot._);
   }
 
   @override
-  Future<void> delete() {
-    return reference.delete();
+  Future<FoodCategoryDocumentSnapshot> transactionGet(Transaction transaction) {
+    return transaction.get(reference).then(FoodCategoryDocumentSnapshot._);
   }
 
   Future<void> update({
-    Object? resturantOwnerId = _sentinel,
+    Object? restaurantId = _sentinel,
+    FieldValue? restaurantIdFieldValue,
     Object? name = _sentinel,
+    FieldValue? nameFieldValue,
     Object? active = _sentinel,
+    FieldValue? activeFieldValue,
     Object? totalFoodItems = _sentinel,
+    FieldValue? totalFoodItemsFieldValue,
     Object? createdAt = _sentinel,
+    FieldValue? createdAtFieldValue,
     Object? updatedAt = _sentinel,
+    FieldValue? updatedAtFieldValue,
   }) async {
+    assert(
+      restaurantId == _sentinel || restaurantIdFieldValue == null,
+      "Cannot specify both restaurantId and restaurantIdFieldValue",
+    );
+    assert(
+      name == _sentinel || nameFieldValue == null,
+      "Cannot specify both name and nameFieldValue",
+    );
+    assert(
+      active == _sentinel || activeFieldValue == null,
+      "Cannot specify both active and activeFieldValue",
+    );
+    assert(
+      totalFoodItems == _sentinel || totalFoodItemsFieldValue == null,
+      "Cannot specify both totalFoodItems and totalFoodItemsFieldValue",
+    );
+    assert(
+      createdAt == _sentinel || createdAtFieldValue == null,
+      "Cannot specify both createdAt and createdAtFieldValue",
+    );
+    assert(
+      updatedAt == _sentinel || updatedAtFieldValue == null,
+      "Cannot specify both updatedAt and updatedAtFieldValue",
+    );
     final json = {
-      if (resturantOwnerId != _sentinel)
-        "resturantOwnerId": resturantOwnerId as String,
-      if (name != _sentinel) "name": name as String,
-      if (active != _sentinel) "active": active as bool,
-      if (totalFoodItems != _sentinel) "totalFoodItems": totalFoodItems as int,
-      if (createdAt != _sentinel) "createdAt": createdAt as DateTime?,
-      if (updatedAt != _sentinel) "updatedAt": updatedAt as DateTime,
+      if (restaurantId != _sentinel) 'restaurantId': restaurantId as String,
+      if (restaurantIdFieldValue != null)
+        'restaurantId': restaurantIdFieldValue,
+      if (name != _sentinel) 'name': name as String,
+      if (nameFieldValue != null) 'name': nameFieldValue,
+      if (active != _sentinel) 'active': active as bool,
+      if (activeFieldValue != null) 'active': activeFieldValue,
+      if (totalFoodItems != _sentinel) 'totalFoodItems': totalFoodItems as int,
+      if (totalFoodItemsFieldValue != null)
+        'totalFoodItems': totalFoodItemsFieldValue,
+      if (createdAt != _sentinel) 'createdAt': createdAt as DateTime?,
+      if (createdAtFieldValue != null) 'createdAt': createdAtFieldValue,
+      if (updatedAt != _sentinel) 'updatedAt': updatedAt as DateTime,
+      if (updatedAtFieldValue != null) 'updatedAt': updatedAtFieldValue,
     };
 
     return reference.update(json);
   }
 
-  Future<void> set(FoodCategory value) {
-    return reference.set(value);
+  void transactionUpdate(
+    Transaction transaction, {
+    Object? restaurantId = _sentinel,
+    FieldValue? restaurantIdFieldValue,
+    Object? name = _sentinel,
+    FieldValue? nameFieldValue,
+    Object? active = _sentinel,
+    FieldValue? activeFieldValue,
+    Object? totalFoodItems = _sentinel,
+    FieldValue? totalFoodItemsFieldValue,
+    Object? createdAt = _sentinel,
+    FieldValue? createdAtFieldValue,
+    Object? updatedAt = _sentinel,
+    FieldValue? updatedAtFieldValue,
+  }) {
+    assert(
+      restaurantId == _sentinel || restaurantIdFieldValue == null,
+      "Cannot specify both restaurantId and restaurantIdFieldValue",
+    );
+    assert(
+      name == _sentinel || nameFieldValue == null,
+      "Cannot specify both name and nameFieldValue",
+    );
+    assert(
+      active == _sentinel || activeFieldValue == null,
+      "Cannot specify both active and activeFieldValue",
+    );
+    assert(
+      totalFoodItems == _sentinel || totalFoodItemsFieldValue == null,
+      "Cannot specify both totalFoodItems and totalFoodItemsFieldValue",
+    );
+    assert(
+      createdAt == _sentinel || createdAtFieldValue == null,
+      "Cannot specify both createdAt and createdAtFieldValue",
+    );
+    assert(
+      updatedAt == _sentinel || updatedAtFieldValue == null,
+      "Cannot specify both updatedAt and updatedAtFieldValue",
+    );
+    final json = {
+      if (restaurantId != _sentinel) 'restaurantId': restaurantId as String,
+      if (restaurantIdFieldValue != null)
+        'restaurantId': restaurantIdFieldValue,
+      if (name != _sentinel) 'name': name as String,
+      if (nameFieldValue != null) 'name': nameFieldValue,
+      if (active != _sentinel) 'active': active as bool,
+      if (activeFieldValue != null) 'active': activeFieldValue,
+      if (totalFoodItems != _sentinel) 'totalFoodItems': totalFoodItems as int,
+      if (totalFoodItemsFieldValue != null)
+        'totalFoodItems': totalFoodItemsFieldValue,
+      if (createdAt != _sentinel) 'createdAt': createdAt as DateTime?,
+      if (createdAtFieldValue != null) 'createdAt': createdAtFieldValue,
+      if (updatedAt != _sentinel) 'updatedAt': updatedAt as DateTime,
+      if (updatedAtFieldValue != null) 'updatedAt': updatedAtFieldValue,
+    };
+
+    transaction.update(reference, json);
   }
 
   @override
@@ -210,27 +319,6 @@ class _$FoodCategoryDocumentReference extends FirestoreDocumentReference<
 
   @override
   int get hashCode => Object.hash(runtimeType, parent, id);
-}
-
-class FoodCategoryDocumentSnapshot
-    extends FirestoreDocumentSnapshot<FoodCategory> {
-  FoodCategoryDocumentSnapshot._(
-    this.snapshot,
-    this.data,
-  );
-
-  @override
-  final DocumentSnapshot<FoodCategory> snapshot;
-
-  @override
-  FoodCategoryDocumentReference get reference {
-    return FoodCategoryDocumentReference(
-      snapshot.reference,
-    );
-  }
-
-  @override
-  final FoodCategory? data;
 }
 
 abstract class FoodCategoryQuery
@@ -317,7 +405,7 @@ abstract class FoodCategoryQuery
     List<String>? whereIn,
     List<String>? whereNotIn,
   });
-  FoodCategoryQuery whereResturantOwnerId({
+  FoodCategoryQuery whereRestaurantId({
     String? isEqualTo,
     String? isNotEqualTo,
     String? isLessThan,
@@ -396,7 +484,7 @@ abstract class FoodCategoryQuery
     FoodCategoryDocumentSnapshot? startAfterDocument,
   });
 
-  FoodCategoryQuery orderByResturantOwnerId({
+  FoodCategoryQuery orderByRestaurantId({
     bool descending = false,
     String startAt,
     String startAfter,
@@ -473,61 +561,45 @@ class _$FoodCategoryQuery
     extends QueryReference<FoodCategory, FoodCategoryQuerySnapshot>
     implements FoodCategoryQuery {
   _$FoodCategoryQuery(
-    this.reference,
-    this._collection,
-  );
+    this._collection, {
+    required Query<FoodCategory> $referenceWithoutCursor,
+    $QueryCursor $queryCursor = const $QueryCursor(),
+  }) : super(
+          $referenceWithoutCursor: $referenceWithoutCursor,
+          $queryCursor: $queryCursor,
+        );
 
   final CollectionReference<Object?> _collection;
 
   @override
-  final Query<FoodCategory> reference;
-
-  FoodCategoryQuerySnapshot _decodeSnapshot(
-    QuerySnapshot<FoodCategory> snapshot,
-  ) {
-    final docs = snapshot.docs.map((e) {
-      return FoodCategoryQueryDocumentSnapshot._(e, e.data());
-    }).toList();
-
-    final docChanges = snapshot.docChanges.map((change) {
-      return FirestoreDocumentChange<FoodCategoryDocumentSnapshot>(
-        type: change.type,
-        oldIndex: change.oldIndex,
-        newIndex: change.newIndex,
-        doc: FoodCategoryDocumentSnapshot._(change.doc, change.doc.data()),
-      );
-    }).toList();
-
-    return FoodCategoryQuerySnapshot._(
-      snapshot,
-      docs,
-      docChanges,
-    );
-  }
-
-  @override
   Stream<FoodCategoryQuerySnapshot> snapshots([SnapshotOptions? options]) {
-    return reference.snapshots().map(_decodeSnapshot);
+    return reference
+        .snapshots()
+        .map(FoodCategoryQuerySnapshot._fromQuerySnapshot);
   }
 
   @override
   Future<FoodCategoryQuerySnapshot> get([GetOptions? options]) {
-    return reference.get(options).then(_decodeSnapshot);
+    return reference
+        .get(options)
+        .then(FoodCategoryQuerySnapshot._fromQuerySnapshot);
   }
 
   @override
   FoodCategoryQuery limit(int limit) {
     return _$FoodCategoryQuery(
-      reference.limit(limit),
       _collection,
+      $referenceWithoutCursor: $referenceWithoutCursor.limit(limit),
+      $queryCursor: $queryCursor,
     );
   }
 
   @override
   FoodCategoryQuery limitToLast(int limit) {
     return _$FoodCategoryQuery(
-      reference.limitToLast(limit),
       _collection,
+      $referenceWithoutCursor: $referenceWithoutCursor.limitToLast(limit),
+      $queryCursor: $queryCursor,
     );
   }
 
@@ -543,35 +615,64 @@ class _$FoodCategoryQuery
     FoodCategoryDocumentSnapshot? endBeforeDocument,
     FoodCategoryDocumentSnapshot? startAfterDocument,
   }) {
-    var query = reference.orderBy(fieldPath, descending: descending);
+    final query =
+        $referenceWithoutCursor.orderBy(fieldPath, descending: descending);
+    var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
-      query = query.startAtDocument(startAtDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        startAt: const [],
+        startAtDocumentSnapshot: startAtDocument.snapshot,
+      );
     }
     if (startAfterDocument != null) {
-      query = query.startAfterDocument(startAfterDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        startAfter: const [],
+        startAfterDocumentSnapshot: startAfterDocument.snapshot,
+      );
     }
     if (endAtDocument != null) {
-      query = query.endAtDocument(endAtDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        endAt: const [],
+        endAtDocumentSnapshot: endAtDocument.snapshot,
+      );
     }
     if (endBeforeDocument != null) {
-      query = query.endBeforeDocument(endBeforeDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        endBefore: const [],
+        endBeforeDocumentSnapshot: endBeforeDocument.snapshot,
+      );
     }
 
     if (startAt != _sentinel) {
-      query = query.startAt([startAt]);
+      queryCursor = queryCursor.copyWith(
+        startAt: [...queryCursor.startAt, startAt],
+        startAtDocumentSnapshot: null,
+      );
     }
     if (startAfter != _sentinel) {
-      query = query.startAfter([startAfter]);
+      queryCursor = queryCursor.copyWith(
+        startAfter: [...queryCursor.startAfter, startAfter],
+        startAfterDocumentSnapshot: null,
+      );
     }
     if (endAt != _sentinel) {
-      query = query.endAt([endAt]);
+      queryCursor = queryCursor.copyWith(
+        endAt: [...queryCursor.endAt, endAt],
+        endAtDocumentSnapshot: null,
+      );
     }
     if (endBefore != _sentinel) {
-      query = query.endBefore([endBefore]);
+      queryCursor = queryCursor.copyWith(
+        endBefore: [...queryCursor.endBefore, endBefore],
+        endBeforeDocumentSnapshot: null,
+      );
     }
-
-    return _$FoodCategoryQuery(query, _collection);
+    return _$FoodCategoryQuery(
+      _collection,
+      $referenceWithoutCursor: query,
+      $queryCursor: queryCursor,
+    );
   }
 
   FoodCategoryQuery whereFieldPath(
@@ -589,7 +690,8 @@ class _$FoodCategoryQuery
     bool? isNull,
   }) {
     return _$FoodCategoryQuery(
-      reference.where(
+      _collection,
+      $referenceWithoutCursor: $referenceWithoutCursor.where(
         fieldPath,
         isEqualTo: isEqualTo,
         isNotEqualTo: isNotEqualTo,
@@ -603,7 +705,7 @@ class _$FoodCategoryQuery
         whereNotIn: whereNotIn,
         isNull: isNull,
       ),
-      _collection,
+      $queryCursor: $queryCursor,
     );
   }
 
@@ -619,7 +721,8 @@ class _$FoodCategoryQuery
     List<String>? whereNotIn,
   }) {
     return _$FoodCategoryQuery(
-      reference.where(
+      _collection,
+      $referenceWithoutCursor: $referenceWithoutCursor.where(
         FieldPath.documentId,
         isEqualTo: isEqualTo,
         isNotEqualTo: isNotEqualTo,
@@ -631,11 +734,11 @@ class _$FoodCategoryQuery
         whereIn: whereIn,
         whereNotIn: whereNotIn,
       ),
-      _collection,
+      $queryCursor: $queryCursor,
     );
   }
 
-  FoodCategoryQuery whereResturantOwnerId({
+  FoodCategoryQuery whereRestaurantId({
     String? isEqualTo,
     String? isNotEqualTo,
     String? isLessThan,
@@ -647,8 +750,9 @@ class _$FoodCategoryQuery
     List<String>? whereNotIn,
   }) {
     return _$FoodCategoryQuery(
-      reference.where(
-        _$FoodCategoryFieldMap["resturantOwnerId"]!,
+      _collection,
+      $referenceWithoutCursor: $referenceWithoutCursor.where(
+        _$FoodCategoryFieldMap['restaurantId']!,
         isEqualTo: isEqualTo,
         isNotEqualTo: isNotEqualTo,
         isLessThan: isLessThan,
@@ -659,7 +763,7 @@ class _$FoodCategoryQuery
         whereIn: whereIn,
         whereNotIn: whereNotIn,
       ),
-      _collection,
+      $queryCursor: $queryCursor,
     );
   }
 
@@ -675,8 +779,9 @@ class _$FoodCategoryQuery
     List<String>? whereNotIn,
   }) {
     return _$FoodCategoryQuery(
-      reference.where(
-        _$FoodCategoryFieldMap["name"]!,
+      _collection,
+      $referenceWithoutCursor: $referenceWithoutCursor.where(
+        _$FoodCategoryFieldMap['name']!,
         isEqualTo: isEqualTo,
         isNotEqualTo: isNotEqualTo,
         isLessThan: isLessThan,
@@ -687,7 +792,7 @@ class _$FoodCategoryQuery
         whereIn: whereIn,
         whereNotIn: whereNotIn,
       ),
-      _collection,
+      $queryCursor: $queryCursor,
     );
   }
 
@@ -703,8 +808,9 @@ class _$FoodCategoryQuery
     List<bool>? whereNotIn,
   }) {
     return _$FoodCategoryQuery(
-      reference.where(
-        _$FoodCategoryFieldMap["active"]!,
+      _collection,
+      $referenceWithoutCursor: $referenceWithoutCursor.where(
+        _$FoodCategoryFieldMap['active']!,
         isEqualTo: isEqualTo,
         isNotEqualTo: isNotEqualTo,
         isLessThan: isLessThan,
@@ -715,7 +821,7 @@ class _$FoodCategoryQuery
         whereIn: whereIn,
         whereNotIn: whereNotIn,
       ),
-      _collection,
+      $queryCursor: $queryCursor,
     );
   }
 
@@ -731,8 +837,9 @@ class _$FoodCategoryQuery
     List<int>? whereNotIn,
   }) {
     return _$FoodCategoryQuery(
-      reference.where(
-        _$FoodCategoryFieldMap["totalFoodItems"]!,
+      _collection,
+      $referenceWithoutCursor: $referenceWithoutCursor.where(
+        _$FoodCategoryFieldMap['totalFoodItems']!,
         isEqualTo: isEqualTo,
         isNotEqualTo: isNotEqualTo,
         isLessThan: isLessThan,
@@ -743,7 +850,7 @@ class _$FoodCategoryQuery
         whereIn: whereIn,
         whereNotIn: whereNotIn,
       ),
-      _collection,
+      $queryCursor: $queryCursor,
     );
   }
 
@@ -759,8 +866,9 @@ class _$FoodCategoryQuery
     List<DateTime?>? whereNotIn,
   }) {
     return _$FoodCategoryQuery(
-      reference.where(
-        _$FoodCategoryFieldMap["createdAt"]!,
+      _collection,
+      $referenceWithoutCursor: $referenceWithoutCursor.where(
+        _$FoodCategoryFieldMap['createdAt']!,
         isEqualTo: isEqualTo,
         isNotEqualTo: isNotEqualTo,
         isLessThan: isLessThan,
@@ -771,7 +879,7 @@ class _$FoodCategoryQuery
         whereIn: whereIn,
         whereNotIn: whereNotIn,
       ),
-      _collection,
+      $queryCursor: $queryCursor,
     );
   }
 
@@ -787,8 +895,9 @@ class _$FoodCategoryQuery
     List<DateTime>? whereNotIn,
   }) {
     return _$FoodCategoryQuery(
-      reference.where(
-        _$FoodCategoryFieldMap["updatedAt"]!,
+      _collection,
+      $referenceWithoutCursor: $referenceWithoutCursor.where(
+        _$FoodCategoryFieldMap['updatedAt']!,
         isEqualTo: isEqualTo,
         isNotEqualTo: isNotEqualTo,
         isLessThan: isLessThan,
@@ -799,7 +908,7 @@ class _$FoodCategoryQuery
         whereIn: whereIn,
         whereNotIn: whereNotIn,
       ),
-      _collection,
+      $queryCursor: $queryCursor,
     );
   }
 
@@ -814,38 +923,68 @@ class _$FoodCategoryQuery
     FoodCategoryDocumentSnapshot? endBeforeDocument,
     FoodCategoryDocumentSnapshot? startAfterDocument,
   }) {
-    var query = reference.orderBy(FieldPath.documentId, descending: descending);
+    final query = $referenceWithoutCursor.orderBy(FieldPath.documentId,
+        descending: descending);
+    var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
-      query = query.startAtDocument(startAtDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        startAt: const [],
+        startAtDocumentSnapshot: startAtDocument.snapshot,
+      );
     }
     if (startAfterDocument != null) {
-      query = query.startAfterDocument(startAfterDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        startAfter: const [],
+        startAfterDocumentSnapshot: startAfterDocument.snapshot,
+      );
     }
     if (endAtDocument != null) {
-      query = query.endAtDocument(endAtDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        endAt: const [],
+        endAtDocumentSnapshot: endAtDocument.snapshot,
+      );
     }
     if (endBeforeDocument != null) {
-      query = query.endBeforeDocument(endBeforeDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        endBefore: const [],
+        endBeforeDocumentSnapshot: endBeforeDocument.snapshot,
+      );
     }
 
     if (startAt != _sentinel) {
-      query = query.startAt([startAt]);
+      queryCursor = queryCursor.copyWith(
+        startAt: [...queryCursor.startAt, startAt],
+        startAtDocumentSnapshot: null,
+      );
     }
     if (startAfter != _sentinel) {
-      query = query.startAfter([startAfter]);
+      queryCursor = queryCursor.copyWith(
+        startAfter: [...queryCursor.startAfter, startAfter],
+        startAfterDocumentSnapshot: null,
+      );
     }
     if (endAt != _sentinel) {
-      query = query.endAt([endAt]);
+      queryCursor = queryCursor.copyWith(
+        endAt: [...queryCursor.endAt, endAt],
+        endAtDocumentSnapshot: null,
+      );
     }
     if (endBefore != _sentinel) {
-      query = query.endBefore([endBefore]);
+      queryCursor = queryCursor.copyWith(
+        endBefore: [...queryCursor.endBefore, endBefore],
+        endBeforeDocumentSnapshot: null,
+      );
     }
 
-    return _$FoodCategoryQuery(query, _collection);
+    return _$FoodCategoryQuery(
+      _collection,
+      $referenceWithoutCursor: query,
+      $queryCursor: queryCursor,
+    );
   }
 
-  FoodCategoryQuery orderByResturantOwnerId({
+  FoodCategoryQuery orderByRestaurantId({
     bool descending = false,
     Object? startAt = _sentinel,
     Object? startAfter = _sentinel,
@@ -856,36 +995,66 @@ class _$FoodCategoryQuery
     FoodCategoryDocumentSnapshot? endBeforeDocument,
     FoodCategoryDocumentSnapshot? startAfterDocument,
   }) {
-    var query = reference.orderBy(_$FoodCategoryFieldMap["resturantOwnerId"]!,
+    final query = $referenceWithoutCursor.orderBy(
+        _$FoodCategoryFieldMap['restaurantId']!,
         descending: descending);
+    var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
-      query = query.startAtDocument(startAtDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        startAt: const [],
+        startAtDocumentSnapshot: startAtDocument.snapshot,
+      );
     }
     if (startAfterDocument != null) {
-      query = query.startAfterDocument(startAfterDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        startAfter: const [],
+        startAfterDocumentSnapshot: startAfterDocument.snapshot,
+      );
     }
     if (endAtDocument != null) {
-      query = query.endAtDocument(endAtDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        endAt: const [],
+        endAtDocumentSnapshot: endAtDocument.snapshot,
+      );
     }
     if (endBeforeDocument != null) {
-      query = query.endBeforeDocument(endBeforeDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        endBefore: const [],
+        endBeforeDocumentSnapshot: endBeforeDocument.snapshot,
+      );
     }
 
     if (startAt != _sentinel) {
-      query = query.startAt([startAt]);
+      queryCursor = queryCursor.copyWith(
+        startAt: [...queryCursor.startAt, startAt],
+        startAtDocumentSnapshot: null,
+      );
     }
     if (startAfter != _sentinel) {
-      query = query.startAfter([startAfter]);
+      queryCursor = queryCursor.copyWith(
+        startAfter: [...queryCursor.startAfter, startAfter],
+        startAfterDocumentSnapshot: null,
+      );
     }
     if (endAt != _sentinel) {
-      query = query.endAt([endAt]);
+      queryCursor = queryCursor.copyWith(
+        endAt: [...queryCursor.endAt, endAt],
+        endAtDocumentSnapshot: null,
+      );
     }
     if (endBefore != _sentinel) {
-      query = query.endBefore([endBefore]);
+      queryCursor = queryCursor.copyWith(
+        endBefore: [...queryCursor.endBefore, endBefore],
+        endBeforeDocumentSnapshot: null,
+      );
     }
 
-    return _$FoodCategoryQuery(query, _collection);
+    return _$FoodCategoryQuery(
+      _collection,
+      $referenceWithoutCursor: query,
+      $queryCursor: queryCursor,
+    );
   }
 
   FoodCategoryQuery orderByName({
@@ -899,36 +1068,65 @@ class _$FoodCategoryQuery
     FoodCategoryDocumentSnapshot? endBeforeDocument,
     FoodCategoryDocumentSnapshot? startAfterDocument,
   }) {
-    var query = reference.orderBy(_$FoodCategoryFieldMap["name"]!,
-        descending: descending);
+    final query = $referenceWithoutCursor
+        .orderBy(_$FoodCategoryFieldMap['name']!, descending: descending);
+    var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
-      query = query.startAtDocument(startAtDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        startAt: const [],
+        startAtDocumentSnapshot: startAtDocument.snapshot,
+      );
     }
     if (startAfterDocument != null) {
-      query = query.startAfterDocument(startAfterDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        startAfter: const [],
+        startAfterDocumentSnapshot: startAfterDocument.snapshot,
+      );
     }
     if (endAtDocument != null) {
-      query = query.endAtDocument(endAtDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        endAt: const [],
+        endAtDocumentSnapshot: endAtDocument.snapshot,
+      );
     }
     if (endBeforeDocument != null) {
-      query = query.endBeforeDocument(endBeforeDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        endBefore: const [],
+        endBeforeDocumentSnapshot: endBeforeDocument.snapshot,
+      );
     }
 
     if (startAt != _sentinel) {
-      query = query.startAt([startAt]);
+      queryCursor = queryCursor.copyWith(
+        startAt: [...queryCursor.startAt, startAt],
+        startAtDocumentSnapshot: null,
+      );
     }
     if (startAfter != _sentinel) {
-      query = query.startAfter([startAfter]);
+      queryCursor = queryCursor.copyWith(
+        startAfter: [...queryCursor.startAfter, startAfter],
+        startAfterDocumentSnapshot: null,
+      );
     }
     if (endAt != _sentinel) {
-      query = query.endAt([endAt]);
+      queryCursor = queryCursor.copyWith(
+        endAt: [...queryCursor.endAt, endAt],
+        endAtDocumentSnapshot: null,
+      );
     }
     if (endBefore != _sentinel) {
-      query = query.endBefore([endBefore]);
+      queryCursor = queryCursor.copyWith(
+        endBefore: [...queryCursor.endBefore, endBefore],
+        endBeforeDocumentSnapshot: null,
+      );
     }
 
-    return _$FoodCategoryQuery(query, _collection);
+    return _$FoodCategoryQuery(
+      _collection,
+      $referenceWithoutCursor: query,
+      $queryCursor: queryCursor,
+    );
   }
 
   FoodCategoryQuery orderByActive({
@@ -942,36 +1140,65 @@ class _$FoodCategoryQuery
     FoodCategoryDocumentSnapshot? endBeforeDocument,
     FoodCategoryDocumentSnapshot? startAfterDocument,
   }) {
-    var query = reference.orderBy(_$FoodCategoryFieldMap["active"]!,
-        descending: descending);
+    final query = $referenceWithoutCursor
+        .orderBy(_$FoodCategoryFieldMap['active']!, descending: descending);
+    var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
-      query = query.startAtDocument(startAtDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        startAt: const [],
+        startAtDocumentSnapshot: startAtDocument.snapshot,
+      );
     }
     if (startAfterDocument != null) {
-      query = query.startAfterDocument(startAfterDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        startAfter: const [],
+        startAfterDocumentSnapshot: startAfterDocument.snapshot,
+      );
     }
     if (endAtDocument != null) {
-      query = query.endAtDocument(endAtDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        endAt: const [],
+        endAtDocumentSnapshot: endAtDocument.snapshot,
+      );
     }
     if (endBeforeDocument != null) {
-      query = query.endBeforeDocument(endBeforeDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        endBefore: const [],
+        endBeforeDocumentSnapshot: endBeforeDocument.snapshot,
+      );
     }
 
     if (startAt != _sentinel) {
-      query = query.startAt([startAt]);
+      queryCursor = queryCursor.copyWith(
+        startAt: [...queryCursor.startAt, startAt],
+        startAtDocumentSnapshot: null,
+      );
     }
     if (startAfter != _sentinel) {
-      query = query.startAfter([startAfter]);
+      queryCursor = queryCursor.copyWith(
+        startAfter: [...queryCursor.startAfter, startAfter],
+        startAfterDocumentSnapshot: null,
+      );
     }
     if (endAt != _sentinel) {
-      query = query.endAt([endAt]);
+      queryCursor = queryCursor.copyWith(
+        endAt: [...queryCursor.endAt, endAt],
+        endAtDocumentSnapshot: null,
+      );
     }
     if (endBefore != _sentinel) {
-      query = query.endBefore([endBefore]);
+      queryCursor = queryCursor.copyWith(
+        endBefore: [...queryCursor.endBefore, endBefore],
+        endBeforeDocumentSnapshot: null,
+      );
     }
 
-    return _$FoodCategoryQuery(query, _collection);
+    return _$FoodCategoryQuery(
+      _collection,
+      $referenceWithoutCursor: query,
+      $queryCursor: queryCursor,
+    );
   }
 
   FoodCategoryQuery orderByTotalFoodItems({
@@ -985,36 +1212,66 @@ class _$FoodCategoryQuery
     FoodCategoryDocumentSnapshot? endBeforeDocument,
     FoodCategoryDocumentSnapshot? startAfterDocument,
   }) {
-    var query = reference.orderBy(_$FoodCategoryFieldMap["totalFoodItems"]!,
+    final query = $referenceWithoutCursor.orderBy(
+        _$FoodCategoryFieldMap['totalFoodItems']!,
         descending: descending);
+    var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
-      query = query.startAtDocument(startAtDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        startAt: const [],
+        startAtDocumentSnapshot: startAtDocument.snapshot,
+      );
     }
     if (startAfterDocument != null) {
-      query = query.startAfterDocument(startAfterDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        startAfter: const [],
+        startAfterDocumentSnapshot: startAfterDocument.snapshot,
+      );
     }
     if (endAtDocument != null) {
-      query = query.endAtDocument(endAtDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        endAt: const [],
+        endAtDocumentSnapshot: endAtDocument.snapshot,
+      );
     }
     if (endBeforeDocument != null) {
-      query = query.endBeforeDocument(endBeforeDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        endBefore: const [],
+        endBeforeDocumentSnapshot: endBeforeDocument.snapshot,
+      );
     }
 
     if (startAt != _sentinel) {
-      query = query.startAt([startAt]);
+      queryCursor = queryCursor.copyWith(
+        startAt: [...queryCursor.startAt, startAt],
+        startAtDocumentSnapshot: null,
+      );
     }
     if (startAfter != _sentinel) {
-      query = query.startAfter([startAfter]);
+      queryCursor = queryCursor.copyWith(
+        startAfter: [...queryCursor.startAfter, startAfter],
+        startAfterDocumentSnapshot: null,
+      );
     }
     if (endAt != _sentinel) {
-      query = query.endAt([endAt]);
+      queryCursor = queryCursor.copyWith(
+        endAt: [...queryCursor.endAt, endAt],
+        endAtDocumentSnapshot: null,
+      );
     }
     if (endBefore != _sentinel) {
-      query = query.endBefore([endBefore]);
+      queryCursor = queryCursor.copyWith(
+        endBefore: [...queryCursor.endBefore, endBefore],
+        endBeforeDocumentSnapshot: null,
+      );
     }
 
-    return _$FoodCategoryQuery(query, _collection);
+    return _$FoodCategoryQuery(
+      _collection,
+      $referenceWithoutCursor: query,
+      $queryCursor: queryCursor,
+    );
   }
 
   FoodCategoryQuery orderByCreatedAt({
@@ -1028,36 +1285,65 @@ class _$FoodCategoryQuery
     FoodCategoryDocumentSnapshot? endBeforeDocument,
     FoodCategoryDocumentSnapshot? startAfterDocument,
   }) {
-    var query = reference.orderBy(_$FoodCategoryFieldMap["createdAt"]!,
-        descending: descending);
+    final query = $referenceWithoutCursor
+        .orderBy(_$FoodCategoryFieldMap['createdAt']!, descending: descending);
+    var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
-      query = query.startAtDocument(startAtDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        startAt: const [],
+        startAtDocumentSnapshot: startAtDocument.snapshot,
+      );
     }
     if (startAfterDocument != null) {
-      query = query.startAfterDocument(startAfterDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        startAfter: const [],
+        startAfterDocumentSnapshot: startAfterDocument.snapshot,
+      );
     }
     if (endAtDocument != null) {
-      query = query.endAtDocument(endAtDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        endAt: const [],
+        endAtDocumentSnapshot: endAtDocument.snapshot,
+      );
     }
     if (endBeforeDocument != null) {
-      query = query.endBeforeDocument(endBeforeDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        endBefore: const [],
+        endBeforeDocumentSnapshot: endBeforeDocument.snapshot,
+      );
     }
 
     if (startAt != _sentinel) {
-      query = query.startAt([startAt]);
+      queryCursor = queryCursor.copyWith(
+        startAt: [...queryCursor.startAt, startAt],
+        startAtDocumentSnapshot: null,
+      );
     }
     if (startAfter != _sentinel) {
-      query = query.startAfter([startAfter]);
+      queryCursor = queryCursor.copyWith(
+        startAfter: [...queryCursor.startAfter, startAfter],
+        startAfterDocumentSnapshot: null,
+      );
     }
     if (endAt != _sentinel) {
-      query = query.endAt([endAt]);
+      queryCursor = queryCursor.copyWith(
+        endAt: [...queryCursor.endAt, endAt],
+        endAtDocumentSnapshot: null,
+      );
     }
     if (endBefore != _sentinel) {
-      query = query.endBefore([endBefore]);
+      queryCursor = queryCursor.copyWith(
+        endBefore: [...queryCursor.endBefore, endBefore],
+        endBeforeDocumentSnapshot: null,
+      );
     }
 
-    return _$FoodCategoryQuery(query, _collection);
+    return _$FoodCategoryQuery(
+      _collection,
+      $referenceWithoutCursor: query,
+      $queryCursor: queryCursor,
+    );
   }
 
   FoodCategoryQuery orderByUpdatedAt({
@@ -1071,36 +1357,65 @@ class _$FoodCategoryQuery
     FoodCategoryDocumentSnapshot? endBeforeDocument,
     FoodCategoryDocumentSnapshot? startAfterDocument,
   }) {
-    var query = reference.orderBy(_$FoodCategoryFieldMap["updatedAt"]!,
-        descending: descending);
+    final query = $referenceWithoutCursor
+        .orderBy(_$FoodCategoryFieldMap['updatedAt']!, descending: descending);
+    var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
-      query = query.startAtDocument(startAtDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        startAt: const [],
+        startAtDocumentSnapshot: startAtDocument.snapshot,
+      );
     }
     if (startAfterDocument != null) {
-      query = query.startAfterDocument(startAfterDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        startAfter: const [],
+        startAfterDocumentSnapshot: startAfterDocument.snapshot,
+      );
     }
     if (endAtDocument != null) {
-      query = query.endAtDocument(endAtDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        endAt: const [],
+        endAtDocumentSnapshot: endAtDocument.snapshot,
+      );
     }
     if (endBeforeDocument != null) {
-      query = query.endBeforeDocument(endBeforeDocument.snapshot);
+      queryCursor = queryCursor.copyWith(
+        endBefore: const [],
+        endBeforeDocumentSnapshot: endBeforeDocument.snapshot,
+      );
     }
 
     if (startAt != _sentinel) {
-      query = query.startAt([startAt]);
+      queryCursor = queryCursor.copyWith(
+        startAt: [...queryCursor.startAt, startAt],
+        startAtDocumentSnapshot: null,
+      );
     }
     if (startAfter != _sentinel) {
-      query = query.startAfter([startAfter]);
+      queryCursor = queryCursor.copyWith(
+        startAfter: [...queryCursor.startAfter, startAfter],
+        startAfterDocumentSnapshot: null,
+      );
     }
     if (endAt != _sentinel) {
-      query = query.endAt([endAt]);
+      queryCursor = queryCursor.copyWith(
+        endAt: [...queryCursor.endAt, endAt],
+        endAtDocumentSnapshot: null,
+      );
     }
     if (endBefore != _sentinel) {
-      query = query.endBefore([endBefore]);
+      queryCursor = queryCursor.copyWith(
+        endBefore: [...queryCursor.endBefore, endBefore],
+        endBeforeDocumentSnapshot: null,
+      );
     }
 
-    return _$FoodCategoryQuery(query, _collection);
+    return _$FoodCategoryQuery(
+      _collection,
+      $referenceWithoutCursor: query,
+      $queryCursor: queryCursor,
+    );
   }
 
   @override
@@ -1114,6 +1429,24 @@ class _$FoodCategoryQuery
   int get hashCode => Object.hash(runtimeType, reference);
 }
 
+class FoodCategoryDocumentSnapshot
+    extends FirestoreDocumentSnapshot<FoodCategory> {
+  FoodCategoryDocumentSnapshot._(this.snapshot) : data = snapshot.data();
+
+  @override
+  final DocumentSnapshot<FoodCategory> snapshot;
+
+  @override
+  FoodCategoryDocumentReference get reference {
+    return FoodCategoryDocumentReference(
+      snapshot.reference,
+    );
+  }
+
+  @override
+  final FoodCategory? data;
+}
+
 class FoodCategoryQuerySnapshot extends FirestoreQuerySnapshot<FoodCategory,
     FoodCategoryQueryDocumentSnapshot> {
   FoodCategoryQuerySnapshot._(
@@ -1121,6 +1454,39 @@ class FoodCategoryQuerySnapshot extends FirestoreQuerySnapshot<FoodCategory,
     this.docs,
     this.docChanges,
   );
+
+  factory FoodCategoryQuerySnapshot._fromQuerySnapshot(
+    QuerySnapshot<FoodCategory> snapshot,
+  ) {
+    final docs =
+        snapshot.docs.map(FoodCategoryQueryDocumentSnapshot._).toList();
+
+    final docChanges = snapshot.docChanges.map((change) {
+      return _decodeDocumentChange(
+        change,
+        FoodCategoryDocumentSnapshot._,
+      );
+    }).toList();
+
+    return FoodCategoryQuerySnapshot._(
+      snapshot,
+      docs,
+      docChanges,
+    );
+  }
+
+  static FirestoreDocumentChange<FoodCategoryDocumentSnapshot>
+      _decodeDocumentChange<T>(
+    DocumentChange<T> docChange,
+    FoodCategoryDocumentSnapshot Function(DocumentSnapshot<T> doc) decodeDoc,
+  ) {
+    return FirestoreDocumentChange<FoodCategoryDocumentSnapshot>(
+      type: docChange.type,
+      oldIndex: docChange.oldIndex,
+      newIndex: docChange.newIndex,
+      doc: decodeDoc(docChange.doc),
+    );
+  }
 
   final QuerySnapshot<FoodCategory> snapshot;
 
@@ -1134,18 +1500,18 @@ class FoodCategoryQuerySnapshot extends FirestoreQuerySnapshot<FoodCategory,
 class FoodCategoryQueryDocumentSnapshot
     extends FirestoreQueryDocumentSnapshot<FoodCategory>
     implements FoodCategoryDocumentSnapshot {
-  FoodCategoryQueryDocumentSnapshot._(this.snapshot, this.data);
+  FoodCategoryQueryDocumentSnapshot._(this.snapshot) : data = snapshot.data();
 
   @override
   final QueryDocumentSnapshot<FoodCategory> snapshot;
 
   @override
+  final FoodCategory data;
+
+  @override
   FoodCategoryDocumentReference get reference {
     return FoodCategoryDocumentReference(snapshot.reference);
   }
-
-  @override
-  final FoodCategory data;
 }
 
 // **************************************************************************
@@ -1153,7 +1519,8 @@ class FoodCategoryQueryDocumentSnapshot
 // **************************************************************************
 
 FoodCategory _$FoodCategoryFromJson(Map<String, dynamic> json) => FoodCategory(
-      resturantOwnerId: json['resturantOwnerId'] as String,
+      id: json['id'] as String? ?? '',
+      restaurantId: json['restaurantId'] as String,
       name: json['name'] as String,
       totalFoodItems: json['totalFoodItems'] as int? ?? 0,
       active: json['active'] as bool? ?? true,
@@ -1164,7 +1531,8 @@ FoodCategory _$FoodCategoryFromJson(Map<String, dynamic> json) => FoodCategory(
     );
 
 const _$FoodCategoryFieldMap = <String, String>{
-  'resturantOwnerId': 'resturantOwnerId',
+  'id': 'id',
+  'restaurantId': 'restaurantId',
   'name': 'name',
   'active': 'active',
   'totalFoodItems': 'totalFoodItems',
@@ -1174,7 +1542,8 @@ const _$FoodCategoryFieldMap = <String, String>{
 
 Map<String, dynamic> _$FoodCategoryToJson(FoodCategory instance) =>
     <String, dynamic>{
-      'resturantOwnerId': instance.resturantOwnerId,
+      'id': instance.id,
+      'restaurantId': instance.restaurantId,
       'name': instance.name,
       'active': instance.active,
       'totalFoodItems': instance.totalFoodItems,

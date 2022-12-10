@@ -21,7 +21,7 @@ class CategoryFoodListView extends GetView<CategoryFoodListController> {
                 children: [
                   const BackButton(),
                   Text(
-                    controller.category.data!.name,
+                    controller.category.name,
                     style: AppTextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,

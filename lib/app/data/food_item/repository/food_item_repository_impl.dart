@@ -11,18 +11,18 @@ class FoodItemRepositoryImpl implements FoodItemRepository {
 
   @override
   Future<FoodItem> createItem(FoodItem item) async {
-    await _dataSource.createFoodItem(item);
-    return item;
+    final id = await _dataSource.createFoodItem(item);
+    return item.copyWith(id: id);
   }
 
   @override
-  Future<List<FoodItemDocumentSnapshot>> getResturantItems(String resturantId) {
-    return _dataSource.getItemsByResturant(resturantId);
+  Future<List<FoodItem>> getRestaurantItems(String restaurantId) {
+    return _dataSource.getItemsByRestaurant(restaurantId);
   }
-  
+
   @override
-  Future<List<FoodItemDocumentSnapshot>> getResturantItemsByCategory(String categoryId) {
-    return _dataSource.getItemsOfResturantByCategory(categoryId);
+  Future<List<FoodItem>> getRestaurantItemsByCategory(String categoryId) {
+    return _dataSource.getItemsOfRestaurantByCategory(categoryId);
   }
 
   @override
@@ -31,10 +31,10 @@ class FoodItemRepositoryImpl implements FoodItemRepository {
   }
 
   @override
-  Future<FoodItem> updateItem(String id, FoodItem category) {
-    return _dataSource.update(id, category);
+  Future<FoodItem> updateItem(FoodItem category) {
+    return _dataSource.update(category);
   }
-  
+
   @override
   Future<void> deleteItem(String id) {
     return _dataSource.delete(id);
@@ -44,6 +44,4 @@ class FoodItemRepositoryImpl implements FoodItemRepository {
   Future<String> uploadItemImage(File image, String itemId) {
     return _dataSource.uploadItemImage(image, itemId);
   }
-
-
 }

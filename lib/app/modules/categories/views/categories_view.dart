@@ -39,9 +39,12 @@ class CategoriesView extends GetView<CategoriesController> {
                     ? ListView.separated(
                         itemCount: controller.allCategories.length,
                         itemBuilder: (context, index) {
+                          final category = controller.allCategories[index]; 
                           return _FoodCategoryCard(
-                            key: ValueKey(controller.allCategories[index].id + controller.allCategories[index].data!.name),
-                            category: controller.allCategories[index],
+                            key: ValueKey(
+                              category.id + category.name,
+                            ),
+                            category: category,
                           );
                         },
                         separatorBuilder: (context, index) {
@@ -85,7 +88,7 @@ class CategoriesView extends GetView<CategoriesController> {
 class _FoodCategoryCard extends GetWidget<CategoriesController> {
   const _FoodCategoryCard({required this.category, required super.key});
 
-  final FoodCategoryDocumentSnapshot category;
+  final FoodCategory category;
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +113,7 @@ class _FoodCategoryCard extends GetWidget<CategoriesController> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      category.data!.name,
+                      category.name,
                       style: AppTextStyle(
                         fontSize: 12,
                       ),
@@ -119,7 +122,7 @@ class _FoodCategoryCard extends GetWidget<CategoriesController> {
                       height: 5,
                     ),
                     Text(
-                      '${category.data!.totalFoodItems} Foods Items',
+                      '${category.totalFoodItems} Foods Items',
                       style: AppTextStyle(
                         fontSize: 9.sp,
                         color: AppColors(context).isDark ? AppColors(context).primary : AppColors(context).primaryDark,
@@ -220,9 +223,9 @@ class _AddCategoryView extends GetWidget<CategoriesController> {
 class _UpdateCategoryView extends GetWidget<CategoriesController> {
   _UpdateCategoryView({
     required this.category,
-  }) : _categoryNameController = TextEditingController(text: category.data!.name);
+  }) : _categoryNameController = TextEditingController(text: category.name);
 
-  final FoodCategoryDocumentSnapshot category;
+  final FoodCategory category;
   final _formKey = GlobalKey<FormState>();
   late final TextEditingController _categoryNameController;
 

@@ -1,10 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intelligent_food_delivery/app/domain/app_user/use_cases/resturant_owner_use_case.dart';
-
 import '../../../common/widgets/snackbars.dart';
 import '../../../core/core.dart';
+import '../../../domain/restaurant/use_cases/resturant_use_case.dart';
 
 enum LoginAccountState {
   phoneVerification,
@@ -33,14 +32,14 @@ class LoginController extends GetxController {
     if (!formKey.currentState!.validate()) return;
 
     final authController = Get.find<AuthenticationController>();
-    final resturantOwnerUseCase = Get.find<ResturantOwnerUseCase>();
-    if (!(await resturantOwnerUseCase.isOwnerRegistered(phoneNumber!))) {
+    final restaurantOwnerUseCase = Get.find<RestaurantUseCase>();
+    if (!(await restaurantOwnerUseCase.isOwnerRegistered(phoneNumber!))) {
       if (Get.isBottomSheetOpen!) Get.back();
       showAppSnackBar('User Not found', "Please create an account first");
       return;
     }
 
-    if(bottomSheet != null) {
+    if (bottomSheet != null) {
       Get.bottomSheet(bottomSheet);
     }
 

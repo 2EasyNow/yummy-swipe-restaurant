@@ -10,13 +10,15 @@ class FoodCategoryRepositoryImpl implements FoodCategoryRepository {
 
   @override
   Future<FoodCategory> createCategory(FoodCategory category) async {
-    await _dataSource.createFoodCategory(category);
-    return category;
+    final id = await _dataSource.createFoodCategory(category);
+    return category.copyWith(
+      id: id,
+    );
   }
 
   @override
-  Future<List<FoodCategoryDocumentSnapshot>> getAllResturantCategories(String resturantId) {
-    return _dataSource.getCategoriesByResturant(resturantId);
+  Future<List<FoodCategory>> getAllRestaurantCategories(String restaurantId) {
+    return _dataSource.getCategoriesByRestaurant(restaurantId);
   }
 
   @override
@@ -28,10 +30,9 @@ class FoodCategoryRepositoryImpl implements FoodCategoryRepository {
   Future<FoodCategory> updateCategory(String uid, FoodCategory category) {
     return _dataSource.updateCategory(uid, category);
   }
-  
+
   @override
   Future<void> deleteCategory(String categoryId) {
     return _dataSource.deleteCategory(categoryId);
   }
-
 }

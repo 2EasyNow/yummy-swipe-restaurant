@@ -14,8 +14,12 @@ import 'package:intelligent_food_delivery/app/modules/login/bindings/login_bindi
 import 'package:intelligent_food_delivery/app/modules/login/views/login_view.dart';
 import 'package:intelligent_food_delivery/app/modules/on_boarding/bindings/on_boarding_binding.dart';
 import 'package:intelligent_food_delivery/app/modules/on_boarding/views/on_boarding_view.dart';
-import 'package:intelligent_food_delivery/app/modules/resturant_profile/bindings/resturant_profile_binding.dart';
-import 'package:intelligent_food_delivery/app/modules/resturant_profile/views/resturant_profile_view.dart';
+import 'package:intelligent_food_delivery/app/modules/orders_detail/bindings/orders_detail_binding.dart';
+import 'package:intelligent_food_delivery/app/modules/orders_detail/views/orders_detail_view.dart';
+import 'package:intelligent_food_delivery/app/modules/orders_list/bindings/orders_list_binding.dart';
+import 'package:intelligent_food_delivery/app/modules/orders_list/views/orders_list_view.dart';
+import 'package:intelligent_food_delivery/app/modules/restaurant_profile/bindings/restaurant_profile_binding.dart';
+import 'package:intelligent_food_delivery/app/modules/restaurant_profile/views/restaurant_profile_view.dart';
 import 'package:intelligent_food_delivery/app/modules/setting/bindings/setting_binding.dart';
 import 'package:intelligent_food_delivery/app/modules/setting/views/setting_view.dart';
 import 'package:intelligent_food_delivery/app/modules/sign_up/bindings/sign_up_binding.dart';
@@ -38,12 +42,12 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.SPLASH,
-      page: () => SplashView(),
+      page: () => const SplashView(),
       binding: SplashBinding(),
     ),
     GetPage(
       name: _Paths.LOGIN,
-      page: () => LoginView(),
+      page: () => const LoginView(),
       binding: LoginBinding(),
     ),
     GetPage(
@@ -53,40 +57,56 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.SIGN_UP,
-      page: () => SignUpView(),
+      page: () => const SignUpView(),
       binding: SignUpBinding(),
     ),
     GetPage(
       name: _Paths.GETTING_STARTED,
-      page: () => GettingStartedView(),
+      page: () => const GettingStartedView(),
       binding: GettingStartedBinding(),
     ),
     GetPage(
       name: _Paths.ON_BOARDING,
-      page: () => OnBoardingView(),
+      page: () => const OnBoardingView(),
       binding: OnBoardingBinding(),
     ),
     GetPage(
-        name: _Paths.CATEGORIES,
-        page: () => CategoriesView(),
-        binding: CategoriesBinding(),
-        children: [
-          GetPage(
-            name: _Paths.CATEGORY_FOOD_LIST,
-            page: () => CategoryFoodListView(),
-            binding: CategoryFoodListBinding(),
-            transition: Transition.rightToLeft,
-          ),
-        ]),
+      name: _Paths.CATEGORIES,
+      page: () => const CategoriesView(),
+      binding: CategoriesBinding(),
+      transition: Transition.rightToLeft,
+      children: [
+        GetPage(
+          name: _Paths.CATEGORY_FOOD_LIST,
+          page: () => const CategoryFoodListView(),
+          binding: CategoryFoodListBinding(),
+          transition: Transition.rightToLeft,
+        ),
+      ],
+    ),
     GetPage(
       name: _Paths.FOOD,
       page: () => FoodView(),
       binding: FoodBinding(),
+      transition: Transition.rightToLeft,
     ),
     GetPage(
       name: _Paths.RESTURANT_PROFILE,
-      page: () => ResturantProfileView(),
-      binding: ResturantProfileBinding(),
+      page: () => RestaurantProfileView(),
+      binding: RestaurantProfileBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: _Paths.ORDERS_LIST,
+      page: () => OrdersListView(),
+      binding: OrdersListBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: _Paths.ORDERS_DETAIL,
+      page: () => OrdersDetailView(),
+      binding: OrdersDetailBinding(),
+      transition: Transition.fadeIn,
     ),
   ];
 }

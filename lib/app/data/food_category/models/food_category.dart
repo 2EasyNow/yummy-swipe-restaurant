@@ -10,7 +10,8 @@ part 'food_category.g.dart';
 @JsonSerializable(createFieldMap: true)
 class FoodCategory {
   FoodCategory({
-    required this.resturantOwnerId,
+    this.id = '',
+    required this.restaurantId,
     required this.name,
     this.totalFoodItems = 0,
     this.active = true,
@@ -25,6 +26,7 @@ class FoodCategory {
 
   // copyWith
   FoodCategory copyWith({
+    String? id,
     String? name,
     bool? active,
     int? totalFoodItems,
@@ -32,7 +34,8 @@ class FoodCategory {
     DateTime? updatedAt,
   }) {
     return FoodCategory(
-      resturantOwnerId: resturantOwnerId,
+      id: id ?? this.id,
+      restaurantId: restaurantId,
       name: name ?? this.name,
       active: active ?? this.active,
       totalFoodItems: totalFoodItems ?? this.totalFoodItems,
@@ -41,7 +44,9 @@ class FoodCategory {
     );
   }
 
-  final String resturantOwnerId;
+  @Id()
+  final String id;
+  final String restaurantId;
   final String name;
   final bool active;
   final int totalFoodItems;

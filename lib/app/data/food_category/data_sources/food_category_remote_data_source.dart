@@ -1,17 +1,16 @@
-
 import '../models/food_category.dart';
 import 'food_category_data_source.dart';
 
 class FoodCategoryRemoteDataSource implements FoodCategoryDataSource {
   @override
-  Future<void> createFoodCategory(FoodCategory category) async {
-    await foodCategoriesReference.add(category);
+  Future<String> createFoodCategory(FoodCategory category) async {
+    return (await foodCategoriesReference.add(category)).reference.id;
   }
 
   @override
-  Future<List<FoodCategoryDocumentSnapshot>> getCategoriesByResturant(String resturantId) async {
-    final allCategoriesSnapshot = await foodCategoriesReference.whereResturantOwnerId(isEqualTo: resturantId).get();
-    return allCategoriesSnapshot.docs;
+  Future<List<FoodCategory>> getCategoriesByRestaurant(String restaurantId) async {
+    final allCategoriesSnapshot = await foodCategoriesReference.whereRestaurantId(isEqualTo: restaurantId).get();
+    return allCategoriesSnapshot.docs.map((e) => e.data).toList();
   }
 
   @override
@@ -25,7 +24,7 @@ class FoodCategoryRemoteDataSource implements FoodCategoryDataSource {
     await foodCategoriesReference.doc(uid).set(newCategory);
     return newCategory;
   }
-  
+
   @override
   Future<void> deleteCategory(String categoryId) {
     return foodCategoriesReference.doc(categoryId).delete();

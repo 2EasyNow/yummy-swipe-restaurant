@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:intelligent_food_delivery/app/domain/app_user/use_cases/resturant_owner_use_case.dart';
 
 import '../../common/utils/firebase.dart';
 import '../../routes/app_pages.dart';
@@ -27,7 +26,7 @@ class AuthenticationController extends GetxController {
       phoneNumber: phone,
       verificationCompleted: (AuthCredential credential) async {
         await FirebaseAuth.instance.signInWithCredential(credential);
-        
+
         onCompleteVerification();
       },
       verificationFailed: (FirebaseAuthException exception) {

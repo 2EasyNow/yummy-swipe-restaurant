@@ -3,20 +3,20 @@
 // import 'package:firebase_auth/firebase_auth.dart';
 // import 'package:get/get.dart';
 
-// import '../../data/resturant_owner/models/resturant_owner.dart';
+// import '../../data/restaurant/models/restaurant.dart';
 
-// class ResturantOwnerController extends GetxController {
-//   StreamSubscription<ResturantOwnerDocumentSnapshot>? currentUserDocListener;
+// class RestaurantController extends GetxController {
+//   StreamSubscription<RestaurantDocumentSnapshot>? currentUserDocListener;
 
-//   Rx<ResturantOwnerDocumentSnapshot>? userDocumentSnapshot;
+//   Rx<RestaurantDocumentSnapshot>? userDocumentSnapshot;
 
 //   String? get currentCustomerId => FirebaseAuth.instance.currentUser?.uid;
 
-//   ResturantOwnerDocumentReference get currentRiderReference => userRef.doc(currentCustomerId);
+//   RestaurantDocumentReference get currentRiderReference => userRef.doc(currentCustomerId);
 
-//   ResturantOwner? get currentRider => userDocumentSnapshot?.value.data;
+//   Restaurant? get currentRider => userDocumentSnapshot?.value.data;
 
-//   Stream<ResturantOwnerDocumentSnapshot> get onRiderDataChange {
+//   Stream<RestaurantDocumentSnapshot> get onRiderDataChange {
 //     return currentRiderReference.snapshots();
 //   }
 
@@ -28,7 +28,7 @@
 
 //   Future<bool> get hasRiderDocCreated async => (await currentRiderReference.get()).exists;
 
-//   Future createCustomerDoc(ResturantOwner user) async {
+//   Future createCustomerDoc(Restaurant user) async {
 //     await currentRiderReference.set(user);
 //     listenToCustomerDoc();
 //   }

@@ -51,7 +51,7 @@ class FoodView extends GetView<FoodController> {
                         itemCount: controller.allFoodItems.length,
                         itemBuilder: (context, index) {
                           return FoodItemCard(
-                            key: ValueKey(controller.allFoodItems[index].id + controller.allFoodItems[index].data!.name),
+                            key: ValueKey(controller.allFoodItems[index].id + controller.allFoodItems[index].name),
                             item: controller.allFoodItems[index],
                             isModdifyAble: true,
                           );
@@ -216,27 +216,27 @@ class _AddItemView extends GetWidget<FoodController> {
                           ),
                         ),
                         const VerticalSpacer(space: 8),
-                        FutureBuilder<List<FoodCategoryDocumentSnapshot>>(
-                            future: Get.find<FoodCategoryUseCase>().getAllResturantCategories(
-                              resturantOwnerId: FirebaseAuth.instance.currentUser!.uid,
+                        FutureBuilder<List<FoodCategory>>(
+                            future: Get.find<FoodCategoryUseCase>().getAllRestaurantCategories(
+                              restaurantOwnerId: FirebaseAuth.instance.currentUser!.uid,
                             ),
                             builder: (context, snap) {
                               if (!snap.hasData) {
                                 return const Center(child: CircularProgressIndicator());
                               }
                               final initialValue = snap.data!.where((element) => _categories.contains(element.id)).toList();
-                              return ChipsInput<FoodCategoryDocumentSnapshot>(
+                              return ChipsInput<FoodCategory>(
                                 initialValue: initialValue,
                                 findSuggestions: (String query) {
                                   if (query.isNotEmpty) {
                                     var lowercaseQuery = query.toLowerCase();
                                     final results = snap.data!.where((category) {
-                                      return category.data!.name.toLowerCase().contains(lowercaseQuery);
+                                      return category.name.toLowerCase().contains(lowercaseQuery);
                                     }).toList(growable: false)
-                                      ..sort((a, b) => a.data!.name
+                                      ..sort((a, b) => a.name
                                           .toLowerCase()
                                           .indexOf(lowercaseQuery)
-                                          .compareTo(b.data!.name.toLowerCase().indexOf(lowercaseQuery)));
+                                          .compareTo(b.name.toLowerCase().indexOf(lowercaseQuery)));
                                     return results;
                                   }
                                   return snap.data!;
@@ -248,7 +248,7 @@ class _AddItemView extends GetWidget<FoodController> {
                                 chipBuilder: (context, state, category) {
                                   return InputChip(
                                     key: ObjectKey(category),
-                                    label: Text(category.data!.name),
+                                    label: Text(category.name),
                                     onDeleted: () => state.deleteChip(category),
                                     materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                   );
@@ -256,7 +256,7 @@ class _AddItemView extends GetWidget<FoodController> {
                                 suggestionBuilder: (context, category) {
                                   return ListTile(
                                     key: ObjectKey(category),
-                                    title: Text(category.data!.name),
+                                    title: Text(category.name),
                                   );
                                 },
                               );
@@ -440,4 +440,3 @@ class _AddItemView extends GetWidget<FoodController> {
     );
   }
 }
-

@@ -1,19 +1,13 @@
 import 'dart:io';
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chips_input/chips_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:geoflutterfire2/geoflutterfire2.dart';
 
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intelligent_food_delivery/app/modules/sign_up/widgets/create_account_sheets/create_account_sheets.dart';
 import 'package:location/location.dart';
-import 'package:otp_text_field/otp_text_field.dart';
-import 'package:otp_text_field/style.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../../assets/assets.gen.dart';
@@ -23,7 +17,6 @@ import '../../../common/widgets/bottom_sheets.dart';
 import '../../../common/widgets/dialogs.dart';
 import '../../../common/widgets/input_formatters.dart';
 import '../../../common/widgets/spacers.dart';
-import '../../../common/widgets/timer_button.dart';
 import '../../../domain/app_settings/usecase/app_setttings_use_case.dart';
 import '../../../routes/app_pages.dart';
 import '../controllers/sign_up_controller.dart';
@@ -63,7 +56,7 @@ class SignUpView extends GetView<SignUpController> {
                   isActive: controller.currentStep == 0,
                 ),
                 Step(
-                  title: const Text("Resturant"),
+                  title: const Text("Restaurant"),
                   content: _SecondStepForm(),
                   isActive: controller.currentStep == 1,
                 ),
@@ -91,15 +84,15 @@ class _FirstStepForm extends GetView<SignUpController> {
           children: [
             const _BannerImage(),
             VerticalSpacer(space: 0.5.h),
-            Text('Resturant Name', style: AppTextStyle(color: AppColors(context).grey400)),
+            Text('Restaurant Name', style: AppTextStyle(color: AppColors(context).grey400)),
             VerticalSpacer(space: 0.5.h),
             TextFormField(
-              controller: controller.resturantNameController,
+              controller: controller.restaurantNameController,
               autofillHints: const [AutofillHints.organizationName],
               inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z ]'))],
               autovalidateMode: AutovalidateMode.onUserInteraction,
               validator: (value) {
-                if (value!.isEmpty) return "Resturant Name can't be empty";
+                if (value!.isEmpty) return "Restaurant Name can't be empty";
                 return null;
               },
               decoration: InputDecoration(
@@ -220,7 +213,7 @@ class _SecondStepForm extends GetView<SignUpController> {
               autofillHints: const [AutofillHints.addressCityAndState],
               validator: (value) {
                 if (value!.trim().isEmpty) {
-                  return 'Please enter the resturant address';
+                  return 'Please enter the restaurant address';
                 }
                 return null;
               },
@@ -233,7 +226,7 @@ class _SecondStepForm extends GetView<SignUpController> {
             ),
             /////////         Coordinated Field         /////////
             VerticalSpacer(space: spaceBetweenFields),
-            Text('Resturant Coordinates', style: AppTextStyle(color: AppColors(context).grey400)),
+            Text('Restaurant Coordinates', style: AppTextStyle(color: AppColors(context).grey400)),
             VerticalSpacer(space: 0.5.h),
             TextFormField(
               controller: controller.coordinatedController,
@@ -254,7 +247,7 @@ class _SecondStepForm extends GetView<SignUpController> {
                         Get.generalDialog(
                           pageBuilder: (context, animation, secondaryAnimation) {
                             return const Material(
-                              child: ResturantCoordinatesPicker(),
+                              child: RestaurantCoordinatesPicker(),
                             );
                           },
                         );
@@ -265,7 +258,7 @@ class _SecondStepForm extends GetView<SignUpController> {
                   Get.generalDialog(
                     pageBuilder: (context, animation, secondaryAnimation) {
                       return const Material(
-                        child: ResturantCoordinatesPicker(),
+                        child: RestaurantCoordinatesPicker(),
                       );
                     },
                   );
@@ -273,7 +266,7 @@ class _SecondStepForm extends GetView<SignUpController> {
               },
               validator: (value) {
                 if (value!.isEmpty) {
-                  return 'Please select the resturant coordinates';
+                  return 'Please select the restaurant coordinates';
                 }
                 return null;
               },
@@ -282,75 +275,129 @@ class _SecondStepForm extends GetView<SignUpController> {
                 prefixIcon: Assets.icons.location.svg(color: AppColors(context).grey600).paddingSymmetric(vertical: 12),
               ),
             ),
-
             VerticalSpacer(space: spaceBetweenFields),
-            Text('Opening Time', style: AppTextStyle(color: AppColors(context).grey400)),
-            VerticalSpacer(space: 0.5.h),
-            Material(
-              color: Colors.transparent,
-              child: InkWell(
-                onTap: () {
-                  showTimePicker(
-                      context: context,
-                      initialTime: TimeOfDay.now(),
-                      builder: (context, child) {
-                        return Theme(
-                          data: Theme.of(context).copyWith(
-                            textButtonTheme: const TextButtonThemeData(),
+            Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Opening Time', style: AppTextStyle(color: AppColors(context).grey400)),
+                      VerticalSpacer(space: 0.5.h),
+                      Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                          onTap: () {
+                            showTimePicker(
+                                context: context,
+                                initialTime: TimeOfDay.now(),
+                                builder: (context, child) {
+                                  return Theme(
+                                    data: Theme.of(context).copyWith(
+                                      textButtonTheme: const TextButtonThemeData(),
+                                    ),
+                                    child: child!,
+                                  );
+                                }).then((value) {
+                              if (value != null) {
+                                controller.openingTime = value;
+                              }
+                            });
+                          },
+                          child: IgnorePointer(
+                            child: TextFormField(
+                              controller: controller.openingTimeController,
+                            ),
                           ),
-                          child: child!,
-                        );
-                      }).then((value) {
-                    if (value != null) {
-                      controller.openingTime = value;
-                    }
-                  });
-                },
-                child: IgnorePointer(
-                  child: TextFormField(
-                    controller: controller.openingTimeController,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const HorizontalSpacer(space: 8),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Closing Time', style: AppTextStyle(color: AppColors(context).grey400)),
+                      VerticalSpacer(space: 0.5.h),
+                      Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                          onTap: () {
+                            showTimePicker(
+                                context: context,
+                                initialTime: TimeOfDay.now(),
+                                builder: (context, child) {
+                                  return Theme(
+                                    data: Theme.of(context).copyWith(
+                                      textButtonTheme: const TextButtonThemeData(),
+                                    ),
+                                    child: child!,
+                                  );
+                                }).then((value) {
+                              if (value != null) {
+                                controller.closingTime = value;
+                              }
+                            });
+                          },
+                          child: IgnorePointer(
+                            child: TextFormField(
+                              controller: controller.closingTimeController,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            VerticalSpacer(space: spaceBetweenFields),
+
+            Text('Average Order Time', style: AppTextStyle(color: AppColors(context).grey400)),
+            VerticalSpacer(space: 0.5.h),
+            TextFormField(
+              controller: controller.averageOrderTimeController,
+              validator: (value) {
+                if (value!.trim().isEmpty) {
+                  return 'Please enter the average order time';
+                }
+                // if value > 60
+                else if (int.parse(value) > 60) {
+                  return 'Please enter a value less than 60';
+                } else if (int.parse(value) == 0) {
+                  return 'Please enter a value greater than 0';
+                }
+                return null;
+              },
+              keyboardType: TextInputType.number,
+              inputFormatters: [
+                FilteringTextInputFormatter.digitsOnly,
+                LengthLimitingTextInputFormatter(2),
+              ],
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              decoration: InputDecoration(
+                suffixIcon: Align(
+                  alignment: Alignment.center,
+                  widthFactor: 1.5,
+                  child: Text(
+                    'min(s)',
+                    style: AppTextStyle(
+                      color: AppColors(context).grey500,
+                    ),
                   ),
                 ),
               ),
             ),
-            VerticalSpacer(space: spaceBetweenFields),
-            Text('Closing Time', style: AppTextStyle(color: AppColors(context).grey400)),
-            VerticalSpacer(space: 0.5.h),
-            Material(
-              color: Colors.transparent,
-              child: InkWell(
-                onTap: () {
-                  showTimePicker(
-                      context: context,
-                      initialTime: TimeOfDay.now(),
-                      builder: (context, child) {
-                        return Theme(
-                          data: Theme.of(context).copyWith(
-                            textButtonTheme: const TextButtonThemeData(),
-                          ),
-                          child: child!,
-                        );
-                      }).then((value) {
-                    if (value != null) {
-                      controller.closingTime = value;
-                    }
-                  });
-                },
-                child: IgnorePointer(
-                  child: TextFormField(
-                    controller: controller.closingTimeController,
-                  ),
-                ),
-              ),
-            ),
 
             VerticalSpacer(space: spaceBetweenFields),
-            Text('Resturant Food Type', style: AppTextStyle(color: AppColors(context).grey400)),
+            Text('Restaurant Food Type', style: AppTextStyle(color: AppColors(context).grey400)),
             VerticalSpacer(space: 0.5.h),
             ChipsInput<String>(
-              initialValue: controller.resturantTags,
+              initialValue: controller.restaurantTags,
               findSuggestions: (String query) {
-              final allTags = Get.find<AppSettingsUseCase>().tags;
+                final allTags = Get.find<AppSettingsUseCase>().tags;
                 if (query.isNotEmpty) {
                   var lowercaseQuery = query.toLowerCase();
                   final results = allTags.where((tag) {
@@ -362,7 +409,7 @@ class _SecondStepForm extends GetView<SignUpController> {
                 return allTags;
               },
               onChanged: (data) {
-                controller.resturantTags = data;
+                controller.restaurantTags = data;
               },
               chipBuilder: (context, state, tag) {
                 return InputChip(

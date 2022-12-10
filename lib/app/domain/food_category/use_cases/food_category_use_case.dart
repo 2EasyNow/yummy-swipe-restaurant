@@ -8,23 +8,24 @@ class FoodCategoryUseCase {
 
   Future<FoodCategory> createCategory({
     required String name,
-    required String resturantOwnerId,
+    required String restaurantId,
   }) async {
     final category = FoodCategory(
-      resturantOwnerId: resturantOwnerId,
+      restaurantId: restaurantId,
       name: name,
       updatedAt: DateTime.now(),
+      createdAt: DateTime.now(),
       active: true,
     );
     return _repository.createCategory(category);
   }
 
   Future<FoodCategory> updateCategory({
-    required FoodCategoryDocumentSnapshot oldCategory,
+    required FoodCategory oldCategory,
     String? name,
     bool? active,
   }) async {
-    final category = oldCategory.data!.copyWith(
+    final category = oldCategory.copyWith(
       name: name,
       active: active,
     );
@@ -43,11 +44,11 @@ class FoodCategoryUseCase {
     return _repository.updateCategory(categoryId, category);
   }
 
-  //get all Categories of a resturant
-  Future<List<FoodCategoryDocumentSnapshot>> getAllResturantCategories({
-    required String resturantOwnerId,
+  //get all Categories of a restaurant
+  Future<List<FoodCategory>> getAllRestaurantCategories({
+    required String restaurantOwnerId,
   }) async {
-    return _repository.getAllResturantCategories(resturantOwnerId);
+    return _repository.getAllRestaurantCategories(restaurantOwnerId);
   }
 
   // get a single category

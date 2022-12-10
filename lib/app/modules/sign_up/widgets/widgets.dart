@@ -1,2 +1,2 @@
 export 'location_permission.dart';
-export 'resturant_coordinate_picker.dart';
+export 'restaurant_coordinate_picker.dart';
