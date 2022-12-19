@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'food_order.dart';
+part of 'rider.dart';
 
 // **************************************************************************
 // CollectionGenerator
@@ -18,81 +18,81 @@ const _sentinel = _Sentinel();
 /// A collection reference object can be used for adding documents,
 /// getting document references, and querying for documents
 /// (using the methods inherited from Query).
-abstract class FoodOrderCollectionReference
+abstract class RiderCollectionReference
     implements
-        FoodOrderQuery,
-        FirestoreCollectionReference<FoodOrder, FoodOrderQuerySnapshot> {
-  factory FoodOrderCollectionReference([
+        RiderQuery,
+        FirestoreCollectionReference<Rider, RiderQuerySnapshot> {
+  factory RiderCollectionReference([
     FirebaseFirestore? firestore,
-  ]) = _$FoodOrderCollectionReference;
+  ]) = _$RiderCollectionReference;
 
-  static FoodOrder fromFirestore(
+  static Rider fromFirestore(
     DocumentSnapshot<Map<String, Object?>> snapshot,
     SnapshotOptions? options,
   ) {
-    return FoodOrder.fromJson({'id': snapshot.id, ...?snapshot.data()});
+    return Rider.fromJson({'id': snapshot.id, ...?snapshot.data()});
   }
 
   static Map<String, Object?> toFirestore(
-    FoodOrder value,
+    Rider value,
     SetOptions? options,
   ) {
-    return {..._$FoodOrderToJson(value)}..remove('id');
+    return {..._$RiderToJson(value)}..remove('id');
   }
 
   @override
-  CollectionReference<FoodOrder> get reference;
+  CollectionReference<Rider> get reference;
 
   @override
-  FoodOrderDocumentReference doc([String? id]);
+  RiderDocumentReference doc([String? id]);
 
   /// Add a new document to this collection with the specified data,
   /// assigning it a document ID automatically.
-  Future<FoodOrderDocumentReference> add(FoodOrder value);
+  Future<RiderDocumentReference> add(Rider value);
 }
 
-class _$FoodOrderCollectionReference extends _$FoodOrderQuery
-    implements FoodOrderCollectionReference {
-  factory _$FoodOrderCollectionReference([FirebaseFirestore? firestore]) {
+class _$RiderCollectionReference extends _$RiderQuery
+    implements RiderCollectionReference {
+  factory _$RiderCollectionReference([FirebaseFirestore? firestore]) {
     firestore ??= FirebaseFirestore.instance;
 
-    return _$FoodOrderCollectionReference._(
-      firestore.collection('Orders').withConverter(
-            fromFirestore: FoodOrderCollectionReference.fromFirestore,
-            toFirestore: FoodOrderCollectionReference.toFirestore,
+    return _$RiderCollectionReference._(
+      firestore.collection('Rider').withConverter(
+            fromFirestore: RiderCollectionReference.fromFirestore,
+            toFirestore: RiderCollectionReference.toFirestore,
           ),
     );
   }
 
-  _$FoodOrderCollectionReference._(
-    CollectionReference<FoodOrder> reference,
+  _$RiderCollectionReference._(
+    CollectionReference<Rider> reference,
   ) : super(reference, $referenceWithoutCursor: reference);
 
   String get path => reference.path;
 
   @override
-  CollectionReference<FoodOrder> get reference =>
-      super.reference as CollectionReference<FoodOrder>;
+  CollectionReference<Rider> get reference =>
+      super.reference as CollectionReference<Rider>;
 
   @override
-  FoodOrderDocumentReference doc([String? id]) {
+  RiderDocumentReference doc([String? id]) {
     assert(
       id == null || id.split('/').length == 1,
       'The document ID cannot be from a different collection',
     );
-    return FoodOrderDocumentReference(
+    return RiderDocumentReference(
       reference.doc(id),
     );
   }
 
   @override
-  Future<FoodOrderDocumentReference> add(FoodOrder value) {
-    return reference.add(value).then((ref) => FoodOrderDocumentReference(ref));
+  Future<RiderDocumentReference> add(Rider value) {
+    return reference.add(value).then((ref) => RiderDocumentReference(ref));
   }
 
   @override
   bool operator ==(Object other) {
-    return other is _$FoodOrderCollectionReference &&
+    return other is _$RiderCollectionReference &&
         other.runtimeType == runtimeType &&
         other.reference == reference;
   }
@@ -101,23 +101,23 @@ class _$FoodOrderCollectionReference extends _$FoodOrderQuery
   int get hashCode => Object.hash(runtimeType, reference);
 }
 
-abstract class FoodOrderDocumentReference
-    extends FirestoreDocumentReference<FoodOrder, FoodOrderDocumentSnapshot> {
-  factory FoodOrderDocumentReference(DocumentReference<FoodOrder> reference) =
-      _$FoodOrderDocumentReference;
+abstract class RiderDocumentReference
+    extends FirestoreDocumentReference<Rider, RiderDocumentSnapshot> {
+  factory RiderDocumentReference(DocumentReference<Rider> reference) =
+      _$RiderDocumentReference;
 
-  DocumentReference<FoodOrder> get reference;
+  DocumentReference<Rider> get reference;
 
-  /// A reference to the [FoodOrderCollectionReference] containing this document.
-  FoodOrderCollectionReference get parent {
-    return _$FoodOrderCollectionReference(reference.firestore);
+  /// A reference to the [RiderCollectionReference] containing this document.
+  RiderCollectionReference get parent {
+    return _$RiderCollectionReference(reference.firestore);
   }
 
   @override
-  Stream<FoodOrderDocumentSnapshot> snapshots();
+  Stream<RiderDocumentSnapshot> snapshots();
 
   @override
-  Future<FoodOrderDocumentSnapshot> get([GetOptions? options]);
+  Future<RiderDocumentSnapshot> get([GetOptions? options]);
 
   @override
   Future<void> delete();
@@ -127,20 +127,22 @@ abstract class FoodOrderDocumentReference
   ///
   /// If no document exists yet, the update will fail.
   Future<void> update({
-    String customerId,
-    FieldValue customerIdFieldValue,
-    String restaurantId,
-    FieldValue restaurantIdFieldValue,
-    String riderId,
-    FieldValue riderIdFieldValue,
-    int subTotal,
-    FieldValue subTotalFieldValue,
-    int deliveryFee,
-    FieldValue deliveryFeeFieldValue,
-    int platformFee,
-    FieldValue platformFeeFieldValue,
-    int totalItems,
-    FieldValue totalItemsFieldValue,
+    String name,
+    FieldValue nameFieldValue,
+    String phone,
+    FieldValue phoneFieldValue,
+    String city,
+    FieldValue cityFieldValue,
+    String vehicleType,
+    FieldValue vehicleTypeFieldValue,
+    bool isAvailable,
+    FieldValue isAvailableFieldValue,
+    String currentOrderId,
+    FieldValue currentOrderIdFieldValue,
+    bool active,
+    FieldValue activeFieldValue,
+    List<String> fcmTokens,
+    FieldValue fcmTokensFieldValue,
     DateTime? createdAt,
     FieldValue createdAtFieldValue,
     DateTime updatedAt,
@@ -152,20 +154,22 @@ abstract class FoodOrderDocumentReference
   /// The update will fail if applied to a document that does not exist.
   void transactionUpdate(
     Transaction transaction, {
-    String customerId,
-    FieldValue customerIdFieldValue,
-    String restaurantId,
-    FieldValue restaurantIdFieldValue,
-    String riderId,
-    FieldValue riderIdFieldValue,
-    int subTotal,
-    FieldValue subTotalFieldValue,
-    int deliveryFee,
-    FieldValue deliveryFeeFieldValue,
-    int platformFee,
-    FieldValue platformFeeFieldValue,
-    int totalItems,
-    FieldValue totalItemsFieldValue,
+    String name,
+    FieldValue nameFieldValue,
+    String phone,
+    FieldValue phoneFieldValue,
+    String city,
+    FieldValue cityFieldValue,
+    String vehicleType,
+    FieldValue vehicleTypeFieldValue,
+    bool isAvailable,
+    FieldValue isAvailableFieldValue,
+    String currentOrderId,
+    FieldValue currentOrderIdFieldValue,
+    bool active,
+    FieldValue activeFieldValue,
+    List<String> fcmTokens,
+    FieldValue fcmTokensFieldValue,
     DateTime? createdAt,
     FieldValue createdAtFieldValue,
     DateTime updatedAt,
@@ -173,81 +177,87 @@ abstract class FoodOrderDocumentReference
   });
 }
 
-class _$FoodOrderDocumentReference
-    extends FirestoreDocumentReference<FoodOrder, FoodOrderDocumentSnapshot>
-    implements FoodOrderDocumentReference {
-  _$FoodOrderDocumentReference(this.reference);
+class _$RiderDocumentReference
+    extends FirestoreDocumentReference<Rider, RiderDocumentSnapshot>
+    implements RiderDocumentReference {
+  _$RiderDocumentReference(this.reference);
 
   @override
-  final DocumentReference<FoodOrder> reference;
+  final DocumentReference<Rider> reference;
 
-  /// A reference to the [FoodOrderCollectionReference] containing this document.
-  FoodOrderCollectionReference get parent {
-    return _$FoodOrderCollectionReference(reference.firestore);
+  /// A reference to the [RiderCollectionReference] containing this document.
+  RiderCollectionReference get parent {
+    return _$RiderCollectionReference(reference.firestore);
   }
 
   @override
-  Stream<FoodOrderDocumentSnapshot> snapshots() {
-    return reference.snapshots().map(FoodOrderDocumentSnapshot._);
+  Stream<RiderDocumentSnapshot> snapshots() {
+    return reference.snapshots().map(RiderDocumentSnapshot._);
   }
 
   @override
-  Future<FoodOrderDocumentSnapshot> get([GetOptions? options]) {
-    return reference.get(options).then(FoodOrderDocumentSnapshot._);
+  Future<RiderDocumentSnapshot> get([GetOptions? options]) {
+    return reference.get(options).then(RiderDocumentSnapshot._);
   }
 
   @override
-  Future<FoodOrderDocumentSnapshot> transactionGet(Transaction transaction) {
-    return transaction.get(reference).then(FoodOrderDocumentSnapshot._);
+  Future<RiderDocumentSnapshot> transactionGet(Transaction transaction) {
+    return transaction.get(reference).then(RiderDocumentSnapshot._);
   }
 
   Future<void> update({
-    Object? customerId = _sentinel,
-    FieldValue? customerIdFieldValue,
-    Object? restaurantId = _sentinel,
-    FieldValue? restaurantIdFieldValue,
-    Object? riderId = _sentinel,
-    FieldValue? riderIdFieldValue,
-    Object? subTotal = _sentinel,
-    FieldValue? subTotalFieldValue,
-    Object? deliveryFee = _sentinel,
-    FieldValue? deliveryFeeFieldValue,
-    Object? platformFee = _sentinel,
-    FieldValue? platformFeeFieldValue,
-    Object? totalItems = _sentinel,
-    FieldValue? totalItemsFieldValue,
+    Object? name = _sentinel,
+    FieldValue? nameFieldValue,
+    Object? phone = _sentinel,
+    FieldValue? phoneFieldValue,
+    Object? city = _sentinel,
+    FieldValue? cityFieldValue,
+    Object? vehicleType = _sentinel,
+    FieldValue? vehicleTypeFieldValue,
+    Object? isAvailable = _sentinel,
+    FieldValue? isAvailableFieldValue,
+    Object? currentOrderId = _sentinel,
+    FieldValue? currentOrderIdFieldValue,
+    Object? active = _sentinel,
+    FieldValue? activeFieldValue,
+    Object? fcmTokens = _sentinel,
+    FieldValue? fcmTokensFieldValue,
     Object? createdAt = _sentinel,
     FieldValue? createdAtFieldValue,
     Object? updatedAt = _sentinel,
     FieldValue? updatedAtFieldValue,
   }) async {
     assert(
-      customerId == _sentinel || customerIdFieldValue == null,
-      "Cannot specify both customerId and customerIdFieldValue",
+      name == _sentinel || nameFieldValue == null,
+      "Cannot specify both name and nameFieldValue",
     );
     assert(
-      restaurantId == _sentinel || restaurantIdFieldValue == null,
-      "Cannot specify both restaurantId and restaurantIdFieldValue",
+      phone == _sentinel || phoneFieldValue == null,
+      "Cannot specify both phone and phoneFieldValue",
     );
     assert(
-      riderId == _sentinel || riderIdFieldValue == null,
-      "Cannot specify both riderId and riderIdFieldValue",
+      city == _sentinel || cityFieldValue == null,
+      "Cannot specify both city and cityFieldValue",
     );
     assert(
-      subTotal == _sentinel || subTotalFieldValue == null,
-      "Cannot specify both subTotal and subTotalFieldValue",
+      vehicleType == _sentinel || vehicleTypeFieldValue == null,
+      "Cannot specify both vehicleType and vehicleTypeFieldValue",
     );
     assert(
-      deliveryFee == _sentinel || deliveryFeeFieldValue == null,
-      "Cannot specify both deliveryFee and deliveryFeeFieldValue",
+      isAvailable == _sentinel || isAvailableFieldValue == null,
+      "Cannot specify both isAvailable and isAvailableFieldValue",
     );
     assert(
-      platformFee == _sentinel || platformFeeFieldValue == null,
-      "Cannot specify both platformFee and platformFeeFieldValue",
+      currentOrderId == _sentinel || currentOrderIdFieldValue == null,
+      "Cannot specify both currentOrderId and currentOrderIdFieldValue",
     );
     assert(
-      totalItems == _sentinel || totalItemsFieldValue == null,
-      "Cannot specify both totalItems and totalItemsFieldValue",
+      active == _sentinel || activeFieldValue == null,
+      "Cannot specify both active and activeFieldValue",
+    );
+    assert(
+      fcmTokens == _sentinel || fcmTokensFieldValue == null,
+      "Cannot specify both fcmTokens and fcmTokensFieldValue",
     );
     assert(
       createdAt == _sentinel || createdAtFieldValue == null,
@@ -258,21 +268,24 @@ class _$FoodOrderDocumentReference
       "Cannot specify both updatedAt and updatedAtFieldValue",
     );
     final json = {
-      if (customerId != _sentinel) 'customerId': customerId as String,
-      if (customerIdFieldValue != null) 'customerId': customerIdFieldValue,
-      if (restaurantId != _sentinel) 'restaurantId': restaurantId as String,
-      if (restaurantIdFieldValue != null)
-        'restaurantId': restaurantIdFieldValue,
-      if (riderId != _sentinel) 'riderId': riderId as String,
-      if (riderIdFieldValue != null) 'riderId': riderIdFieldValue,
-      if (subTotal != _sentinel) 'subTotal': subTotal as int,
-      if (subTotalFieldValue != null) 'subTotal': subTotalFieldValue,
-      if (deliveryFee != _sentinel) 'deliveryFee': deliveryFee as int,
-      if (deliveryFeeFieldValue != null) 'deliveryFee': deliveryFeeFieldValue,
-      if (platformFee != _sentinel) 'platformFee': platformFee as int,
-      if (platformFeeFieldValue != null) 'platformFee': platformFeeFieldValue,
-      if (totalItems != _sentinel) 'totalItems': totalItems as int,
-      if (totalItemsFieldValue != null) 'totalItems': totalItemsFieldValue,
+      if (name != _sentinel) 'name': name as String,
+      if (nameFieldValue != null) 'name': nameFieldValue,
+      if (phone != _sentinel) 'phone': phone as String,
+      if (phoneFieldValue != null) 'phone': phoneFieldValue,
+      if (city != _sentinel) 'city': city as String,
+      if (cityFieldValue != null) 'city': cityFieldValue,
+      if (vehicleType != _sentinel) 'vehicleType': vehicleType as String,
+      if (vehicleTypeFieldValue != null) 'vehicleType': vehicleTypeFieldValue,
+      if (isAvailable != _sentinel) 'isAvailable': isAvailable as bool,
+      if (isAvailableFieldValue != null) 'isAvailable': isAvailableFieldValue,
+      if (currentOrderId != _sentinel)
+        'currentOrderId': currentOrderId as String,
+      if (currentOrderIdFieldValue != null)
+        'currentOrderId': currentOrderIdFieldValue,
+      if (active != _sentinel) 'active': active as bool,
+      if (activeFieldValue != null) 'active': activeFieldValue,
+      if (fcmTokens != _sentinel) 'fcmTokens': fcmTokens as List<String>,
+      if (fcmTokensFieldValue != null) 'fcmTokens': fcmTokensFieldValue,
       if (createdAt != _sentinel) 'createdAt': createdAt as DateTime?,
       if (createdAtFieldValue != null) 'createdAt': createdAtFieldValue,
       if (updatedAt != _sentinel) 'updatedAt': updatedAt as DateTime,
@@ -284,52 +297,58 @@ class _$FoodOrderDocumentReference
 
   void transactionUpdate(
     Transaction transaction, {
-    Object? customerId = _sentinel,
-    FieldValue? customerIdFieldValue,
-    Object? restaurantId = _sentinel,
-    FieldValue? restaurantIdFieldValue,
-    Object? riderId = _sentinel,
-    FieldValue? riderIdFieldValue,
-    Object? subTotal = _sentinel,
-    FieldValue? subTotalFieldValue,
-    Object? deliveryFee = _sentinel,
-    FieldValue? deliveryFeeFieldValue,
-    Object? platformFee = _sentinel,
-    FieldValue? platformFeeFieldValue,
-    Object? totalItems = _sentinel,
-    FieldValue? totalItemsFieldValue,
+    Object? name = _sentinel,
+    FieldValue? nameFieldValue,
+    Object? phone = _sentinel,
+    FieldValue? phoneFieldValue,
+    Object? city = _sentinel,
+    FieldValue? cityFieldValue,
+    Object? vehicleType = _sentinel,
+    FieldValue? vehicleTypeFieldValue,
+    Object? isAvailable = _sentinel,
+    FieldValue? isAvailableFieldValue,
+    Object? currentOrderId = _sentinel,
+    FieldValue? currentOrderIdFieldValue,
+    Object? active = _sentinel,
+    FieldValue? activeFieldValue,
+    Object? fcmTokens = _sentinel,
+    FieldValue? fcmTokensFieldValue,
     Object? createdAt = _sentinel,
     FieldValue? createdAtFieldValue,
     Object? updatedAt = _sentinel,
     FieldValue? updatedAtFieldValue,
   }) {
     assert(
-      customerId == _sentinel || customerIdFieldValue == null,
-      "Cannot specify both customerId and customerIdFieldValue",
+      name == _sentinel || nameFieldValue == null,
+      "Cannot specify both name and nameFieldValue",
     );
     assert(
-      restaurantId == _sentinel || restaurantIdFieldValue == null,
-      "Cannot specify both restaurantId and restaurantIdFieldValue",
+      phone == _sentinel || phoneFieldValue == null,
+      "Cannot specify both phone and phoneFieldValue",
     );
     assert(
-      riderId == _sentinel || riderIdFieldValue == null,
-      "Cannot specify both riderId and riderIdFieldValue",
+      city == _sentinel || cityFieldValue == null,
+      "Cannot specify both city and cityFieldValue",
     );
     assert(
-      subTotal == _sentinel || subTotalFieldValue == null,
-      "Cannot specify both subTotal and subTotalFieldValue",
+      vehicleType == _sentinel || vehicleTypeFieldValue == null,
+      "Cannot specify both vehicleType and vehicleTypeFieldValue",
     );
     assert(
-      deliveryFee == _sentinel || deliveryFeeFieldValue == null,
-      "Cannot specify both deliveryFee and deliveryFeeFieldValue",
+      isAvailable == _sentinel || isAvailableFieldValue == null,
+      "Cannot specify both isAvailable and isAvailableFieldValue",
     );
     assert(
-      platformFee == _sentinel || platformFeeFieldValue == null,
-      "Cannot specify both platformFee and platformFeeFieldValue",
+      currentOrderId == _sentinel || currentOrderIdFieldValue == null,
+      "Cannot specify both currentOrderId and currentOrderIdFieldValue",
     );
     assert(
-      totalItems == _sentinel || totalItemsFieldValue == null,
-      "Cannot specify both totalItems and totalItemsFieldValue",
+      active == _sentinel || activeFieldValue == null,
+      "Cannot specify both active and activeFieldValue",
+    );
+    assert(
+      fcmTokens == _sentinel || fcmTokensFieldValue == null,
+      "Cannot specify both fcmTokens and fcmTokensFieldValue",
     );
     assert(
       createdAt == _sentinel || createdAtFieldValue == null,
@@ -340,21 +359,24 @@ class _$FoodOrderDocumentReference
       "Cannot specify both updatedAt and updatedAtFieldValue",
     );
     final json = {
-      if (customerId != _sentinel) 'customerId': customerId as String,
-      if (customerIdFieldValue != null) 'customerId': customerIdFieldValue,
-      if (restaurantId != _sentinel) 'restaurantId': restaurantId as String,
-      if (restaurantIdFieldValue != null)
-        'restaurantId': restaurantIdFieldValue,
-      if (riderId != _sentinel) 'riderId': riderId as String,
-      if (riderIdFieldValue != null) 'riderId': riderIdFieldValue,
-      if (subTotal != _sentinel) 'subTotal': subTotal as int,
-      if (subTotalFieldValue != null) 'subTotal': subTotalFieldValue,
-      if (deliveryFee != _sentinel) 'deliveryFee': deliveryFee as int,
-      if (deliveryFeeFieldValue != null) 'deliveryFee': deliveryFeeFieldValue,
-      if (platformFee != _sentinel) 'platformFee': platformFee as int,
-      if (platformFeeFieldValue != null) 'platformFee': platformFeeFieldValue,
-      if (totalItems != _sentinel) 'totalItems': totalItems as int,
-      if (totalItemsFieldValue != null) 'totalItems': totalItemsFieldValue,
+      if (name != _sentinel) 'name': name as String,
+      if (nameFieldValue != null) 'name': nameFieldValue,
+      if (phone != _sentinel) 'phone': phone as String,
+      if (phoneFieldValue != null) 'phone': phoneFieldValue,
+      if (city != _sentinel) 'city': city as String,
+      if (cityFieldValue != null) 'city': cityFieldValue,
+      if (vehicleType != _sentinel) 'vehicleType': vehicleType as String,
+      if (vehicleTypeFieldValue != null) 'vehicleType': vehicleTypeFieldValue,
+      if (isAvailable != _sentinel) 'isAvailable': isAvailable as bool,
+      if (isAvailableFieldValue != null) 'isAvailable': isAvailableFieldValue,
+      if (currentOrderId != _sentinel)
+        'currentOrderId': currentOrderId as String,
+      if (currentOrderIdFieldValue != null)
+        'currentOrderId': currentOrderIdFieldValue,
+      if (active != _sentinel) 'active': active as bool,
+      if (activeFieldValue != null) 'active': activeFieldValue,
+      if (fcmTokens != _sentinel) 'fcmTokens': fcmTokens as List<String>,
+      if (fcmTokensFieldValue != null) 'fcmTokens': fcmTokensFieldValue,
       if (createdAt != _sentinel) 'createdAt': createdAt as DateTime?,
       if (createdAtFieldValue != null) 'createdAt': createdAtFieldValue,
       if (updatedAt != _sentinel) 'updatedAt': updatedAt as DateTime,
@@ -366,7 +388,7 @@ class _$FoodOrderDocumentReference
 
   @override
   bool operator ==(Object other) {
-    return other is FoodOrderDocumentReference &&
+    return other is RiderDocumentReference &&
         other.runtimeType == runtimeType &&
         other.parent == parent &&
         other.id == id;
@@ -376,13 +398,12 @@ class _$FoodOrderDocumentReference
   int get hashCode => Object.hash(runtimeType, parent, id);
 }
 
-abstract class FoodOrderQuery
-    implements QueryReference<FoodOrder, FoodOrderQuerySnapshot> {
+abstract class RiderQuery implements QueryReference<Rider, RiderQuerySnapshot> {
   @override
-  FoodOrderQuery limit(int limit);
+  RiderQuery limit(int limit);
 
   @override
-  FoodOrderQuery limitToLast(int limit);
+  RiderQuery limitToLast(int limit);
 
   /// Perform an order query based on a [FieldPath].
   ///
@@ -404,17 +425,17 @@ abstract class FoodOrderQuery
   /// ```dart
   /// collection.orderByTitle(startAt: 'title');
   /// ```
-  FoodOrderQuery orderByFieldPath(
+  RiderQuery orderByFieldPath(
     FieldPath fieldPath, {
     bool descending = false,
     Object? startAt,
     Object? startAfter,
     Object? endAt,
     Object? endBefore,
-    FoodOrderDocumentSnapshot? startAtDocument,
-    FoodOrderDocumentSnapshot? endAtDocument,
-    FoodOrderDocumentSnapshot? endBeforeDocument,
-    FoodOrderDocumentSnapshot? startAfterDocument,
+    RiderDocumentSnapshot? startAtDocument,
+    RiderDocumentSnapshot? endAtDocument,
+    RiderDocumentSnapshot? endBeforeDocument,
+    RiderDocumentSnapshot? startAfterDocument,
   });
 
   /// Perform a where query based on a [FieldPath].
@@ -434,7 +455,7 @@ abstract class FoodOrderQuery
   /// ```dart
   /// collection.whereTitle(isEqualTo: 'title');
   /// ```
-  FoodOrderQuery whereFieldPath(
+  RiderQuery whereFieldPath(
     FieldPath fieldPath, {
     Object? isEqualTo,
     Object? isNotEqualTo,
@@ -449,7 +470,7 @@ abstract class FoodOrderQuery
     bool? isNull,
   });
 
-  FoodOrderQuery whereDocumentId({
+  RiderQuery whereDocumentId({
     String? isEqualTo,
     String? isNotEqualTo,
     String? isLessThan,
@@ -460,7 +481,7 @@ abstract class FoodOrderQuery
     List<String>? whereIn,
     List<String>? whereNotIn,
   });
-  FoodOrderQuery whereCustomerId({
+  RiderQuery whereName({
     String? isEqualTo,
     String? isNotEqualTo,
     String? isLessThan,
@@ -471,7 +492,7 @@ abstract class FoodOrderQuery
     List<String>? whereIn,
     List<String>? whereNotIn,
   });
-  FoodOrderQuery whereRestaurantId({
+  RiderQuery wherePhone({
     String? isEqualTo,
     String? isNotEqualTo,
     String? isLessThan,
@@ -482,7 +503,7 @@ abstract class FoodOrderQuery
     List<String>? whereIn,
     List<String>? whereNotIn,
   });
-  FoodOrderQuery whereRiderId({
+  RiderQuery whereCity({
     String? isEqualTo,
     String? isNotEqualTo,
     String? isLessThan,
@@ -493,51 +514,62 @@ abstract class FoodOrderQuery
     List<String>? whereIn,
     List<String>? whereNotIn,
   });
-  FoodOrderQuery whereSubTotal({
-    int? isEqualTo,
-    int? isNotEqualTo,
-    int? isLessThan,
-    int? isLessThanOrEqualTo,
-    int? isGreaterThan,
-    int? isGreaterThanOrEqualTo,
+  RiderQuery whereVehicleType({
+    String? isEqualTo,
+    String? isNotEqualTo,
+    String? isLessThan,
+    String? isLessThanOrEqualTo,
+    String? isGreaterThan,
+    String? isGreaterThanOrEqualTo,
     bool? isNull,
-    List<int>? whereIn,
-    List<int>? whereNotIn,
+    List<String>? whereIn,
+    List<String>? whereNotIn,
   });
-  FoodOrderQuery whereDeliveryFee({
-    int? isEqualTo,
-    int? isNotEqualTo,
-    int? isLessThan,
-    int? isLessThanOrEqualTo,
-    int? isGreaterThan,
-    int? isGreaterThanOrEqualTo,
+  RiderQuery whereIsAvailable({
+    bool? isEqualTo,
+    bool? isNotEqualTo,
+    bool? isLessThan,
+    bool? isLessThanOrEqualTo,
+    bool? isGreaterThan,
+    bool? isGreaterThanOrEqualTo,
     bool? isNull,
-    List<int>? whereIn,
-    List<int>? whereNotIn,
+    List<bool>? whereIn,
+    List<bool>? whereNotIn,
   });
-  FoodOrderQuery wherePlatformFee({
-    int? isEqualTo,
-    int? isNotEqualTo,
-    int? isLessThan,
-    int? isLessThanOrEqualTo,
-    int? isGreaterThan,
-    int? isGreaterThanOrEqualTo,
+  RiderQuery whereCurrentOrderId({
+    String? isEqualTo,
+    String? isNotEqualTo,
+    String? isLessThan,
+    String? isLessThanOrEqualTo,
+    String? isGreaterThan,
+    String? isGreaterThanOrEqualTo,
     bool? isNull,
-    List<int>? whereIn,
-    List<int>? whereNotIn,
+    List<String>? whereIn,
+    List<String>? whereNotIn,
   });
-  FoodOrderQuery whereTotalItems({
-    int? isEqualTo,
-    int? isNotEqualTo,
-    int? isLessThan,
-    int? isLessThanOrEqualTo,
-    int? isGreaterThan,
-    int? isGreaterThanOrEqualTo,
+  RiderQuery whereActive({
+    bool? isEqualTo,
+    bool? isNotEqualTo,
+    bool? isLessThan,
+    bool? isLessThanOrEqualTo,
+    bool? isGreaterThan,
+    bool? isGreaterThanOrEqualTo,
     bool? isNull,
-    List<int>? whereIn,
-    List<int>? whereNotIn,
+    List<bool>? whereIn,
+    List<bool>? whereNotIn,
   });
-  FoodOrderQuery whereCreatedAt({
+  RiderQuery whereFcmTokens({
+    List<String>? isEqualTo,
+    List<String>? isNotEqualTo,
+    List<String>? isLessThan,
+    List<String>? isLessThanOrEqualTo,
+    List<String>? isGreaterThan,
+    List<String>? isGreaterThanOrEqualTo,
+    bool? isNull,
+    String? arrayContains,
+    List<String>? arrayContainsAny,
+  });
+  RiderQuery whereCreatedAt({
     DateTime? isEqualTo,
     DateTime? isNotEqualTo,
     DateTime? isLessThan,
@@ -548,7 +580,7 @@ abstract class FoodOrderQuery
     List<DateTime?>? whereIn,
     List<DateTime?>? whereNotIn,
   });
-  FoodOrderQuery whereUpdatedAt({
+  RiderQuery whereUpdatedAt({
     DateTime? isEqualTo,
     DateTime? isNotEqualTo,
     DateTime? isLessThan,
@@ -560,132 +592,144 @@ abstract class FoodOrderQuery
     List<DateTime>? whereNotIn,
   });
 
-  FoodOrderQuery orderByDocumentId({
+  RiderQuery orderByDocumentId({
     bool descending = false,
     String startAt,
     String startAfter,
     String endAt,
     String endBefore,
-    FoodOrderDocumentSnapshot? startAtDocument,
-    FoodOrderDocumentSnapshot? endAtDocument,
-    FoodOrderDocumentSnapshot? endBeforeDocument,
-    FoodOrderDocumentSnapshot? startAfterDocument,
+    RiderDocumentSnapshot? startAtDocument,
+    RiderDocumentSnapshot? endAtDocument,
+    RiderDocumentSnapshot? endBeforeDocument,
+    RiderDocumentSnapshot? startAfterDocument,
   });
 
-  FoodOrderQuery orderByCustomerId({
+  RiderQuery orderByName({
     bool descending = false,
     String startAt,
     String startAfter,
     String endAt,
     String endBefore,
-    FoodOrderDocumentSnapshot? startAtDocument,
-    FoodOrderDocumentSnapshot? endAtDocument,
-    FoodOrderDocumentSnapshot? endBeforeDocument,
-    FoodOrderDocumentSnapshot? startAfterDocument,
+    RiderDocumentSnapshot? startAtDocument,
+    RiderDocumentSnapshot? endAtDocument,
+    RiderDocumentSnapshot? endBeforeDocument,
+    RiderDocumentSnapshot? startAfterDocument,
   });
 
-  FoodOrderQuery orderByRestaurantId({
+  RiderQuery orderByPhone({
     bool descending = false,
     String startAt,
     String startAfter,
     String endAt,
     String endBefore,
-    FoodOrderDocumentSnapshot? startAtDocument,
-    FoodOrderDocumentSnapshot? endAtDocument,
-    FoodOrderDocumentSnapshot? endBeforeDocument,
-    FoodOrderDocumentSnapshot? startAfterDocument,
+    RiderDocumentSnapshot? startAtDocument,
+    RiderDocumentSnapshot? endAtDocument,
+    RiderDocumentSnapshot? endBeforeDocument,
+    RiderDocumentSnapshot? startAfterDocument,
   });
 
-  FoodOrderQuery orderByRiderId({
+  RiderQuery orderByCity({
     bool descending = false,
     String startAt,
     String startAfter,
     String endAt,
     String endBefore,
-    FoodOrderDocumentSnapshot? startAtDocument,
-    FoodOrderDocumentSnapshot? endAtDocument,
-    FoodOrderDocumentSnapshot? endBeforeDocument,
-    FoodOrderDocumentSnapshot? startAfterDocument,
+    RiderDocumentSnapshot? startAtDocument,
+    RiderDocumentSnapshot? endAtDocument,
+    RiderDocumentSnapshot? endBeforeDocument,
+    RiderDocumentSnapshot? startAfterDocument,
   });
 
-  FoodOrderQuery orderBySubTotal({
+  RiderQuery orderByVehicleType({
     bool descending = false,
-    int startAt,
-    int startAfter,
-    int endAt,
-    int endBefore,
-    FoodOrderDocumentSnapshot? startAtDocument,
-    FoodOrderDocumentSnapshot? endAtDocument,
-    FoodOrderDocumentSnapshot? endBeforeDocument,
-    FoodOrderDocumentSnapshot? startAfterDocument,
+    String startAt,
+    String startAfter,
+    String endAt,
+    String endBefore,
+    RiderDocumentSnapshot? startAtDocument,
+    RiderDocumentSnapshot? endAtDocument,
+    RiderDocumentSnapshot? endBeforeDocument,
+    RiderDocumentSnapshot? startAfterDocument,
   });
 
-  FoodOrderQuery orderByDeliveryFee({
+  RiderQuery orderByIsAvailable({
     bool descending = false,
-    int startAt,
-    int startAfter,
-    int endAt,
-    int endBefore,
-    FoodOrderDocumentSnapshot? startAtDocument,
-    FoodOrderDocumentSnapshot? endAtDocument,
-    FoodOrderDocumentSnapshot? endBeforeDocument,
-    FoodOrderDocumentSnapshot? startAfterDocument,
+    bool startAt,
+    bool startAfter,
+    bool endAt,
+    bool endBefore,
+    RiderDocumentSnapshot? startAtDocument,
+    RiderDocumentSnapshot? endAtDocument,
+    RiderDocumentSnapshot? endBeforeDocument,
+    RiderDocumentSnapshot? startAfterDocument,
   });
 
-  FoodOrderQuery orderByPlatformFee({
+  RiderQuery orderByCurrentOrderId({
     bool descending = false,
-    int startAt,
-    int startAfter,
-    int endAt,
-    int endBefore,
-    FoodOrderDocumentSnapshot? startAtDocument,
-    FoodOrderDocumentSnapshot? endAtDocument,
-    FoodOrderDocumentSnapshot? endBeforeDocument,
-    FoodOrderDocumentSnapshot? startAfterDocument,
+    String startAt,
+    String startAfter,
+    String endAt,
+    String endBefore,
+    RiderDocumentSnapshot? startAtDocument,
+    RiderDocumentSnapshot? endAtDocument,
+    RiderDocumentSnapshot? endBeforeDocument,
+    RiderDocumentSnapshot? startAfterDocument,
   });
 
-  FoodOrderQuery orderByTotalItems({
+  RiderQuery orderByActive({
     bool descending = false,
-    int startAt,
-    int startAfter,
-    int endAt,
-    int endBefore,
-    FoodOrderDocumentSnapshot? startAtDocument,
-    FoodOrderDocumentSnapshot? endAtDocument,
-    FoodOrderDocumentSnapshot? endBeforeDocument,
-    FoodOrderDocumentSnapshot? startAfterDocument,
+    bool startAt,
+    bool startAfter,
+    bool endAt,
+    bool endBefore,
+    RiderDocumentSnapshot? startAtDocument,
+    RiderDocumentSnapshot? endAtDocument,
+    RiderDocumentSnapshot? endBeforeDocument,
+    RiderDocumentSnapshot? startAfterDocument,
   });
 
-  FoodOrderQuery orderByCreatedAt({
+  RiderQuery orderByFcmTokens({
+    bool descending = false,
+    List<String> startAt,
+    List<String> startAfter,
+    List<String> endAt,
+    List<String> endBefore,
+    RiderDocumentSnapshot? startAtDocument,
+    RiderDocumentSnapshot? endAtDocument,
+    RiderDocumentSnapshot? endBeforeDocument,
+    RiderDocumentSnapshot? startAfterDocument,
+  });
+
+  RiderQuery orderByCreatedAt({
     bool descending = false,
     DateTime? startAt,
     DateTime? startAfter,
     DateTime? endAt,
     DateTime? endBefore,
-    FoodOrderDocumentSnapshot? startAtDocument,
-    FoodOrderDocumentSnapshot? endAtDocument,
-    FoodOrderDocumentSnapshot? endBeforeDocument,
-    FoodOrderDocumentSnapshot? startAfterDocument,
+    RiderDocumentSnapshot? startAtDocument,
+    RiderDocumentSnapshot? endAtDocument,
+    RiderDocumentSnapshot? endBeforeDocument,
+    RiderDocumentSnapshot? startAfterDocument,
   });
 
-  FoodOrderQuery orderByUpdatedAt({
+  RiderQuery orderByUpdatedAt({
     bool descending = false,
     DateTime startAt,
     DateTime startAfter,
     DateTime endAt,
     DateTime endBefore,
-    FoodOrderDocumentSnapshot? startAtDocument,
-    FoodOrderDocumentSnapshot? endAtDocument,
-    FoodOrderDocumentSnapshot? endBeforeDocument,
-    FoodOrderDocumentSnapshot? startAfterDocument,
+    RiderDocumentSnapshot? startAtDocument,
+    RiderDocumentSnapshot? endAtDocument,
+    RiderDocumentSnapshot? endBeforeDocument,
+    RiderDocumentSnapshot? startAfterDocument,
   });
 }
 
-class _$FoodOrderQuery extends QueryReference<FoodOrder, FoodOrderQuerySnapshot>
-    implements FoodOrderQuery {
-  _$FoodOrderQuery(
+class _$RiderQuery extends QueryReference<Rider, RiderQuerySnapshot>
+    implements RiderQuery {
+  _$RiderQuery(
     this._collection, {
-    required Query<FoodOrder> $referenceWithoutCursor,
+    required Query<Rider> $referenceWithoutCursor,
     $QueryCursor $queryCursor = const $QueryCursor(),
   }) : super(
           $referenceWithoutCursor: $referenceWithoutCursor,
@@ -695,20 +739,18 @@ class _$FoodOrderQuery extends QueryReference<FoodOrder, FoodOrderQuerySnapshot>
   final CollectionReference<Object?> _collection;
 
   @override
-  Stream<FoodOrderQuerySnapshot> snapshots([SnapshotOptions? options]) {
-    return reference.snapshots().map(FoodOrderQuerySnapshot._fromQuerySnapshot);
+  Stream<RiderQuerySnapshot> snapshots([SnapshotOptions? options]) {
+    return reference.snapshots().map(RiderQuerySnapshot._fromQuerySnapshot);
   }
 
   @override
-  Future<FoodOrderQuerySnapshot> get([GetOptions? options]) {
-    return reference
-        .get(options)
-        .then(FoodOrderQuerySnapshot._fromQuerySnapshot);
+  Future<RiderQuerySnapshot> get([GetOptions? options]) {
+    return reference.get(options).then(RiderQuerySnapshot._fromQuerySnapshot);
   }
 
   @override
-  FoodOrderQuery limit(int limit) {
-    return _$FoodOrderQuery(
+  RiderQuery limit(int limit) {
+    return _$RiderQuery(
       _collection,
       $referenceWithoutCursor: $referenceWithoutCursor.limit(limit),
       $queryCursor: $queryCursor,
@@ -716,25 +758,25 @@ class _$FoodOrderQuery extends QueryReference<FoodOrder, FoodOrderQuerySnapshot>
   }
 
   @override
-  FoodOrderQuery limitToLast(int limit) {
-    return _$FoodOrderQuery(
+  RiderQuery limitToLast(int limit) {
+    return _$RiderQuery(
       _collection,
       $referenceWithoutCursor: $referenceWithoutCursor.limitToLast(limit),
       $queryCursor: $queryCursor,
     );
   }
 
-  FoodOrderQuery orderByFieldPath(
+  RiderQuery orderByFieldPath(
     FieldPath fieldPath, {
     bool descending = false,
     Object? startAt = _sentinel,
     Object? startAfter = _sentinel,
     Object? endAt = _sentinel,
     Object? endBefore = _sentinel,
-    FoodOrderDocumentSnapshot? startAtDocument,
-    FoodOrderDocumentSnapshot? endAtDocument,
-    FoodOrderDocumentSnapshot? endBeforeDocument,
-    FoodOrderDocumentSnapshot? startAfterDocument,
+    RiderDocumentSnapshot? startAtDocument,
+    RiderDocumentSnapshot? endAtDocument,
+    RiderDocumentSnapshot? endBeforeDocument,
+    RiderDocumentSnapshot? startAfterDocument,
   }) {
     final query =
         $referenceWithoutCursor.orderBy(fieldPath, descending: descending);
@@ -789,14 +831,14 @@ class _$FoodOrderQuery extends QueryReference<FoodOrder, FoodOrderQuerySnapshot>
         endBeforeDocumentSnapshot: null,
       );
     }
-    return _$FoodOrderQuery(
+    return _$RiderQuery(
       _collection,
       $referenceWithoutCursor: query,
       $queryCursor: queryCursor,
     );
   }
 
-  FoodOrderQuery whereFieldPath(
+  RiderQuery whereFieldPath(
     FieldPath fieldPath, {
     Object? isEqualTo,
     Object? isNotEqualTo,
@@ -810,7 +852,7 @@ class _$FoodOrderQuery extends QueryReference<FoodOrder, FoodOrderQuerySnapshot>
     List<Object?>? whereNotIn,
     bool? isNull,
   }) {
-    return _$FoodOrderQuery(
+    return _$RiderQuery(
       _collection,
       $referenceWithoutCursor: $referenceWithoutCursor.where(
         fieldPath,
@@ -830,7 +872,7 @@ class _$FoodOrderQuery extends QueryReference<FoodOrder, FoodOrderQuerySnapshot>
     );
   }
 
-  FoodOrderQuery whereDocumentId({
+  RiderQuery whereDocumentId({
     String? isEqualTo,
     String? isNotEqualTo,
     String? isLessThan,
@@ -841,7 +883,7 @@ class _$FoodOrderQuery extends QueryReference<FoodOrder, FoodOrderQuerySnapshot>
     List<String>? whereIn,
     List<String>? whereNotIn,
   }) {
-    return _$FoodOrderQuery(
+    return _$RiderQuery(
       _collection,
       $referenceWithoutCursor: $referenceWithoutCursor.where(
         FieldPath.documentId,
@@ -859,7 +901,7 @@ class _$FoodOrderQuery extends QueryReference<FoodOrder, FoodOrderQuerySnapshot>
     );
   }
 
-  FoodOrderQuery whereCustomerId({
+  RiderQuery whereName({
     String? isEqualTo,
     String? isNotEqualTo,
     String? isLessThan,
@@ -870,10 +912,10 @@ class _$FoodOrderQuery extends QueryReference<FoodOrder, FoodOrderQuerySnapshot>
     List<String>? whereIn,
     List<String>? whereNotIn,
   }) {
-    return _$FoodOrderQuery(
+    return _$RiderQuery(
       _collection,
       $referenceWithoutCursor: $referenceWithoutCursor.where(
-        _$FoodOrderFieldMap['customerId']!,
+        _$RiderFieldMap['name']!,
         isEqualTo: isEqualTo,
         isNotEqualTo: isNotEqualTo,
         isLessThan: isLessThan,
@@ -888,7 +930,7 @@ class _$FoodOrderQuery extends QueryReference<FoodOrder, FoodOrderQuerySnapshot>
     );
   }
 
-  FoodOrderQuery whereRestaurantId({
+  RiderQuery wherePhone({
     String? isEqualTo,
     String? isNotEqualTo,
     String? isLessThan,
@@ -899,10 +941,10 @@ class _$FoodOrderQuery extends QueryReference<FoodOrder, FoodOrderQuerySnapshot>
     List<String>? whereIn,
     List<String>? whereNotIn,
   }) {
-    return _$FoodOrderQuery(
+    return _$RiderQuery(
       _collection,
       $referenceWithoutCursor: $referenceWithoutCursor.where(
-        _$FoodOrderFieldMap['restaurantId']!,
+        _$RiderFieldMap['phone']!,
         isEqualTo: isEqualTo,
         isNotEqualTo: isNotEqualTo,
         isLessThan: isLessThan,
@@ -917,7 +959,7 @@ class _$FoodOrderQuery extends QueryReference<FoodOrder, FoodOrderQuerySnapshot>
     );
   }
 
-  FoodOrderQuery whereRiderId({
+  RiderQuery whereCity({
     String? isEqualTo,
     String? isNotEqualTo,
     String? isLessThan,
@@ -928,10 +970,10 @@ class _$FoodOrderQuery extends QueryReference<FoodOrder, FoodOrderQuerySnapshot>
     List<String>? whereIn,
     List<String>? whereNotIn,
   }) {
-    return _$FoodOrderQuery(
+    return _$RiderQuery(
       _collection,
       $referenceWithoutCursor: $referenceWithoutCursor.where(
-        _$FoodOrderFieldMap['riderId']!,
+        _$RiderFieldMap['city']!,
         isEqualTo: isEqualTo,
         isNotEqualTo: isNotEqualTo,
         isLessThan: isLessThan,
@@ -946,21 +988,21 @@ class _$FoodOrderQuery extends QueryReference<FoodOrder, FoodOrderQuerySnapshot>
     );
   }
 
-  FoodOrderQuery whereSubTotal({
-    int? isEqualTo,
-    int? isNotEqualTo,
-    int? isLessThan,
-    int? isLessThanOrEqualTo,
-    int? isGreaterThan,
-    int? isGreaterThanOrEqualTo,
+  RiderQuery whereVehicleType({
+    String? isEqualTo,
+    String? isNotEqualTo,
+    String? isLessThan,
+    String? isLessThanOrEqualTo,
+    String? isGreaterThan,
+    String? isGreaterThanOrEqualTo,
     bool? isNull,
-    List<int>? whereIn,
-    List<int>? whereNotIn,
+    List<String>? whereIn,
+    List<String>? whereNotIn,
   }) {
-    return _$FoodOrderQuery(
+    return _$RiderQuery(
       _collection,
       $referenceWithoutCursor: $referenceWithoutCursor.where(
-        _$FoodOrderFieldMap['subTotal']!,
+        _$RiderFieldMap['vehicleType']!,
         isEqualTo: isEqualTo,
         isNotEqualTo: isNotEqualTo,
         isLessThan: isLessThan,
@@ -975,21 +1017,21 @@ class _$FoodOrderQuery extends QueryReference<FoodOrder, FoodOrderQuerySnapshot>
     );
   }
 
-  FoodOrderQuery whereDeliveryFee({
-    int? isEqualTo,
-    int? isNotEqualTo,
-    int? isLessThan,
-    int? isLessThanOrEqualTo,
-    int? isGreaterThan,
-    int? isGreaterThanOrEqualTo,
+  RiderQuery whereIsAvailable({
+    bool? isEqualTo,
+    bool? isNotEqualTo,
+    bool? isLessThan,
+    bool? isLessThanOrEqualTo,
+    bool? isGreaterThan,
+    bool? isGreaterThanOrEqualTo,
     bool? isNull,
-    List<int>? whereIn,
-    List<int>? whereNotIn,
+    List<bool>? whereIn,
+    List<bool>? whereNotIn,
   }) {
-    return _$FoodOrderQuery(
+    return _$RiderQuery(
       _collection,
       $referenceWithoutCursor: $referenceWithoutCursor.where(
-        _$FoodOrderFieldMap['deliveryFee']!,
+        _$RiderFieldMap['isAvailable']!,
         isEqualTo: isEqualTo,
         isNotEqualTo: isNotEqualTo,
         isLessThan: isLessThan,
@@ -1004,21 +1046,21 @@ class _$FoodOrderQuery extends QueryReference<FoodOrder, FoodOrderQuerySnapshot>
     );
   }
 
-  FoodOrderQuery wherePlatformFee({
-    int? isEqualTo,
-    int? isNotEqualTo,
-    int? isLessThan,
-    int? isLessThanOrEqualTo,
-    int? isGreaterThan,
-    int? isGreaterThanOrEqualTo,
+  RiderQuery whereCurrentOrderId({
+    String? isEqualTo,
+    String? isNotEqualTo,
+    String? isLessThan,
+    String? isLessThanOrEqualTo,
+    String? isGreaterThan,
+    String? isGreaterThanOrEqualTo,
     bool? isNull,
-    List<int>? whereIn,
-    List<int>? whereNotIn,
+    List<String>? whereIn,
+    List<String>? whereNotIn,
   }) {
-    return _$FoodOrderQuery(
+    return _$RiderQuery(
       _collection,
       $referenceWithoutCursor: $referenceWithoutCursor.where(
-        _$FoodOrderFieldMap['platformFee']!,
+        _$RiderFieldMap['currentOrderId']!,
         isEqualTo: isEqualTo,
         isNotEqualTo: isNotEqualTo,
         isLessThan: isLessThan,
@@ -1033,21 +1075,21 @@ class _$FoodOrderQuery extends QueryReference<FoodOrder, FoodOrderQuerySnapshot>
     );
   }
 
-  FoodOrderQuery whereTotalItems({
-    int? isEqualTo,
-    int? isNotEqualTo,
-    int? isLessThan,
-    int? isLessThanOrEqualTo,
-    int? isGreaterThan,
-    int? isGreaterThanOrEqualTo,
+  RiderQuery whereActive({
+    bool? isEqualTo,
+    bool? isNotEqualTo,
+    bool? isLessThan,
+    bool? isLessThanOrEqualTo,
+    bool? isGreaterThan,
+    bool? isGreaterThanOrEqualTo,
     bool? isNull,
-    List<int>? whereIn,
-    List<int>? whereNotIn,
+    List<bool>? whereIn,
+    List<bool>? whereNotIn,
   }) {
-    return _$FoodOrderQuery(
+    return _$RiderQuery(
       _collection,
       $referenceWithoutCursor: $referenceWithoutCursor.where(
-        _$FoodOrderFieldMap['totalItems']!,
+        _$RiderFieldMap['active']!,
         isEqualTo: isEqualTo,
         isNotEqualTo: isNotEqualTo,
         isLessThan: isLessThan,
@@ -1062,7 +1104,36 @@ class _$FoodOrderQuery extends QueryReference<FoodOrder, FoodOrderQuerySnapshot>
     );
   }
 
-  FoodOrderQuery whereCreatedAt({
+  RiderQuery whereFcmTokens({
+    List<String>? isEqualTo,
+    List<String>? isNotEqualTo,
+    List<String>? isLessThan,
+    List<String>? isLessThanOrEqualTo,
+    List<String>? isGreaterThan,
+    List<String>? isGreaterThanOrEqualTo,
+    bool? isNull,
+    String? arrayContains,
+    List<String>? arrayContainsAny,
+  }) {
+    return _$RiderQuery(
+      _collection,
+      $referenceWithoutCursor: $referenceWithoutCursor.where(
+        _$RiderFieldMap['fcmTokens']!,
+        isEqualTo: isEqualTo,
+        isNotEqualTo: isNotEqualTo,
+        isLessThan: isLessThan,
+        isLessThanOrEqualTo: isLessThanOrEqualTo,
+        isGreaterThan: isGreaterThan,
+        isGreaterThanOrEqualTo: isGreaterThanOrEqualTo,
+        isNull: isNull,
+        arrayContains: arrayContains,
+        arrayContainsAny: arrayContainsAny,
+      ),
+      $queryCursor: $queryCursor,
+    );
+  }
+
+  RiderQuery whereCreatedAt({
     DateTime? isEqualTo,
     DateTime? isNotEqualTo,
     DateTime? isLessThan,
@@ -1073,10 +1144,10 @@ class _$FoodOrderQuery extends QueryReference<FoodOrder, FoodOrderQuerySnapshot>
     List<DateTime?>? whereIn,
     List<DateTime?>? whereNotIn,
   }) {
-    return _$FoodOrderQuery(
+    return _$RiderQuery(
       _collection,
       $referenceWithoutCursor: $referenceWithoutCursor.where(
-        _$FoodOrderFieldMap['createdAt']!,
+        _$RiderFieldMap['createdAt']!,
         isEqualTo: isEqualTo,
         isNotEqualTo: isNotEqualTo,
         isLessThan: isLessThan,
@@ -1091,7 +1162,7 @@ class _$FoodOrderQuery extends QueryReference<FoodOrder, FoodOrderQuerySnapshot>
     );
   }
 
-  FoodOrderQuery whereUpdatedAt({
+  RiderQuery whereUpdatedAt({
     DateTime? isEqualTo,
     DateTime? isNotEqualTo,
     DateTime? isLessThan,
@@ -1102,10 +1173,10 @@ class _$FoodOrderQuery extends QueryReference<FoodOrder, FoodOrderQuerySnapshot>
     List<DateTime>? whereIn,
     List<DateTime>? whereNotIn,
   }) {
-    return _$FoodOrderQuery(
+    return _$RiderQuery(
       _collection,
       $referenceWithoutCursor: $referenceWithoutCursor.where(
-        _$FoodOrderFieldMap['updatedAt']!,
+        _$RiderFieldMap['updatedAt']!,
         isEqualTo: isEqualTo,
         isNotEqualTo: isNotEqualTo,
         isLessThan: isLessThan,
@@ -1120,16 +1191,16 @@ class _$FoodOrderQuery extends QueryReference<FoodOrder, FoodOrderQuerySnapshot>
     );
   }
 
-  FoodOrderQuery orderByDocumentId({
+  RiderQuery orderByDocumentId({
     bool descending = false,
     Object? startAt = _sentinel,
     Object? startAfter = _sentinel,
     Object? endAt = _sentinel,
     Object? endBefore = _sentinel,
-    FoodOrderDocumentSnapshot? startAtDocument,
-    FoodOrderDocumentSnapshot? endAtDocument,
-    FoodOrderDocumentSnapshot? endBeforeDocument,
-    FoodOrderDocumentSnapshot? startAfterDocument,
+    RiderDocumentSnapshot? startAtDocument,
+    RiderDocumentSnapshot? endAtDocument,
+    RiderDocumentSnapshot? endBeforeDocument,
+    RiderDocumentSnapshot? startAfterDocument,
   }) {
     final query = $referenceWithoutCursor.orderBy(FieldPath.documentId,
         descending: descending);
@@ -1185,26 +1256,26 @@ class _$FoodOrderQuery extends QueryReference<FoodOrder, FoodOrderQuerySnapshot>
       );
     }
 
-    return _$FoodOrderQuery(
+    return _$RiderQuery(
       _collection,
       $referenceWithoutCursor: query,
       $queryCursor: queryCursor,
     );
   }
 
-  FoodOrderQuery orderByCustomerId({
+  RiderQuery orderByName({
     bool descending = false,
     Object? startAt = _sentinel,
     Object? startAfter = _sentinel,
     Object? endAt = _sentinel,
     Object? endBefore = _sentinel,
-    FoodOrderDocumentSnapshot? startAtDocument,
-    FoodOrderDocumentSnapshot? endAtDocument,
-    FoodOrderDocumentSnapshot? endBeforeDocument,
-    FoodOrderDocumentSnapshot? startAfterDocument,
+    RiderDocumentSnapshot? startAtDocument,
+    RiderDocumentSnapshot? endAtDocument,
+    RiderDocumentSnapshot? endBeforeDocument,
+    RiderDocumentSnapshot? startAfterDocument,
   }) {
-    final query = $referenceWithoutCursor
-        .orderBy(_$FoodOrderFieldMap['customerId']!, descending: descending);
+    final query = $referenceWithoutCursor.orderBy(_$RiderFieldMap['name']!,
+        descending: descending);
     var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
@@ -1257,26 +1328,26 @@ class _$FoodOrderQuery extends QueryReference<FoodOrder, FoodOrderQuerySnapshot>
       );
     }
 
-    return _$FoodOrderQuery(
+    return _$RiderQuery(
       _collection,
       $referenceWithoutCursor: query,
       $queryCursor: queryCursor,
     );
   }
 
-  FoodOrderQuery orderByRestaurantId({
+  RiderQuery orderByPhone({
     bool descending = false,
     Object? startAt = _sentinel,
     Object? startAfter = _sentinel,
     Object? endAt = _sentinel,
     Object? endBefore = _sentinel,
-    FoodOrderDocumentSnapshot? startAtDocument,
-    FoodOrderDocumentSnapshot? endAtDocument,
-    FoodOrderDocumentSnapshot? endBeforeDocument,
-    FoodOrderDocumentSnapshot? startAfterDocument,
+    RiderDocumentSnapshot? startAtDocument,
+    RiderDocumentSnapshot? endAtDocument,
+    RiderDocumentSnapshot? endBeforeDocument,
+    RiderDocumentSnapshot? startAfterDocument,
   }) {
-    final query = $referenceWithoutCursor
-        .orderBy(_$FoodOrderFieldMap['restaurantId']!, descending: descending);
+    final query = $referenceWithoutCursor.orderBy(_$RiderFieldMap['phone']!,
+        descending: descending);
     var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
@@ -1329,26 +1400,26 @@ class _$FoodOrderQuery extends QueryReference<FoodOrder, FoodOrderQuerySnapshot>
       );
     }
 
-    return _$FoodOrderQuery(
+    return _$RiderQuery(
       _collection,
       $referenceWithoutCursor: query,
       $queryCursor: queryCursor,
     );
   }
 
-  FoodOrderQuery orderByRiderId({
+  RiderQuery orderByCity({
     bool descending = false,
     Object? startAt = _sentinel,
     Object? startAfter = _sentinel,
     Object? endAt = _sentinel,
     Object? endBefore = _sentinel,
-    FoodOrderDocumentSnapshot? startAtDocument,
-    FoodOrderDocumentSnapshot? endAtDocument,
-    FoodOrderDocumentSnapshot? endBeforeDocument,
-    FoodOrderDocumentSnapshot? startAfterDocument,
+    RiderDocumentSnapshot? startAtDocument,
+    RiderDocumentSnapshot? endAtDocument,
+    RiderDocumentSnapshot? endBeforeDocument,
+    RiderDocumentSnapshot? startAfterDocument,
   }) {
-    final query = $referenceWithoutCursor
-        .orderBy(_$FoodOrderFieldMap['riderId']!, descending: descending);
+    final query = $referenceWithoutCursor.orderBy(_$RiderFieldMap['city']!,
+        descending: descending);
     var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
@@ -1401,26 +1472,26 @@ class _$FoodOrderQuery extends QueryReference<FoodOrder, FoodOrderQuerySnapshot>
       );
     }
 
-    return _$FoodOrderQuery(
+    return _$RiderQuery(
       _collection,
       $referenceWithoutCursor: query,
       $queryCursor: queryCursor,
     );
   }
 
-  FoodOrderQuery orderBySubTotal({
+  RiderQuery orderByVehicleType({
     bool descending = false,
     Object? startAt = _sentinel,
     Object? startAfter = _sentinel,
     Object? endAt = _sentinel,
     Object? endBefore = _sentinel,
-    FoodOrderDocumentSnapshot? startAtDocument,
-    FoodOrderDocumentSnapshot? endAtDocument,
-    FoodOrderDocumentSnapshot? endBeforeDocument,
-    FoodOrderDocumentSnapshot? startAfterDocument,
+    RiderDocumentSnapshot? startAtDocument,
+    RiderDocumentSnapshot? endAtDocument,
+    RiderDocumentSnapshot? endBeforeDocument,
+    RiderDocumentSnapshot? startAfterDocument,
   }) {
     final query = $referenceWithoutCursor
-        .orderBy(_$FoodOrderFieldMap['subTotal']!, descending: descending);
+        .orderBy(_$RiderFieldMap['vehicleType']!, descending: descending);
     var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
@@ -1473,26 +1544,26 @@ class _$FoodOrderQuery extends QueryReference<FoodOrder, FoodOrderQuerySnapshot>
       );
     }
 
-    return _$FoodOrderQuery(
+    return _$RiderQuery(
       _collection,
       $referenceWithoutCursor: query,
       $queryCursor: queryCursor,
     );
   }
 
-  FoodOrderQuery orderByDeliveryFee({
+  RiderQuery orderByIsAvailable({
     bool descending = false,
     Object? startAt = _sentinel,
     Object? startAfter = _sentinel,
     Object? endAt = _sentinel,
     Object? endBefore = _sentinel,
-    FoodOrderDocumentSnapshot? startAtDocument,
-    FoodOrderDocumentSnapshot? endAtDocument,
-    FoodOrderDocumentSnapshot? endBeforeDocument,
-    FoodOrderDocumentSnapshot? startAfterDocument,
+    RiderDocumentSnapshot? startAtDocument,
+    RiderDocumentSnapshot? endAtDocument,
+    RiderDocumentSnapshot? endBeforeDocument,
+    RiderDocumentSnapshot? startAfterDocument,
   }) {
     final query = $referenceWithoutCursor
-        .orderBy(_$FoodOrderFieldMap['deliveryFee']!, descending: descending);
+        .orderBy(_$RiderFieldMap['isAvailable']!, descending: descending);
     var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
@@ -1545,26 +1616,26 @@ class _$FoodOrderQuery extends QueryReference<FoodOrder, FoodOrderQuerySnapshot>
       );
     }
 
-    return _$FoodOrderQuery(
+    return _$RiderQuery(
       _collection,
       $referenceWithoutCursor: query,
       $queryCursor: queryCursor,
     );
   }
 
-  FoodOrderQuery orderByPlatformFee({
+  RiderQuery orderByCurrentOrderId({
     bool descending = false,
     Object? startAt = _sentinel,
     Object? startAfter = _sentinel,
     Object? endAt = _sentinel,
     Object? endBefore = _sentinel,
-    FoodOrderDocumentSnapshot? startAtDocument,
-    FoodOrderDocumentSnapshot? endAtDocument,
-    FoodOrderDocumentSnapshot? endBeforeDocument,
-    FoodOrderDocumentSnapshot? startAfterDocument,
+    RiderDocumentSnapshot? startAtDocument,
+    RiderDocumentSnapshot? endAtDocument,
+    RiderDocumentSnapshot? endBeforeDocument,
+    RiderDocumentSnapshot? startAfterDocument,
   }) {
     final query = $referenceWithoutCursor
-        .orderBy(_$FoodOrderFieldMap['platformFee']!, descending: descending);
+        .orderBy(_$RiderFieldMap['currentOrderId']!, descending: descending);
     var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
@@ -1617,26 +1688,26 @@ class _$FoodOrderQuery extends QueryReference<FoodOrder, FoodOrderQuerySnapshot>
       );
     }
 
-    return _$FoodOrderQuery(
+    return _$RiderQuery(
       _collection,
       $referenceWithoutCursor: query,
       $queryCursor: queryCursor,
     );
   }
 
-  FoodOrderQuery orderByTotalItems({
+  RiderQuery orderByActive({
     bool descending = false,
     Object? startAt = _sentinel,
     Object? startAfter = _sentinel,
     Object? endAt = _sentinel,
     Object? endBefore = _sentinel,
-    FoodOrderDocumentSnapshot? startAtDocument,
-    FoodOrderDocumentSnapshot? endAtDocument,
-    FoodOrderDocumentSnapshot? endBeforeDocument,
-    FoodOrderDocumentSnapshot? startAfterDocument,
+    RiderDocumentSnapshot? startAtDocument,
+    RiderDocumentSnapshot? endAtDocument,
+    RiderDocumentSnapshot? endBeforeDocument,
+    RiderDocumentSnapshot? startAfterDocument,
   }) {
-    final query = $referenceWithoutCursor
-        .orderBy(_$FoodOrderFieldMap['totalItems']!, descending: descending);
+    final query = $referenceWithoutCursor.orderBy(_$RiderFieldMap['active']!,
+        descending: descending);
     var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
@@ -1689,26 +1760,26 @@ class _$FoodOrderQuery extends QueryReference<FoodOrder, FoodOrderQuerySnapshot>
       );
     }
 
-    return _$FoodOrderQuery(
+    return _$RiderQuery(
       _collection,
       $referenceWithoutCursor: query,
       $queryCursor: queryCursor,
     );
   }
 
-  FoodOrderQuery orderByCreatedAt({
+  RiderQuery orderByFcmTokens({
     bool descending = false,
     Object? startAt = _sentinel,
     Object? startAfter = _sentinel,
     Object? endAt = _sentinel,
     Object? endBefore = _sentinel,
-    FoodOrderDocumentSnapshot? startAtDocument,
-    FoodOrderDocumentSnapshot? endAtDocument,
-    FoodOrderDocumentSnapshot? endBeforeDocument,
-    FoodOrderDocumentSnapshot? startAfterDocument,
+    RiderDocumentSnapshot? startAtDocument,
+    RiderDocumentSnapshot? endAtDocument,
+    RiderDocumentSnapshot? endBeforeDocument,
+    RiderDocumentSnapshot? startAfterDocument,
   }) {
-    final query = $referenceWithoutCursor
-        .orderBy(_$FoodOrderFieldMap['createdAt']!, descending: descending);
+    final query = $referenceWithoutCursor.orderBy(_$RiderFieldMap['fcmTokens']!,
+        descending: descending);
     var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
@@ -1761,26 +1832,26 @@ class _$FoodOrderQuery extends QueryReference<FoodOrder, FoodOrderQuerySnapshot>
       );
     }
 
-    return _$FoodOrderQuery(
+    return _$RiderQuery(
       _collection,
       $referenceWithoutCursor: query,
       $queryCursor: queryCursor,
     );
   }
 
-  FoodOrderQuery orderByUpdatedAt({
+  RiderQuery orderByCreatedAt({
     bool descending = false,
     Object? startAt = _sentinel,
     Object? startAfter = _sentinel,
     Object? endAt = _sentinel,
     Object? endBefore = _sentinel,
-    FoodOrderDocumentSnapshot? startAtDocument,
-    FoodOrderDocumentSnapshot? endAtDocument,
-    FoodOrderDocumentSnapshot? endBeforeDocument,
-    FoodOrderDocumentSnapshot? startAfterDocument,
+    RiderDocumentSnapshot? startAtDocument,
+    RiderDocumentSnapshot? endAtDocument,
+    RiderDocumentSnapshot? endBeforeDocument,
+    RiderDocumentSnapshot? startAfterDocument,
   }) {
-    final query = $referenceWithoutCursor
-        .orderBy(_$FoodOrderFieldMap['updatedAt']!, descending: descending);
+    final query = $referenceWithoutCursor.orderBy(_$RiderFieldMap['createdAt']!,
+        descending: descending);
     var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
@@ -1833,7 +1904,79 @@ class _$FoodOrderQuery extends QueryReference<FoodOrder, FoodOrderQuerySnapshot>
       );
     }
 
-    return _$FoodOrderQuery(
+    return _$RiderQuery(
+      _collection,
+      $referenceWithoutCursor: query,
+      $queryCursor: queryCursor,
+    );
+  }
+
+  RiderQuery orderByUpdatedAt({
+    bool descending = false,
+    Object? startAt = _sentinel,
+    Object? startAfter = _sentinel,
+    Object? endAt = _sentinel,
+    Object? endBefore = _sentinel,
+    RiderDocumentSnapshot? startAtDocument,
+    RiderDocumentSnapshot? endAtDocument,
+    RiderDocumentSnapshot? endBeforeDocument,
+    RiderDocumentSnapshot? startAfterDocument,
+  }) {
+    final query = $referenceWithoutCursor.orderBy(_$RiderFieldMap['updatedAt']!,
+        descending: descending);
+    var queryCursor = $queryCursor;
+
+    if (startAtDocument != null) {
+      queryCursor = queryCursor.copyWith(
+        startAt: const [],
+        startAtDocumentSnapshot: startAtDocument.snapshot,
+      );
+    }
+    if (startAfterDocument != null) {
+      queryCursor = queryCursor.copyWith(
+        startAfter: const [],
+        startAfterDocumentSnapshot: startAfterDocument.snapshot,
+      );
+    }
+    if (endAtDocument != null) {
+      queryCursor = queryCursor.copyWith(
+        endAt: const [],
+        endAtDocumentSnapshot: endAtDocument.snapshot,
+      );
+    }
+    if (endBeforeDocument != null) {
+      queryCursor = queryCursor.copyWith(
+        endBefore: const [],
+        endBeforeDocumentSnapshot: endBeforeDocument.snapshot,
+      );
+    }
+
+    if (startAt != _sentinel) {
+      queryCursor = queryCursor.copyWith(
+        startAt: [...queryCursor.startAt, startAt],
+        startAtDocumentSnapshot: null,
+      );
+    }
+    if (startAfter != _sentinel) {
+      queryCursor = queryCursor.copyWith(
+        startAfter: [...queryCursor.startAfter, startAfter],
+        startAfterDocumentSnapshot: null,
+      );
+    }
+    if (endAt != _sentinel) {
+      queryCursor = queryCursor.copyWith(
+        endAt: [...queryCursor.endAt, endAt],
+        endAtDocumentSnapshot: null,
+      );
+    }
+    if (endBefore != _sentinel) {
+      queryCursor = queryCursor.copyWith(
+        endBefore: [...queryCursor.endBefore, endBefore],
+        endBeforeDocumentSnapshot: null,
+      );
+    }
+
+    return _$RiderQuery(
       _collection,
       $referenceWithoutCursor: query,
       $queryCursor: queryCursor,
@@ -1842,7 +1985,7 @@ class _$FoodOrderQuery extends QueryReference<FoodOrder, FoodOrderQuerySnapshot>
 
   @override
   bool operator ==(Object other) {
-    return other is _$FoodOrderQuery &&
+    return other is _$RiderQuery &&
         other.runtimeType == runtimeType &&
         other.reference == reference;
   }
@@ -1851,56 +1994,56 @@ class _$FoodOrderQuery extends QueryReference<FoodOrder, FoodOrderQuerySnapshot>
   int get hashCode => Object.hash(runtimeType, reference);
 }
 
-class FoodOrderDocumentSnapshot extends FirestoreDocumentSnapshot<FoodOrder> {
-  FoodOrderDocumentSnapshot._(this.snapshot) : data = snapshot.data();
+class RiderDocumentSnapshot extends FirestoreDocumentSnapshot<Rider> {
+  RiderDocumentSnapshot._(this.snapshot) : data = snapshot.data();
 
   @override
-  final DocumentSnapshot<FoodOrder> snapshot;
+  final DocumentSnapshot<Rider> snapshot;
 
   @override
-  FoodOrderDocumentReference get reference {
-    return FoodOrderDocumentReference(
+  RiderDocumentReference get reference {
+    return RiderDocumentReference(
       snapshot.reference,
     );
   }
 
   @override
-  final FoodOrder? data;
+  final Rider? data;
 }
 
-class FoodOrderQuerySnapshot
-    extends FirestoreQuerySnapshot<FoodOrder, FoodOrderQueryDocumentSnapshot> {
-  FoodOrderQuerySnapshot._(
+class RiderQuerySnapshot
+    extends FirestoreQuerySnapshot<Rider, RiderQueryDocumentSnapshot> {
+  RiderQuerySnapshot._(
     this.snapshot,
     this.docs,
     this.docChanges,
   );
 
-  factory FoodOrderQuerySnapshot._fromQuerySnapshot(
-    QuerySnapshot<FoodOrder> snapshot,
+  factory RiderQuerySnapshot._fromQuerySnapshot(
+    QuerySnapshot<Rider> snapshot,
   ) {
-    final docs = snapshot.docs.map(FoodOrderQueryDocumentSnapshot._).toList();
+    final docs = snapshot.docs.map(RiderQueryDocumentSnapshot._).toList();
 
     final docChanges = snapshot.docChanges.map((change) {
       return _decodeDocumentChange(
         change,
-        FoodOrderDocumentSnapshot._,
+        RiderDocumentSnapshot._,
       );
     }).toList();
 
-    return FoodOrderQuerySnapshot._(
+    return RiderQuerySnapshot._(
       snapshot,
       docs,
       docChanges,
     );
   }
 
-  static FirestoreDocumentChange<FoodOrderDocumentSnapshot>
+  static FirestoreDocumentChange<RiderDocumentSnapshot>
       _decodeDocumentChange<T>(
     DocumentChange<T> docChange,
-    FoodOrderDocumentSnapshot Function(DocumentSnapshot<T> doc) decodeDoc,
+    RiderDocumentSnapshot Function(DocumentSnapshot<T> doc) decodeDoc,
   ) {
-    return FirestoreDocumentChange<FoodOrderDocumentSnapshot>(
+    return FirestoreDocumentChange<RiderDocumentSnapshot>(
       type: docChange.type,
       oldIndex: docChange.oldIndex,
       newIndex: docChange.newIndex,
@@ -1908,29 +2051,28 @@ class FoodOrderQuerySnapshot
     );
   }
 
-  final QuerySnapshot<FoodOrder> snapshot;
+  final QuerySnapshot<Rider> snapshot;
 
   @override
-  final List<FoodOrderQueryDocumentSnapshot> docs;
+  final List<RiderQueryDocumentSnapshot> docs;
 
   @override
-  final List<FirestoreDocumentChange<FoodOrderDocumentSnapshot>> docChanges;
+  final List<FirestoreDocumentChange<RiderDocumentSnapshot>> docChanges;
 }
 
-class FoodOrderQueryDocumentSnapshot
-    extends FirestoreQueryDocumentSnapshot<FoodOrder>
-    implements FoodOrderDocumentSnapshot {
-  FoodOrderQueryDocumentSnapshot._(this.snapshot) : data = snapshot.data();
+class RiderQueryDocumentSnapshot extends FirestoreQueryDocumentSnapshot<Rider>
+    implements RiderDocumentSnapshot {
+  RiderQueryDocumentSnapshot._(this.snapshot) : data = snapshot.data();
 
   @override
-  final QueryDocumentSnapshot<FoodOrder> snapshot;
+  final QueryDocumentSnapshot<Rider> snapshot;
 
   @override
-  final FoodOrder data;
+  final Rider data;
 
   @override
-  FoodOrderDocumentReference get reference {
-    return FoodOrderDocumentReference(snapshot.reference);
+  RiderDocumentReference get reference {
+    return RiderDocumentReference(snapshot.reference);
   }
 }
 
@@ -1938,62 +2080,58 @@ class FoodOrderQueryDocumentSnapshot
 // JsonSerializableGenerator
 // **************************************************************************
 
-FoodOrder _$FoodOrderFromJson(Map<String, dynamic> json) => FoodOrder(
-      id: json['id'] as String? ?? '',
-      restaurantId: json['restaurantId'] as String,
-      riderId: json['riderId'] as String? ?? '',
-      restaurantLocation: const LatLngConverter()
-          .fromJson(json['restaurantLocation'] as Object),
-      customerId: json['customerId'] as String,
-      customerLocation:
-          const LatLngConverter().fromJson(json['customerLocation'] as Object),
-      subTotal: json['subTotal'] as int,
-      deliveryFee: json['deliveryFee'] as int,
-      platformFee: json['platformFee'] as int,
-      totalItems: json['totalItems'] as int,
-      status: json['status'] == null
-          ? OrderStatus.pending
-          : const OrderStatusConverter().fromJson(json['status'] as String),
+Rider _$RiderFromJson(Map<String, dynamic> json) => Rider(
+      id: json['id'] as String? ?? "",
+      name: json['name'] as String,
+      phone: json['phone'] as String,
+      city: json['city'] as String,
+      vehicleType: json['vehicleType'] as String,
+      age: json['age'] as String,
+      fcmTokens: (json['fcmTokens'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
+      currentOrderId: json['currentOrderId'] as String? ?? '',
+      isAvailable: json['isAvailable'] as bool? ?? true,
+      active: json['active'] as bool? ?? true,
       createdAt: _$JsonConverterFromJson<Timestamp, DateTime>(
-          json['createdAt'], const DateTimeToTimestampConverter().fromJson),
-      updatedAt: const DateTimeToTimestampConverter()
-          .fromJson(json['updatedAt'] as Timestamp),
+          json['createdAt'], const TimestampConverter().fromJson),
+      location: const LatLngConverter().fromJson(json['location']),
+      updatedAt:
+          const TimestampConverter().fromJson(json['updatedAt'] as Timestamp),
     );
 
-const _$FoodOrderFieldMap = <String, String>{
+const _$RiderFieldMap = <String, String>{
   'id': 'id',
-  'customerId': 'customerId',
-  'customerLocation': 'customerLocation',
-  'restaurantId': 'restaurantId',
-  'restaurantLocation': 'restaurantLocation',
-  'riderId': 'riderId',
-  'subTotal': 'subTotal',
-  'deliveryFee': 'deliveryFee',
-  'platformFee': 'platformFee',
-  'totalItems': 'totalItems',
-  'status': 'status',
+  'name': 'name',
+  'phone': 'phone',
+  'city': 'city',
+  'vehicleType': 'vehicleType',
+  'age': 'age',
+  'isAvailable': 'isAvailable',
+  'currentOrderId': 'currentOrderId',
+  'active': 'active',
+  'fcmTokens': 'fcmTokens',
+  'location': 'location',
   'createdAt': 'createdAt',
   'updatedAt': 'updatedAt',
 };
 
-Map<String, dynamic> _$FoodOrderToJson(FoodOrder instance) => <String, dynamic>{
+Map<String, dynamic> _$RiderToJson(Rider instance) => <String, dynamic>{
       'id': instance.id,
-      'customerId': instance.customerId,
-      'customerLocation':
-          const LatLngConverter().toJson(instance.customerLocation),
-      'restaurantId': instance.restaurantId,
-      'restaurantLocation':
-          const LatLngConverter().toJson(instance.restaurantLocation),
-      'riderId': instance.riderId,
-      'subTotal': instance.subTotal,
-      'deliveryFee': instance.deliveryFee,
-      'platformFee': instance.platformFee,
-      'totalItems': instance.totalItems,
-      'status': const OrderStatusConverter().toJson(instance.status),
+      'name': instance.name,
+      'phone': instance.phone,
+      'city': instance.city,
+      'vehicleType': instance.vehicleType,
+      'age': _$RiderAgeCategoryEnumMap[instance.age]!,
+      'isAvailable': instance.isAvailable,
+      'currentOrderId': instance.currentOrderId,
+      'active': instance.active,
+      'fcmTokens': instance.fcmTokens,
+      'location': const LatLngConverter().toJson(instance.location),
       'createdAt': _$JsonConverterToJson<Timestamp, DateTime>(
-          instance.createdAt, const DateTimeToTimestampConverter().toJson),
-      'updatedAt':
-          const DateTimeToTimestampConverter().toJson(instance.updatedAt),
+          instance.createdAt, const TimestampConverter().toJson),
+      'updatedAt': const TimestampConverter().toJson(instance.updatedAt),
     };
 
 Value? _$JsonConverterFromJson<Json, Value>(
@@ -2001,6 +2139,11 @@ Value? _$JsonConverterFromJson<Json, Value>(
   Value? Function(Json json) fromJson,
 ) =>
     json == null ? null : fromJson(json as Json);
+
+const _$RiderAgeCategoryEnumMap = {
+  RiderAgeCategory.minor: 'minor',
+  RiderAgeCategory.adult: 'adult',
+};
 
 Json? _$JsonConverterToJson<Json, Value>(
   Value? value,

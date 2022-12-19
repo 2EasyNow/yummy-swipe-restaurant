@@ -150,29 +150,33 @@ class OrdersDetailView extends GetView<OrdersDetailController> {
                           Text('Rs. ${controller.order.totalBill}')
                         ],
                       ),
+                      if (controller.order.status == OrderStatus.cooking)
+                        TextButton(
+                          onPressed: () => controller.onRiderPickedOrder(context),
+                          child: const Text('Picked By Rider'),
+                        ).paddingSymmetric(horizontal: 16, vertical: 8),
                       if (controller.order.status == OrderStatus.pending)
-                      Row(
-                        children: [
-                          Expanded(
-                            child: TextButton(
-                              onPressed: () => controller.onCancelOrder(context),
-                              style: TextButton.styleFrom(
-                                backgroundColor: AppColors(context).errorDark,
-                                foregroundColor: Colors.white,
-                                
+                        Row(
+                          children: [
+                            Expanded(
+                              child: TextButton(
+                                onPressed: () => controller.onCancelOrder(context),
+                                style: TextButton.styleFrom(
+                                  backgroundColor: AppColors(context).errorDark,
+                                  foregroundColor: Colors.white,
+                                ),
+                                child: const Text('Cancel'),
                               ),
-                              child: const Text('Cancel'),
                             ),
-                          ),
-                          const SizedBox(width: 12),
-                          Expanded(
-                            child: TextButton(
-                              onPressed: controller.onAcceptOrder,
-                              child: const Text('Accept'),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: TextButton(
+                                onPressed: () => controller.onAcceptOrder(context),
+                                child: const Text('Accept'),
+                              ),
                             ),
-                          ),
-                        ],
-                      )
+                          ],
+                        )
                     ],
                   ).paddingSymmetric(horizontal: 16),
                 ),

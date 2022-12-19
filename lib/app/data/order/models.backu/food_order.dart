@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_firestore_odm/cloud_firestore_odm.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:json_annotation/json_annotation.dart';
 import '../../../common/converters/converters.dart';
 
@@ -10,13 +9,11 @@ part 'food_order.g.dart';
 
 @JsonSerializable(createFieldMap: true)
 class FoodOrder {
-  FoodOrder( {
+  FoodOrder({
     this.id = '',
     required this.restaurantId,
-    this.riderId = '',
-    required this.restaurantLocation,
     required this.customerId,
-    required this.customerLocation,
+    this.riderId = '',
     required this.subTotal,
     required this.deliveryFee,
     required this.platformFee,
@@ -35,10 +32,8 @@ class FoodOrder {
   FoodOrder copyWith({
     String? id,
     String? restaurantId,
-    LatLng? restaurantLocation,
     String? customerId,
     String? riderId,
-    LatLng? customerLocation,
     OrderStatus? status,
     int? subTotal,
     int? deliveryFee,
@@ -49,11 +44,9 @@ class FoodOrder {
   }) {
     return FoodOrder(
       id: id ?? this.id,
-      riderId: riderId ?? this.riderId,
       restaurantId: restaurantId ?? this.restaurantId,
-      restaurantLocation: restaurantLocation ?? this.restaurantLocation,
       customerId: customerId ?? this.customerId,
-      customerLocation: customerLocation ?? this.customerLocation,
+      riderId: riderId ?? this.riderId,
       status: status ?? this.status,
       subTotal: subTotal ?? this.subTotal,
       deliveryFee: deliveryFee ?? this.deliveryFee,
@@ -67,12 +60,8 @@ class FoodOrder {
   @Id()
   final String id;
   final String customerId;
-  @LatLngConverter()
-  final LatLng customerLocation;
   final String restaurantId;
-  @LatLngConverter()
-  final LatLng restaurantLocation;
-  final String riderId;
+  final String? riderId;
   final int subTotal;
   final int deliveryFee;
   final int platformFee;

@@ -8,7 +8,7 @@ class OrdersListController extends GetxController {
     'Pending',
     'Canceled',
     'Cooking in Progress',
-    'Picked Up'
+    'Picked Up',
     'Delivered',
   ];
   final selectedOrderType = 'Pending'.obs;

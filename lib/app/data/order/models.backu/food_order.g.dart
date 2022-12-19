@@ -131,7 +131,7 @@ abstract class FoodOrderDocumentReference
     FieldValue customerIdFieldValue,
     String restaurantId,
     FieldValue restaurantIdFieldValue,
-    String riderId,
+    String? riderId,
     FieldValue riderIdFieldValue,
     int subTotal,
     FieldValue subTotalFieldValue,
@@ -156,7 +156,7 @@ abstract class FoodOrderDocumentReference
     FieldValue customerIdFieldValue,
     String restaurantId,
     FieldValue restaurantIdFieldValue,
-    String riderId,
+    String? riderId,
     FieldValue riderIdFieldValue,
     int subTotal,
     FieldValue subTotalFieldValue,
@@ -263,7 +263,7 @@ class _$FoodOrderDocumentReference
       if (restaurantId != _sentinel) 'restaurantId': restaurantId as String,
       if (restaurantIdFieldValue != null)
         'restaurantId': restaurantIdFieldValue,
-      if (riderId != _sentinel) 'riderId': riderId as String,
+      if (riderId != _sentinel) 'riderId': riderId as String?,
       if (riderIdFieldValue != null) 'riderId': riderIdFieldValue,
       if (subTotal != _sentinel) 'subTotal': subTotal as int,
       if (subTotalFieldValue != null) 'subTotal': subTotalFieldValue,
@@ -345,7 +345,7 @@ class _$FoodOrderDocumentReference
       if (restaurantId != _sentinel) 'restaurantId': restaurantId as String,
       if (restaurantIdFieldValue != null)
         'restaurantId': restaurantIdFieldValue,
-      if (riderId != _sentinel) 'riderId': riderId as String,
+      if (riderId != _sentinel) 'riderId': riderId as String?,
       if (riderIdFieldValue != null) 'riderId': riderIdFieldValue,
       if (subTotal != _sentinel) 'subTotal': subTotal as int,
       if (subTotalFieldValue != null) 'subTotal': subTotalFieldValue,
@@ -490,8 +490,8 @@ abstract class FoodOrderQuery
     String? isGreaterThan,
     String? isGreaterThanOrEqualTo,
     bool? isNull,
-    List<String>? whereIn,
-    List<String>? whereNotIn,
+    List<String?>? whereIn,
+    List<String?>? whereNotIn,
   });
   FoodOrderQuery whereSubTotal({
     int? isEqualTo,
@@ -598,10 +598,10 @@ abstract class FoodOrderQuery
 
   FoodOrderQuery orderByRiderId({
     bool descending = false,
-    String startAt,
-    String startAfter,
-    String endAt,
-    String endBefore,
+    String? startAt,
+    String? startAfter,
+    String? endAt,
+    String? endBefore,
     FoodOrderDocumentSnapshot? startAtDocument,
     FoodOrderDocumentSnapshot? endAtDocument,
     FoodOrderDocumentSnapshot? endBeforeDocument,
@@ -925,8 +925,8 @@ class _$FoodOrderQuery extends QueryReference<FoodOrder, FoodOrderQuerySnapshot>
     String? isGreaterThan,
     String? isGreaterThanOrEqualTo,
     bool? isNull,
-    List<String>? whereIn,
-    List<String>? whereNotIn,
+    List<String?>? whereIn,
+    List<String?>? whereNotIn,
   }) {
     return _$FoodOrderQuery(
       _collection,
@@ -1941,12 +1941,8 @@ class FoodOrderQueryDocumentSnapshot
 FoodOrder _$FoodOrderFromJson(Map<String, dynamic> json) => FoodOrder(
       id: json['id'] as String? ?? '',
       restaurantId: json['restaurantId'] as String,
-      riderId: json['riderId'] as String? ?? '',
-      restaurantLocation: const LatLngConverter()
-          .fromJson(json['restaurantLocation'] as Object),
       customerId: json['customerId'] as String,
-      customerLocation:
-          const LatLngConverter().fromJson(json['customerLocation'] as Object),
+      riderId: json['riderId'] as String? ?? '',
       subTotal: json['subTotal'] as int,
       deliveryFee: json['deliveryFee'] as int,
       platformFee: json['platformFee'] as int,
@@ -1963,9 +1959,7 @@ FoodOrder _$FoodOrderFromJson(Map<String, dynamic> json) => FoodOrder(
 const _$FoodOrderFieldMap = <String, String>{
   'id': 'id',
   'customerId': 'customerId',
-  'customerLocation': 'customerLocation',
   'restaurantId': 'restaurantId',
-  'restaurantLocation': 'restaurantLocation',
   'riderId': 'riderId',
   'subTotal': 'subTotal',
   'deliveryFee': 'deliveryFee',
@@ -1979,11 +1973,7 @@ const _$FoodOrderFieldMap = <String, String>{
 Map<String, dynamic> _$FoodOrderToJson(FoodOrder instance) => <String, dynamic>{
       'id': instance.id,
       'customerId': instance.customerId,
-      'customerLocation':
-          const LatLngConverter().toJson(instance.customerLocation),
       'restaurantId': instance.restaurantId,
-      'restaurantLocation':
-          const LatLngConverter().toJson(instance.restaurantLocation),
       'riderId': instance.riderId,
       'subTotal': instance.subTotal,
       'deliveryFee': instance.deliveryFee,
